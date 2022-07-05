@@ -122,11 +122,16 @@ public abstract class MixinRenderEnderCrystal {
             if (CrystalModify.INSTANCE.mode.getValue().equals((Object) CrystalModify.modes.WIREFRAME)) {
                 GL11.glPolygonMode((int) 1032, (int) 6913);
             }
+            if (CrystalModify.INSTANCE.blendModes.getValue().equals((Object) CrystalModify.BlendModes.Default)) {
+				GL11.glBlendFunc((int) 770, (int) 771);
+            }
+			if (CrystalModify.INSTANCE.blendModes.getValue().equals((Object) CrystalModify.BlendModes.Brighter)) {
+                GL11.glBlendFunc((int)770, (int)32772);
+            }
             GL11.glDisable((int) 3008);
             GL11.glDisable((int) 3553);
             GL11.glDisable((int) 2896);
             GL11.glEnable((int) 3042);
-            GL11.glBlendFunc((int) 770, (int) 771);
             GL11.glLineWidth((float) 1.5f);
             GL11.glEnable((int) 2960);
             GL11.glDisable((int) 2929);
@@ -163,6 +168,14 @@ public abstract class MixinRenderEnderCrystal {
                     this.modelEnderCrystal.render((Entity) var1, 0.0f, var14 * spinSpeed, var15 * bounceSpeed, 0.0f, 0.0f, 0.0625f);
                 } else {
                     this.modelEnderCrystalNoBase.render((Entity) var1, 0.0f, var14 * spinSpeed, var15 * bounceSpeed, 0.0f, 0.0f, 0.0625f);
+                }
+                if (CrystalModify.INSTANCE.blendModes.getValue().equals((Object) CrystalModify.BlendModes.Default)) {
+				    GL11.glBlendFunc((int) 768, (int) 771);
+                }
+			    if (CrystalModify.INSTANCE.blendModes.getValue().equals((Object) CrystalModify.BlendModes.Brighter)) {
+                    GL11.glBlendFunc((int)770, (int)32772);
+			    } else {
+                    GL11.glBlendFunc((int)770, (int)771);	
                 }
                 GL11.glColor4f((float) 1.0f, (float) 1.0f, (float) 1.0f, (float) 1.0f);
             }
