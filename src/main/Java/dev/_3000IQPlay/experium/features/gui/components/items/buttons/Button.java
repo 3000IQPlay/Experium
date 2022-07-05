@@ -20,7 +20,7 @@ public class Button
 
     public Button(String name) {
         super(name);
-        this.height = 15;
+        this.height = 14;
     }
 
     @Override
