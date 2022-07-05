@@ -11,6 +11,7 @@ public class CrystalModify
     public Setting<Float> size = this.register(new Setting<Float>("Size", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(2.0f)));
     public Setting<Float> crystalSpeed = this.register(new Setting<Float>("Speed", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(20.0f)));
     public Setting<Float> crystalBounce = this.register(new Setting<Float>("Bounce", Float.valueOf(0.2f), Float.valueOf(0.1f), Float.valueOf(1.0f)));
+    public Setting<BlendModes> blendModes = this.register(new Setting<BlendModes>("Blend", BlendModes.Default));
     public Setting<Boolean> enchanted = this.register(new Setting<Boolean>("Glint", false));
     public Setting<Integer> enchantRed = this.register(new Setting<Object>("Glint Red", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.enchanted.getValue()));
     public Setting<Integer> enchantGreen = this.register(new Setting<Object>("Glint Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.enchanted.getValue()));
@@ -42,13 +43,15 @@ public class CrystalModify
     public static enum modes {
         FILL,
         WIREFRAME;
-
     }
 
     public static enum outlineModes {
         WIRE,
         FLAT;
-
+    }
+        
+    public static enum BlendModes {
+        Default,
+        Brighter;
     }
 }
-
