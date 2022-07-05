@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "experium",
+    "name": "Experium",
+    "description": "1.12.2 PvP Hack",
+    "version": "1.0.1",
+    "mcversion": "1.12.2",
+    "logoFile": "experium.png",
+    "url": "https://www.youtube.com/watch?v=o-YBDTqX_ZU",
+    "updateUrl": "",
+    "authorList": [
+      "_3000IQPlay"
+    ],
+    "screenshots": [experium.png],
+    "dependencies": []
+  }
+]
