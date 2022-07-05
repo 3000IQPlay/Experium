@@ -42,7 +42,7 @@ public class Component
         this.x = x;
         this.y = y;
         this.width = 113;
-        this.height = 18;
+        this.height = 19;
         this.open = open;
         this.setupItems();
     }
