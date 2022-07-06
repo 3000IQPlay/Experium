@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class PingSpoof
         extends Module {
     private final Setting<Boolean> seconds = this.register(new Setting<Boolean>("Seconds", false));
-    private final Setting<Integer> delay = this.register(new Setting<Object>("DelayMS", Integer.valueOf(100), Integer.valueOf(0), Integer.valueOf(50000), v -> this.seconds.getValue() == false));
-    private final Setting<Integer> secondDelay = this.register(new Setting<Object>("DelayS", Integer.valueOf(5), Integer.valueOf(0), Integer.valueOf(1000), v -> this.seconds.getValue()));
+    private final Setting<Integer> delay = this.register(new Setting<Object>("DelayMS", Integer.valueOf(100), Integer.valueOf(0), Integer.valueOf(1000), v -> this.seconds.getValue() == false));
+    private final Setting<Integer> secondDelay = this.register(new Setting<Object>("DelayS", Integer.valueOf(5), Integer.valueOf(0), Integer.valueOf(100), v -> this.seconds.getValue()));
     private final Setting<Boolean> offOnLogout = this.register(new Setting<Boolean>("Logout", false));
     private final Queue<Packet<?>> packets = new ConcurrentLinkedQueue();
     private final Timer timer = new Timer();
