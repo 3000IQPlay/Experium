@@ -18,6 +18,8 @@ public class ClickGui
 	public Setting<String> prefix = this.register(new Setting<String>("Prefix", ".").setRenderName(true));
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false, v -> this.setting.getValue() == Settings.Misc));
 	public Setting<Boolean> rainbowRolling = this.register(new Setting<Object>("RollingRainbow", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.Misc && this.colorSync.getValue() != false && Colors.INSTANCE.rainbow.getValue() != false));
+	public Setting<Integer> guiWidth = this.register(new Setting<Integer>("GuiWidth", Integer.valueOf(113), Integer.valueOf(90), Integer.valueOf(130), v -> this.setting.getValue() == Settings.Scaling));
+	public Setting<Integer> moduleButtonHeight = this.register(new Setting<Integer>("ModuleButtonHeight", Integer.valueOf(14), Integer.valueOf(12), Integer.valueOf(30), v -> this.setting.getValue() == Settings.Scaling));
     public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", false, v -> this.setting.getValue() == Settings.Main));
 	public Setting<Boolean> outlineNew = this.register(new Setting<Boolean>("OutlineNew", false, v -> this.setting.getValue() == Settings.Main));
     public Setting<Float> outlineThickness = this.register(new Setting<Float>("LineThickness", Float.valueOf(2.5f), Float.valueOf(0.5f), Float.valueOf(5.0f), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
