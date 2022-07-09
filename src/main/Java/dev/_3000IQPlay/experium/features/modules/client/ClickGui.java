@@ -180,6 +180,7 @@ public class ClickGui
 		Main,
 		Background,
 		FontC,
+		Scaling,
 		Misc
 	}	
 }
