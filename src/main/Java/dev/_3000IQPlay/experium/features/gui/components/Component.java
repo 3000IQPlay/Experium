@@ -41,7 +41,7 @@ public class Component
         super(name);
         this.x = x;
         this.y = y;
-        this.width = 113;
+        this.width = ClickGui.getInstance().guiWidth.getValue().intValue();
         this.height = 19;
         this.open = open;
         this.setupItems();
