@@ -143,14 +143,14 @@ public class ModuleButton
     @Override
     public int getHeight() {
         if (this.subOpen) {
-            int height = 14;
+            int height = ClickGui.getInstance().moduleButtonHeight.getValue().intValue();
             for (Item item : this.items) {
                 if (item.isHidden()) continue;
                 height += item.getHeight() + 1;
             }
             return height + 2;
         }
-        return 14;
+        return ClickGui.getInstance().moduleButtonHeight.getValue().intValue();
     }
 
     public Module getModule() {
