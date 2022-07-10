@@ -5,7 +5,6 @@ import java.awt.Color;
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.modules.client.Colors;
 import dev._3000IQPlay.experium.features.modules.render.CrystalModify;
-import dev._3000IQPlay.experium.features.modules.render.ESP;
 import dev._3000IQPlay.experium.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -61,45 +60,6 @@ public abstract class MixinRenderEnderCrystal {
     public void IdoRender(EntityEnderCrystal var1, double var2, double var4, double var6, float var8, float var9, CallbackInfo var10) {
         Minecraft mc = Minecraft.getMinecraft();
         mc.gameSettings.fancyGraphics = false;
-        if (Experium.moduleManager.isModuleEnabled(ESP.class) && ESP.getInstance().others.getValue().booleanValue()) {
-            float var13 = (float) var1.innerRotation + var9;
-            GlStateManager.pushMatrix();
-            GlStateManager.translate((double) var2, (double) var4, (double) var6);
-            Minecraft.getMinecraft().getRenderManager().renderEngine.bindTexture(ENDER_CRYSTAL_TEXTURES);
-            float var14 = MathHelper.sin((float) (var13 * 0.2f)) / 2.0f + 0.5f;
-            var14 += var14 * var14;
-            GL11.glLineWidth((float) 5.0f);
-            if (var1.shouldShowBottom()) {
-                this.modelEnderCrystal.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            } else {
-                this.modelEnderCrystalNoBase.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            }
-            RenderUtil.renderOne((float) ESP.getInstance().lineWidth.getValue().doubleValue());
-            if (var1.shouldShowBottom()) {
-                this.modelEnderCrystal.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            } else {
-                this.modelEnderCrystalNoBase.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            }
-            RenderUtil.renderTwo();
-            if (var1.shouldShowBottom()) {
-                this.modelEnderCrystal.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            } else {
-                this.modelEnderCrystalNoBase.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            }
-            Color rainbowColor1 = ESP.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(ESP.getInstance().red.getValue(), ESP.getInstance().green.getValue(), ESP.getInstance().blue.getValue());
-            Color rainbowColor2 = new Color(rainbowColor1.getRed(), rainbowColor1.getGreen(), rainbowColor1.getBlue());
-            Color n = new Color(rainbowColor2.getRed(), rainbowColor2.getGreen(), rainbowColor2.getBlue());
-            RenderUtil.renderThree();
-            RenderUtil.renderFour(rainbowColor1);
-            RenderUtil.setColor(n);
-            if (var1.shouldShowBottom()) {
-                this.modelEnderCrystal.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            } else {
-                this.modelEnderCrystalNoBase.render((Entity) var1, 0.0f, var13 * 3.0f, var14 * 0.2f, 0.0f, 0.0f, 0.0625f);
-            }
-            RenderUtil.renderFive();
-            GlStateManager.popMatrix();
-        }
         if (Experium.moduleManager.isModuleEnabled(CrystalModify.class)) {
             Color outlineColor;
             GL11.glPushMatrix();
