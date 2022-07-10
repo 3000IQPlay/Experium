@@ -23,11 +23,6 @@ public class ESP
         extends Module {
     private static ESP INSTANCE = new ESP();
     public final Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
-    public final Setting<Boolean> players = this.register(new Setting<Boolean>("Players", true));
-    public final Setting<Boolean> colorFriends = this.register(new Setting<Boolean>("Friends", Boolean.valueOf(true), v -> this.players.getValue()));
-    public final Setting<Boolean> animals = this.register(new Setting<Boolean>("Animals", false));
-    public final Setting<Boolean> mobs = this.register(new Setting<Boolean>("Mobs", false));
-    public final Setting<Boolean> others = this.register(new Setting<Boolean>("Crystals", false));
     public final Setting<Boolean> items = this.register(new Setting<Boolean>("Items", false));
     public final Setting<Boolean> xporbs = this.register(new Setting<Boolean>("XpOrbs", false));
     public final Setting<Boolean> xpbottles = this.register(new Setting<Boolean>("XpBottles", false));
