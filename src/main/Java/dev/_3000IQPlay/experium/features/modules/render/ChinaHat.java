@@ -19,7 +19,7 @@ public class ChinaHat
     public Setting<Boolean> firstP = this.register(new Setting<Boolean>("FirstPerson", false));
 
     public ChinaHat() {
-        super("ChinaHat", "China code", Module.Category.RENDER, true, false, false);
+        super("ChinaHat", "Cool china hat from (GuguHack)", Module.Category.RENDER, true, false, false);
     }
 
     @Override
