@@ -152,10 +152,8 @@ public class ModuleManager
 		this.modules.add(new PacketmineOLD());
 		this.modules.add(new AntiSpam());
 		this.modules.add(new EnchantColor());
-		this.modules.add(new ChinaHat());
 		this.modules.add(new Blocker());
 		this.moduleColorMap.put(this.getModuleByClass(Blocker.class), new Color(63, 0, 158));
-		this.moduleColorMap.put(this.getModuleByClass(ChinaHat.class), new Color(0, 234, 78));
 		this.moduleColorMap.put(this.getModuleByClass(EnchantColor.class), new Color(66, 119, 9));
 		this.moduleColorMap.put(this.getModuleByClass(AntiSpam.class), new Color(192, 225, 0));
 		this.moduleColorMap.put(this.getModuleByClass(PacketmineOLD.class), new Color(41, 0, 133));
