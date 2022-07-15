@@ -19,7 +19,7 @@ public class DiscordPresence {
 
     public static void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
-        rpc.Discord_Initialize("939110016575737867", handlers, true, "");
+        rpc.Discord_Initialize("997166162985095288", handlers, true, "");
         DiscordPresence.presence.startTimestamp = System.currentTimeMillis() / 1000L;
         DiscordPresence.presence.details = Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu ? "In the main menu." : "Playing " + (Minecraft.getMinecraft().currentServerData != null ? (RPC.INSTANCE.showIP.getValue().booleanValue() ? "on " + Minecraft.getMinecraft().currentServerData.serverIP + "." : " multiplayer.") : " singleplayer.");
         DiscordPresence.presence.state = RPC.INSTANCE.state.getValue();
