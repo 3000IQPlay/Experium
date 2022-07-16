@@ -3,7 +3,6 @@ package dev._3000IQPlay.experium.features.modules.render;
 import dev._3000IQPlay.experium.event.events.Render3DEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
-import dev._3000IQPlay.experium.util.EntityUtil;
 import dev._3000IQPlay.experium.util.RenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
