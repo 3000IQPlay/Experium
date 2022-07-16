@@ -69,7 +69,7 @@ public class ModuleManager
         this.modules.add(new NoRender());
         this.modules.add(new Fullbright());
         this.modules.add(new CameraClip());
-        //this.modules.add(new Chams());
+        this.modules.add(new ChinaHat());
         this.modules.add(new ESP());
         this.modules.add(new HoleESP());
         this.modules.add(new BlockHighlight());
@@ -236,7 +236,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(ToolTips.class), new Color(209, 125, 156));
         this.moduleColorMap.put(this.getModuleByClass(BlockHighlight.class), new Color(103, 182, 224));
         this.moduleColorMap.put(this.getModuleByClass(CameraClip.class), new Color(247, 169, 107));
-        //this.moduleColorMap.put(this.getModuleByClass(Chams.class), new Color(34, 152, 34));
+        this.moduleColorMap.put(this.getModuleByClass(ChinaHat.class), new Color(34, 152, 34));
         this.moduleColorMap.put(this.getModuleByClass(ESP.class), new Color(255, 27, 155));
         this.moduleColorMap.put(this.getModuleByClass(Fullbright.class), new Color(255, 164, 107));
         this.moduleColorMap.put(this.getModuleByClass(HoleESP.class), new Color(95, 83, 130));
