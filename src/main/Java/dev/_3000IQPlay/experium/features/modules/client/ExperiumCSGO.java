@@ -36,7 +36,7 @@ public class ExperiumCSGO
 	public Setting<Integer> bAlpha = this.register(new Setting<Integer>("BorderAlpha", 255, 0, 255, v -> this.page.getValue() == Pages.Border));
 	public Setting<Integer> firstRed = this.register(new Setting<Integer>("FirstRed", 135, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.First));
 	public Setting<Integer> firstGreen = this.register(new Setting<Integer>("FirstGreen", 135, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.First));
-	public Setting<Integer> firtBlue = this.register(new Setting<Integer>("FirstBlue", 253, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.First));
+	public Setting<Integer> firtBlue = this.register(new Setting<Integer>("FirstBlue", 255, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.First));
 	public Setting<Integer> firstAlpha = this.register(new Setting<Integer>("FirstAlpha", 255, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.First));
 	public Setting<Integer> secondRed = this.register(new Setting<Integer>("SecondRed", 0, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.Second));
 	public Setting<Integer> secondGreen = this.register(new Setting<Integer>("SecondGreen", 255, 0, 255, v -> this.page.getValue() == Pages.BarColor && this.colorp.getValue() == Colorsp.Second));
