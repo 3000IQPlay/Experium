@@ -61,18 +61,18 @@ public class ExperiumCSGO
             return;
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-	    String ping = this.getPing((EntityPlayer)ExperiumCSGO.mc.player) + "ms";
+			String ping = this.getPing((EntityPlayer)ExperiumCSGO.mc.player) + "ms";
             String fpsText = Minecraft.debugFPS + "fps ";
-	    String name = mc.player.getDisplayNameString();
-	    String server = Minecraft.getMinecraft().isSingleplayer() ? "singleplayer".toLowerCase() : ExperiumCSGO.mc.getCurrentServerData().serverIP.toLowerCase();
-	    String Experium = "Experium";
-	    String text = Experium + " | " + server + " | " + ping + " | " + fpsText;
+			String name = mc.player.getDisplayNameString();
+			String server = Minecraft.getMinecraft().isSingleplayer() ? "singleplayer".toLowerCase() : ExperiumCSGO.mc.getCurrentServerData().serverIP.toLowerCase();
+			String Experium = "Experium";
+			String text = Experium + " | " + server + " | " + ping + " | " + fpsText;
             float width = Minecraft.getMinecraft().fontRenderer.getStringWidth(text) + 6;
             int height = this.height.getValue();
             int posX = 2;
             int posY = this.posY.getValue();
-	    double barPosY = this.barPosY.getValue();
-	    double textPosY = this.textPosY.getValue();
+			double barPosY = this.barPosY.getValue();
+			double textPosY = this.textPosY.getValue();
             RenderUtil.drawRectangleCorrectly(posX - 4, posY - 4, (int)(width + 10.0f), height + 6, ColorUtil.toRGBA(0, 0, 0, 255));
             RenderUtil.drawRectangleCorrectly(posX - 4, posY - 4, (int)(width + 11.0f), height + 7, ColorUtil.toRGBA(this.bRed.getValue(), this.bGreen.getValue(), this.bBlue.getValue(), this.bAlpha.getValue()));
             ExperiumCSGO.drawRect(posX, posY, (float)posX + width + 2.0f, posY + height, new Color(this.bgRed.getValue(), this.bgGreen.getValue(), this.bgBlue.getValue(), this.bgAlpha.getValue()).getRGB());
@@ -126,7 +126,7 @@ public class ExperiumCSGO
         float f7 = (float)(col2 & 0xFF) / 255.0f;
         GL11.glEnable((int)3042);
         GL11.glDisable((int)3553);
-	GL11.glBlendFunc((int) 770, (int) 771);
+		GL11.glBlendFunc((int) 770, (int) 771);
         GL11.glEnable((int)2848);
         GL11.glShadeModel((int)7425);
         GL11.glPushMatrix();
@@ -154,16 +154,16 @@ public class ExperiumCSGO
         return ping;
     }
 	
-    public static enum Pages {
-	Watermark,
-	BarColor,
+	public static enum Pages {
+		Watermark,
+		BarColor,
         Background,
         Border;
     }
 	
-    public static enum Colorsp {
-	First,
-	Second,
+	public static enum Colorsp {
+		First,
+		Second,
         Third,
         Fourth;
     }
