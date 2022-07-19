@@ -23,7 +23,7 @@ public class ExperiumCSGO
 	public Setting<Pages> page = this.register(new Setting<Pages>("Page", Pages.Watermark));
 	public Setting<Colorsp> colorp = this.register(new Setting<Colorsp>("ColorPage", Colorsp.First, v -> this.page.getValue() == Pages.GradientBar));
 	public Setting<Integer> height = this.register(new Setting<Integer>("Height", 20, 20, 25, v -> this.page.getValue() == Pages.Watermark));
-	public Setting<Integer> posX = this.register(new Setting<Integer>("PosX", 2, 0, 1000, v -> this.page.getValue() == Pages.Watermark));
+	public Setting<Integer> posY = this.register(new Setting<Integer>("PosY", 2, 0, 1000, v -> this.page.getValue() == Pages.Watermark));
 	public Setting<Integer> bgRed = this.register(new Setting<Integer>("BackgroundRed", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
 	public Setting<Integer> bgGreen = this.register(new Setting<Integer>("BackgroundGreen", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
 	public Setting<Integer> bgBlue = this.register(new Setting<Integer>("BackgroundBlue", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
