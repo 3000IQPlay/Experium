@@ -121,7 +121,7 @@ public class ModuleManager
         this.modules.add(new PistonAura());
         this.modules.add(new PacketEat());
         this.modules.add(new AntiPing());
-        this.modules.add(new AutoCity());
+        //this.modules.add(new AutoCity());
         this.modules.add(new ChorusPostpone());
         this.modules.add(new AntiPackets());
         this.modules.add(new Clip());
@@ -190,7 +190,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Clip.class), new Color(136, 72, 219));
         this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
         this.moduleColorMap.put(this.getModuleByClass(ChorusPostpone.class), new Color(43, 165, 216));
-        this.moduleColorMap.put(this.getModuleByClass(AutoCity.class), new Color(97, 173, 162));
+        //this.moduleColorMap.put(this.getModuleByClass(AutoCity.class), new Color(97, 173, 162));
         this.moduleColorMap.put(this.getModuleByClass(AntiPing.class), new Color(172, 133, 192));
         this.moduleColorMap.put(this.getModuleByClass(PacketEat.class), new Color(215, 81, 248));
         this.moduleColorMap.put(this.getModuleByClass(PistonAura.class), new Color(85, 94, 58));
