@@ -154,7 +154,7 @@ public class ModuleManager
 		this.modules.add(new EnchantColor());
 		this.modules.add(new Blocker());
 		this.modules.add(new MountBypass());
-	        this.modules.add(new AutoFrameDupe());
+	    this.modules.add(new AutoFrameDupe());
 		this.modules.add(new AutoCraftDupe());
 		this.moduleColorMap.put(this.getModuleByClass(AutoCraftDupe.class), new Color(28, 0, 189));
 		this.moduleColorMap.put(this.getModuleByClass(AutoFrameDupe.class), new Color(0, 173, 94));
