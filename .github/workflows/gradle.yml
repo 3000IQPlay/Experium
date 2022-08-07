@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: Experium-build
+          name: Scuffed-Experium-build
           path: build/libs/*-release.jar
 
       - name: Cleanup Gradle Cache
