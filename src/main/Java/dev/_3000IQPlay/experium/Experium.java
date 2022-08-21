@@ -62,7 +62,6 @@ public class Experium {
             reloadManager = null;
         }
 		dispatcher = new me.zero.alpine.bus.EventManager();
-        baritoneManager = new NoStopManager();
         totemPopManager = new TotemPopManager();
         timerManager = new TimerManager();
         packetManager = new PacketManager();
@@ -104,9 +103,6 @@ public class Experium {
         if (unload) {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
-        }
-        if (baritoneManager != null) {
-            baritoneManager.stop();
         }
         Experium.onUnload();
 		dispatcher = null;
