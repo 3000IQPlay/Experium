@@ -168,6 +168,9 @@ public class SpeedNew
 
     @Override
     public void onEnable() {
+		if (this.timerSpeed.getValue().booleanValue()) {
+			Experium.timerManager.setTimer(this.timerSpeedVal.getValue().floatValue());
+		}
         if (this.resetXZ.getValue().booleanValue()) {
             SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
         }
@@ -175,6 +178,12 @@ public class SpeedNew
             SpeedNew.mc.player.motionX = 0.0;
         }
         super.onEnable();
+    }
+	
+	@Override
+    public void onDisable() {
+        Experium.timerManager.reset();
+		super.onDisable();
     }
 
     @Override
