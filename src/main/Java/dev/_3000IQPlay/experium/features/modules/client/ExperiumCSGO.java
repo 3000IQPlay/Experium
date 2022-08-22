@@ -22,10 +22,9 @@ public class ExperiumCSGO
         extends Module {
 	public Setting<Pages> page = this.register(new Setting<Pages>("Page", Pages.Watermark));
 	public Setting<Colorsp> colorp = this.register(new Setting<Colorsp>("ColorPage", Colorsp.First, v -> this.page.getValue() == Pages.BarColor));
-	public Setting<Integer> height = this.register(new Setting<Integer>("Height", 20, 20, 25, v -> this.page.getValue() == Pages.Watermark));
 	public Setting<Integer> posY = this.register(new Setting<Integer>("PosY", 2, 0, 512, v -> this.page.getValue() == Pages.Watermark));
-	public Setting<Double> barPosY = this.register(new Setting<Double>("BarPosY", 0.0, -2.0, 19.0, v -> this.page.getValue() == Pages.Watermark));
-	public Setting<Double> textPosY = this.register(new Setting<Double>("TextPosY", 0.0, -6.0, 7.0, v -> this.page.getValue() == Pages.Watermark));
+	public Setting<Double> barPosY = this.register(new Setting<Double>("BarPosY", 0.0, -2.0, 15.0, v -> this.page.getValue() == Pages.Watermark));
+	public Setting<Double> textPosY = this.register(new Setting<Double>("TextPosY", 0.0, -6.0, 3.0, v -> this.page.getValue() == Pages.Watermark));
 	public Setting<Integer> bgRed = this.register(new Setting<Integer>("BackgroundRed", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
 	public Setting<Integer> bgGreen = this.register(new Setting<Integer>("BackgroundGreen", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
 	public Setting<Integer> bgBlue = this.register(new Setting<Integer>("BackgroundBlue", 20, 0, 255, v -> this.page.getValue() == Pages.Background));
@@ -68,7 +67,7 @@ public class ExperiumCSGO
 			String Experium = "Experium";
 			String text = Experium + " | " + server + " | " + ping + " | " + fpsText;
             float width = Minecraft.getMinecraft().fontRenderer.getStringWidth(text) + 6;
-            int height = this.height.getValue();
+            int height = 2;
             int posX = 2;
             int posY = this.posY.getValue();
 			double barPosY = this.barPosY.getValue();
