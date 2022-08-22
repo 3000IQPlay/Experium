@@ -19,12 +19,12 @@ public class DiscordPresence {
 
     public static void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
-        rpc.Discord_Initialize("997166162985095288", handlers, true, "");
+        rpc.Discord_Initialize("1011264108290637865", handlers, true, "");
         DiscordPresence.presence.startTimestamp = System.currentTimeMillis() / 1000L;
         DiscordPresence.presence.details = Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu ? "In the main menu." : "Playing " + (Minecraft.getMinecraft().currentServerData != null ? (RPC.INSTANCE.showIP.getValue().booleanValue() ? "on " + Minecraft.getMinecraft().currentServerData.serverIP + "." : " multiplayer.") : " singleplayer.");
         DiscordPresence.presence.state = RPC.INSTANCE.state.getValue();
         DiscordPresence.presence.largeImageKey = "experiumlogo";
-        DiscordPresence.presence.largeImageText = "Experium v1.0.1";
+        DiscordPresence.presence.largeImageText = "Experium v1.2.7";
         rpc.Discord_UpdatePresence(presence);
         thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
