@@ -1,5 +1,6 @@
 package dev._3000IQPlay.experium.features.modules.movement;
 
+import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.event.events.MoveEvent;
 import dev._3000IQPlay.experium.event.events.UpdateWalkingPlayerEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
@@ -17,9 +18,11 @@ import java.util.Objects;
 
 public class SpeedNew
         extends Module {
-    private final Setting<SpeedNewModes> mode = this.register(new Setting<SpeedNewModes>("Mode", SpeedNewModes.HYPIXELHOP));
+    private final Setting<SpeedNewModes> mode = this.register(new Setting<SpeedNewModes>("Mode", SpeedNewModes.CUSTOM));
     private final Setting<Float> customSpeedNew = this.register(new Setting<Float>("CustomSpeedNew", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(2.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Float> customY = this.register(new Setting<Float>("CustomY", Float.valueOf(0.44f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+	private final Setting<Boolean> timerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Boolean> customStrafe = this.register(new Setting<Boolean>("CustomStrafe", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Boolean> resetXZ = this.register(new Setting<Boolean>("CustomResetXZ", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Boolean> resetY = this.register(new Setting<Boolean>("CustomResetY", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
@@ -120,6 +123,9 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionY * SpeedNew.mc.player.motionY + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
                     break;
                 }
+				if (this.timerSpeed.getValue().booleanValue()) {
+					Experium.timerManager.setTimer(this.timerSpeedVal.getValue().floatValue());
+				}
                 SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
                 break;
             }
@@ -151,24 +157,9 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionY * SpeedNew.mc.player.motionY + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
                     break;
                 }
-                SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
-                break;
-            }
-            case HYPIXELHOP: {
-                if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
-                    if (SpeedNew.mc.player.onGround) {
-                        SpeedNew.mc.player.jump();
-                        float speed = MovementUtil.getBaseMoveSpeed() < (double)0.56f ? (float)(MovementUtil.getBaseMoveSpeed() * (double)1.045f) : 0.56f;
-                        if (SpeedNew.mc.player.onGround) {
-                            speed *= 1.13f;
-                        }
-                        EntityUtil.moveEntityStrafe(speed, (Entity)SpeedNew.mc.player);
-                    } else if (SpeedNew.mc.player.motionY < 0.2) {
-                        SpeedNew.mc.player.motionY -= 0.02;
-                    }
-                    EntityUtil.moveEntityStrafe(MovementUtil.getBaseMoveSpeed() * (double)1.01889f, (Entity)SpeedNew.mc.player);
-                    break;
-                }
+				if (this.timerSpeed.getValue().booleanValue()) {
+					Experium.timerManager.setTimer(this.timerSpeedVal.getValue().floatValue());
+				}
                 SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
                 break;
             }
@@ -198,7 +189,6 @@ public class SpeedNew
     }
 
     public static enum SpeedNewModes {
-        HYPIXELHOP,
         CUSTOM,
         STRAFE;
     }
