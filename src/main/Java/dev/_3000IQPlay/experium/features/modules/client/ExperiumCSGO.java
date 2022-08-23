@@ -67,7 +67,7 @@ public class ExperiumCSGO
 			String Experium = "Experium";
 			String text = Experium + " | " + server + " | " + ping + " | " + fpsText;
             float width = Minecraft.getMinecraft().fontRenderer.getStringWidth(text) + 6;
-            int height = 2;
+            int height = 20;
             int posX = 2;
             int posY = this.posY.getValue();
 			double barPosY = this.barPosY.getValue();
