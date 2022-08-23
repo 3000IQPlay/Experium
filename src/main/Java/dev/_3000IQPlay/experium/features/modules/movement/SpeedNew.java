@@ -123,8 +123,10 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionY * SpeedNew.mc.player.motionY + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
                     break;
                 }
-				if (this.timerSpeed.getValue().booleanValue()) {
+				if (this.timerSpeed.getValue().booleanValue() == Boolean.TRUE) {
 					Experium.timerManager.setTimer(this.timerSpeedVal.getValue().floatValue());
+				} else {
+					Experium.timerManager.reset();
 				}
                 SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
                 break;
@@ -157,8 +159,10 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionY * SpeedNew.mc.player.motionY + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
                     break;
                 }
-				if (this.timerSpeed.getValue().booleanValue()) {
+				if (this.timerSpeed.getValue().booleanValue() == Boolean.TRUE) {
 					Experium.timerManager.setTimer(this.timerSpeedVal.getValue().floatValue());
+				} else {
+					Experium.timerManager.reset();
 				}
                 SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
                 break;
