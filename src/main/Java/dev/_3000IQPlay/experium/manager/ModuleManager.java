@@ -156,6 +156,8 @@ public class ModuleManager
 		this.modules.add(new MountBypass());
 	    this.modules.add(new AutoFrameDupe());
 		this.modules.add(new AutoCraftDupe());
+		this.modules.add(new ThunderHack());
+		this.moduleColorMap.put(this.getModuleByClass(ThunderHack.class), new Color(46, 89, 0));
 		this.moduleColorMap.put(this.getModuleByClass(AutoCraftDupe.class), new Color(28, 0, 189));
 		this.moduleColorMap.put(this.getModuleByClass(AutoFrameDupe.class), new Color(0, 173, 94));
 		this.moduleColorMap.put(this.getModuleByClass(MountBypass.class), new Color(91, 31, 194));
