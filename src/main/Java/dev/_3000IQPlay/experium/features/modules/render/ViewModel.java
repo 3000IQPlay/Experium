@@ -3,6 +3,7 @@ package dev._3000IQPlay.experium.features.modules.render;
 import dev._3000IQPlay.experium.event.events.RenderItemEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.Timer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ViewModel
@@ -31,6 +32,15 @@ public class ViewModel
     public Setting<Double> offScaleX = this.register(new Setting<Double>("OffScaleX", Double.valueOf(1.0), Double.valueOf(0.1), Double.valueOf(5.0), v -> this.settings.getValue() == Settings.SCALE));
     public Setting<Double> offScaleY = this.register(new Setting<Double>("OffScaleY", Double.valueOf(1.0), Double.valueOf(0.1), Double.valueOf(5.0), v -> this.settings.getValue() == Settings.SCALE));
     public Setting<Double> offScaleZ = this.register(new Setting<Double>("OffScaleZ", Double.valueOf(1.0), Double.valueOf(0.1), Double.valueOf(5.0), v -> this.settings.getValue() == Settings.SCALE));
+	public Setting<Boolean> rotatexo = this.register(new Setting("RotateX", Boolean.valueOf(false)));
+    public Setting<Boolean> rotateyo = this.register(new Setting("RotateY", Boolean.valueOf(false)));
+    public Setting<Boolean> rotatezo = this.register(new Setting("RotateZ", Boolean.valueOf(false)));
+    public Setting<Boolean> rotatex = this.register(new Setting("RotateXOff", Boolean.valueOf(false)));
+    public Setting<Boolean> rotatey = this.register(new Setting("RotateYOff", Boolean.valueOf(false)));
+    public Setting<Boolean> rotatez = this.register(new Setting("RotateZOff", Boolean.valueOf(false)));
+    public Setting<Integer> animDelay = this.register(new Setting("RotateSpeed", Integer.valueOf(500), Integer.valueOf(1), Integer.valueOf(1500), v -> this.rotatex.getValue() || this.rotatey.getValue() || this.rotatez.getValue()));
+	public Timer timer = new Timer();
+	int rotation = -180;
 
     public ViewModel() {
         super("ViewModel", "Cool", Module.Category.RENDER, true, false, false);
@@ -68,6 +78,43 @@ public class ViewModel
         event.setMainHandScaleX(this.mainScaleX.getValue());
         event.setMainHandScaleY(this.mainScaleY.getValue());
         event.setMainHandScaleZ(this.mainScaleZ.getValue());
+		if (this.timer.passedMs((long)(1000 / this.animDelay.getValue()))) {
+            ++this.rotation;
+            if (this.rotation > 180) {
+                this.rotation = -180;
+            }
+            this.timer.reset();
+        }
+        if (!(this.rotatex.getValue()).booleanValue()) {
+            event.setOffRotX((double)(this.offRotX.getValue() * 5));
+        } else {
+            event.setOffRotX((double)this.rotation);
+        }
+        if (!(this.rotatey.getValue()).booleanValue()) {
+            event.setOffRotY((double)(this.offRotY.getValue() * 5));
+        } else {
+            event.setOffRotY((double)this.rotation);
+        }
+        if (!(this.rotatez.getValue()).booleanValue()) {
+            event.setOffRotZ((double)(this.offRotZ.getValue() * 5));
+        } else {
+            event.setOffRotZ((double)this.rotation);
+        }
+		if (!(this.rotatexo.getValue()).booleanValue()) {
+            event.setMainRotX((double)(this.offRotX.getValue() * 5));
+        } else {
+            event.setMainRotX((double)this.rotation);
+        }
+        if (!(this.rotateyo.getValue()).booleanValue()) {
+            event.setMainRotY((double)(this.offRotY.getValue() * 5));
+        } else {
+            event.setMainRotY((double)this.rotation);
+        }
+        if (!(this.rotatezo.getValue()).booleanValue()) {
+            event.setMainRotZ((double)(this.offRotZ.getValue() * 5));
+        } else {
+            event.setMainRotZ((double)this.rotation);
+        }
     }
 
     private static enum Settings {
@@ -75,7 +122,5 @@ public class ViewModel
         ROTATE,
         SCALE,
         TWEAKS;
-
     }
 }
-
