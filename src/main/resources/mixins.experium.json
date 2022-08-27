@@ -12,6 +12,8 @@
     "MixinBlockLiquid",
     "MixinBlockModelRenderer",
     "MixinBlockSoulSand",
+    "MixinBlockVine",
+    "MixinBlockWeb",
     "MixinC00Handshake",
     "MixinEntity",
     "MixinEntityLivingBase",
