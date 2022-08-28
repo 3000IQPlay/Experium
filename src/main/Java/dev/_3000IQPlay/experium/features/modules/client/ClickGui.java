@@ -61,15 +61,15 @@ public class ClickGui
     public Setting<Integer> moAlpha = this.register(new Setting<Object>("ModuleOutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleOutline.getValue()));
     public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.setting.getValue() == Settings.Misc && this.scroll.getValue()));
-    public Setting<Integer> red = this.register(new Setting<Integer>("Red", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> green = this.register(new Setting<Integer>("Green", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("Alpha", 0, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> red = this.register(new Setting<Integer>("EnableRed", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> green = this.register(new Setting<Integer>("EnableGreen", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> blue = this.register(new Setting<Integer>("EnableBlue", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("EnableAlpha", 0, 0, 255, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main));
-	public Setting<Integer> b_red = this.register(new Setting<Integer>("ButtonRed", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_green = this.register(new Setting<Integer>("ButtonGreen", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_blue = this.register(new Setting<Integer>("ButtonBlue", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_alpha = this.register(new Setting<Integer>("ButtonAlpha", 255, 0, 255, v -> this.setting.getValue() == Settings.Main));
+	public Setting<Integer> b_red = this.register(new Setting<Integer>("ButtonBGRed", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_green = this.register(new Setting<Integer>("ButtonBGGreen", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_blue = this.register(new Setting<Integer>("ButtonBGBlue", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_alpha = this.register(new Setting<Integer>("ButtonBGAlpha", 255, 0, 255, v -> this.setting.getValue() == Settings.Main));
 	public Setting<Integer> textRed = this.register(new Setting<Integer>("EnabledTextRed", 135, 0, 255, v -> this.setting.getValue() == Settings.FontC));
     public Setting<Integer> textGreen = this.register(new Setting<Integer>("EnabledTextGreen", 135, 0, 255, v -> this.setting.getValue() == Settings.FontC));
     public Setting<Integer> textBlue = this.register(new Setting<Integer>("EnabledTextBlue", 255, 0, 255, v -> this.setting.getValue() == Settings.FontC));
@@ -181,6 +181,6 @@ public class ClickGui
 		Background,
 		FontC,
 		Scaling,
-		Misc
+		Misc;
 	}	
 }
