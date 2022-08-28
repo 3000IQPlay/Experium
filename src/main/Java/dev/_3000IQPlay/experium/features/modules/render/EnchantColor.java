@@ -8,13 +8,27 @@ import java.awt.Color;
 
 public class EnchantColor
         extends Module {
+	private static EnchantColor INSTANCE = new EnchantColor();
     public Setting<Integer> red = this.register(new Setting<Integer>("Red", 255, 0, 255));
     public Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
     public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
     public Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Rainbow", false));
+	public Setting<Boolean> betterRainbow = this.register(new Setting<Boolean>("BetterRainbow", false));
 
     public EnchantColor() {
         super("EnchantColor", "Changes the enchant glint color", Module.Category.RENDER, true, false, true);
+		this.setInstance();
+    }
+	
+	public static EnchantColor getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new EnchantColor();
+        }
+        return INSTANCE;
+    }
+
+    private void setInstance() {
+        INSTANCE = this;
     }
 
     public static Color getColor(long offset, float fade) {
