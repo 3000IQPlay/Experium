@@ -13,7 +13,7 @@ public class NoSwing
     public Setting<Swing> swing = this.register(new Setting<Swing>("Swing", Swing.MAINHAND));
 
     public NoSwing() {
-        super("NoSwing", "Shopgirls requested this soooo", Module.Category.PLAYER, true, false, false);
+        super("NoSwing", "Shopgirls requested this soooo", Module.Category.RENDER, true, false, false);
     }
 
     @SubscribeEvent
