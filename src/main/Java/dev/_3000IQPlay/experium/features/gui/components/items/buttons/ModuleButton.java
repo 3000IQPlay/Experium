@@ -150,7 +150,7 @@ public class ModuleButton
             }
             return height + 2;
         }
-        return ClickGui.getInstance().moduleButtonHeight.getValue().intValue();
+        return 14;
     }
 
     public Module getModule() {
