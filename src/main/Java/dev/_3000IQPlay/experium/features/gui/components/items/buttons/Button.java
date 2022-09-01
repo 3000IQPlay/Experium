@@ -20,7 +20,7 @@ public class Button
 
     public Button(String name) {
         super(name);
-        this.height = ClickGui.getInstance().moduleButtonHeight.getValue().intValue() + 1;
+        this.height = 15;
     }
 
     @Override
