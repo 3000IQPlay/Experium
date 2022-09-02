@@ -157,10 +157,10 @@ public class ModuleManager
 	    this.modules.add(new AutoFrameDupe());
 		this.modules.add(new AutoCraftDupe());
 		this.modules.add(new SolidWeb());
-	    this.modules.add(new NoSwing());
+	    //this.modules.add(new NoSwing());
 		this.modules.add(new KillEffect());
 		this.moduleColorMap.put(this.getModuleByClass(KillEffect.class), new Color(87, 109, 223));
-	    this.moduleColorMap.put(this.getModuleByClass(NoSwing.class), new Color(0, 0, 223));
+	    //this.moduleColorMap.put(this.getModuleByClass(NoSwing.class), new Color(0, 0, 223));
 		this.moduleColorMap.put(this.getModuleByClass(SolidWeb.class), new Color(46, 89, 0));
 		this.moduleColorMap.put(this.getModuleByClass(AutoCraftDupe.class), new Color(28, 0, 189));
 		this.moduleColorMap.put(this.getModuleByClass(AutoFrameDupe.class), new Color(0, 173, 94));
