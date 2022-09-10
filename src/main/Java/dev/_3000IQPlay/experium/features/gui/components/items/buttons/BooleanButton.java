@@ -5,21 +5,22 @@ import dev._3000IQPlay.experium.features.gui.ExperiumGui;
 import dev._3000IQPlay.experium.features.gui.components.items.buttons.Button;
 import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.modules.client.HUD;
+import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.ColorUtil;
 import dev._3000IQPlay.experium.util.MathUtil;
 import dev._3000IQPlay.experium.util.RenderUtil;
-import dev._3000IQPlay.experium.util.Util;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 
-public class BooleanButton
+public class BindButton
         extends Button {
     private final Setting setting;
+    public boolean isListening;
 
-    public BooleanButton(Setting setting) {
+    public BindButton(Setting setting) {
         super(setting.getName());
         this.setting = setting;
         this.width = 40;
@@ -27,26 +28,21 @@ public class BooleanButton
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		if (ClickGui.getInstance().sideSettings.getValue().booleanValue()) {
+            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sideRed.getValue(), ClickGui.getInstance().sideGreen.getValue(), ClickGui.getInstance().sideBlue.getValue(), ClickGui.getInstance().sideAlpha.getValue());
+            RenderUtil.drawRect(this.x, this.y, this.x + 1.0f, this.y + (float)this.height + 1.0f, sideColor);
+        }
         if (ClickGui.getInstance().rainbowRolling.getValue().booleanValue()) {
             int color = ColorUtil.changeAlpha(HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y, 0, this.renderer.scaledHeight)), Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue());
             int color1 = ColorUtil.changeAlpha(HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y + this.height, 0, this.renderer.scaledHeight)), Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue());
             RenderUtil.drawGradientRect(this.x, this.y, (float)this.width + 7.4f, (float)this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y, 0, this.renderer.scaledHeight)) : color) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515), this.getState() ? (!this.isHovering(mouseX, mouseY) ? HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y + this.height, 0, this.renderer.scaledHeight)) : color1) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
         } else {
-            RenderUtil.drawRect(this.x, this.y, this.x + (float)this.width + 7.4f, this.y + (float)this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue())) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
+            RenderUtil.drawRect(this.x, this.y, this.x + (float)this.width + 7.4f, this.y + (float)this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? Experium.colorManager.getColorWithAlpha(((ClickGui)Experium.moduleManager.getModuleByName((String)"ClickGui")).hoverAlpha.getValue()) : Experium.colorManager.getColorWithAlpha(((ClickGui)Experium.moduleManager.getModuleByName((String)"ClickGui")).alpha.getValue())) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
         }
-        Experium.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
-		if (ClickGui.getInstance().sideSettings.getValue().booleanValue()) {
-            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sideRed.getValue(), ClickGui.getInstance().sideGreen.getValue(), ClickGui.getInstance().sideBlue.getValue(), ClickGui.getInstance().sideAlpha.getValue());
-            RenderUtil.drawRect(this.x, this.y, this.x + 1.0f, this.y + (float)this.height + 1.0f, sideColor);
-        }
-        if (ClickGui.getInstance().enableSwitch.getValue().booleanValue()) {
-            Experium.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
-			RenderUtil.drawRect(this.x + 85.0f, this.y + 5.0f, this.x + (float)this.width + 3.5f, this.y + (float)this.height - 2.0f, this.getState() ? ColorUtil.toRGBA(ClickGui.getInstance().sbRed.getValue(), ClickGui.getInstance().sbGreen.getValue(), ClickGui.getInstance().sbBlue.getValue(), ClickGui.getInstance().sbAlpha.getValue()) : ColorUtil.toRGBA(ClickGui.getInstance().sbRed.getValue(), ClickGui.getInstance().sbGreen.getValue(), ClickGui.getInstance().sbBlue.getValue(), ClickGui.getInstance().sbAlpha.getValue()));
-            if (this.getState()) {
-                RenderUtil.drawRect(this.x + 93.0f, this.y + 6.0f, this.x + (float)this.width + 2.5f, this.y + (float)this.height - 3.0f, this.getState() ? ColorUtil.toRGBA(ClickGui.getInstance().seRed.getValue(), ClickGui.getInstance().seGreen.getValue(), ClickGui.getInstance().seBlue.getValue(), ClickGui.getInstance().seAlpha.getValue()) : ColorUtil.toRGBA(ClickGui.getInstance().seRed.getValue(), ClickGui.getInstance().seGreen.getValue(), ClickGui.getInstance().seBlue.getValue(), ClickGui.getInstance().seAlpha.getValue()));
-            } else {
-                RenderUtil.drawRect(this.x + 86.0f, this.y + 6.0f, this.x + (float)this.width - 4.7f, this.y + (float)this.height - 3.0f, this.getState() ? ColorUtil.toRGBA(ClickGui.getInstance().sdRed.getValue(), ClickGui.getInstance().sdGreen.getValue(), ClickGui.getInstance().sdBlue.getValue(), ClickGui.getInstance().sdAlpha.getValue()) : ColorUtil.toRGBA(ClickGui.getInstance().sdRed.getValue(), ClickGui.getInstance().sdGreen.getValue(), ClickGui.getInstance().sdBlue.getValue(), ClickGui.getInstance().sdAlpha.getValue()));
-            }
+        if (this.isListening) {
+            Experium.textManager.drawStringWithShadow("Listening...", this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
+        } else {
+            Experium.textManager.drawStringWithShadow(this.setting.getName() + " \u00a77" + this.setting.getValue().toString(), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
         }
     }
 
@@ -59,7 +55,22 @@ public class BooleanButton
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         if (this.isHovering(mouseX, mouseY)) {
-            Util.mc.getSoundHandler().playSound((ISound)PositionedSoundRecord.getMasterRecord((SoundEvent)SoundEvents.UI_BUTTON_CLICK, (float)1.0f));
+            mc.getSoundHandler().playSound((ISound)PositionedSoundRecord.getMasterRecord((SoundEvent)SoundEvents.UI_BUTTON_CLICK, (float)1.0f));
+        }
+    }
+
+    @Override
+    public void onKeyTyped(char typedChar, int keyCode) {
+        if (this.isListening) {
+            Bind bind = new Bind(keyCode);
+            if (bind.toString().equalsIgnoreCase("Escape")) {
+                return;
+            }
+            if (bind.toString().equalsIgnoreCase("Delete")) {
+                bind = new Bind(-1);
+            }
+            this.setting.setValue(bind);
+            super.onMouseClick();
         }
     }
 
@@ -70,11 +81,11 @@ public class BooleanButton
 
     @Override
     public void toggle() {
-        this.setting.setValue((Boolean)this.setting.getValue() == false);
+        this.isListening = !this.isListening;
     }
 
     @Override
     public boolean getState() {
-        return (Boolean)this.setting.getValue();
+        return !this.isListening;
     }
 }
