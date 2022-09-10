@@ -35,6 +35,10 @@ public class BooleanButton
             RenderUtil.drawRect(this.x, this.y, this.x + (float)this.width + 7.4f, this.y + (float)this.height - 0.5f, this.getState() ? (!this.isHovering(mouseX, mouseY) ? Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue())) : (!this.isHovering(mouseX, mouseY) ? 0x11555555 : -2007673515));
         }
         Experium.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
+		if (ClickGui.getInstance().sideSettings.getValue().booleanValue()) {
+            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sideRed.getValue(), ClickGui.getInstance().sideGreen.getValue(), ClickGui.getInstance().sideBlue.getValue(), ClickGui.getInstance().sideAlpha.getValue());
+            RenderUtil.drawRect(this.x, this.y, this.x + 1.0f, this.y + (float)this.height + 1.0f, sideColor);
+        }
         if (ClickGui.getInstance().enableSwitch.getValue().booleanValue()) {
             Experium.textManager.drawStringWithShadow(this.getName(), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), this.getState() ? -1 : -5592406);
 			RenderUtil.drawRect(this.x + 85.0f, this.y + 5.0f, this.x + (float)this.width + 3.5f, this.y + (float)this.height - 2.0f, this.getState() ? ColorUtil.toRGBA(ClickGui.getInstance().sbRed.getValue(), ClickGui.getInstance().sbGreen.getValue(), ClickGui.getInstance().sbBlue.getValue(), ClickGui.getInstance().sbAlpha.getValue()) : ColorUtil.toRGBA(ClickGui.getInstance().sbRed.getValue(), ClickGui.getInstance().sbGreen.getValue(), ClickGui.getInstance().sbBlue.getValue(), ClickGui.getInstance().sbAlpha.getValue()));
