@@ -1,9 +1,5 @@
 package dev._3000IQPlay.experium.features.modules.combat;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.modules.Module;
@@ -31,23 +27,28 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class PistonAura
         extends Module {
     public EntityPlayer target = null;
     private Setting<redstone> redstoneType = this.register(new Setting<redstone>("Redstone", redstone.Torch, " redstone type"));
-    private Setting<Integer> start_delay = this.register(new Setting<Integer>("Start Delay", 1, 0, 10));
-    private Setting<Integer> place_delay = this.register(new Setting<Integer>("Place Delay", 1, 0, 10));
-    private Setting<Integer> crystal_delay = this.register(new Setting<Integer>("Crystal Delay", 1, 0, 10));
-    private Setting<Integer> break_delay = this.register(new Setting<Integer>("Break Delay", 1, 0, 10));
-    private Setting<Integer> break_attempts = this.register(new Setting<Integer>("Break Attempts", 2, 1, 10));
+    private Setting<Integer> start_delay = this.register(new Setting<Integer>("StartDelay", 1, 0, 10));
+    private Setting<Integer> place_delay = this.register(new Setting<Integer>("PlaceDelay", 1, 0, 10));
+    private Setting<Integer> crystal_delay = this.register(new Setting<Integer>("CrystalDelay", 1, 0, 10));
+    private Setting<Integer> break_delay = this.register(new Setting<Integer>("BreakDelay", 1, 0, 10));
+    private Setting<Integer> break_attempts = this.register(new Setting<Integer>("BreakAttempts", 2, 1, 10));
     private Setting<types> target_type = this.register(new Setting<types>("Target", types.Looking));
     private Setting<Integer> MaxY = this.register(new Setting<Integer>("MaxY", 2, 1, 5));
     private Setting<Float> range = this.register(new Setting<Float>("Range", Float.valueOf(5.2f), Float.valueOf(1.0f), Float.valueOf(15.0f)));
-    private Setting<mode> trap = this.register(new Setting<mode>("Trap Mode", mode.Smart));
+    private Setting<mode> trap = this.register(new Setting<mode>("TrapMode", mode.Smart));
     private Setting<Boolean> packetPlace = this.register(new Setting<Boolean>("PacketPlace", false));
-    private Setting<arm> swingArm = this.register(new Setting<arm>("Swing Arm", arm.MainHand));
+    private Setting<arm> swingArm = this.register(new Setting<arm>("SwingArm", arm.MainHand));
     private Setting<Boolean> antiweakness = this.register(new Setting<Boolean>("AntiWeakness", false));
     private Setting<Boolean> toggle = this.register(new Setting<Boolean>("Toggle", true));
+	private Setting<Boolean> debug = this.register(new Setting<Boolean>("Debug", true));
     private boolean r_redstone = false;
     private int b_stage = 0;
     private BlockPos b_crystal = null;
@@ -102,7 +103,9 @@ public class PistonAura
                 sword = pickaxe;
             }
             if (pickaxe == -1 || crystal == -1 || piston == -1 || redstone2 == -1 || obsidian == -1) {
-                Command.sendMessage("Missing Materials! disabling...");
+				if (this.debug.getValue()) {
+                    Command.sendMessage("Missing Materials! disabling...");
+				}
                 this.disable();
                 return;
             }
@@ -124,7 +127,9 @@ public class PistonAura
                 this.searchSpace();
                 if (this.b_crystal == null || this.b_piston == null || this.b_redStone == null) {
                     if (this.toggle.getValue().booleanValue()) {
-                        Command.sendMessage("Not found space! disabling...");
+						if (this.debug.getValue()) {
+                            Command.sendMessage("Not found space! disabling...");
+						}
                         this.disable();
                     }
                     return;
@@ -132,7 +137,9 @@ public class PistonAura
             }
             this.debug_stage = 2;
             if (this.getRange(this.b_crystal) > this.range.getValue().floatValue() || this.getRange(this.b_piston) > this.range.getValue().floatValue() || this.getRange(this.b_redStone) > this.range.getValue().floatValue()) {
-                Command.sendMessage("Out of range! disabling...");
+				if (this.debug.getValue()) {
+                    Command.sendMessage("Out of range! disabling...");
+				}
                 if (this.toggle.getValue().booleanValue()) {
                     this.disable();
                 }
@@ -258,7 +265,9 @@ public class PistonAura
                         return;
                     }
                     this.attempts = 0;
-                    Command.sendMessage("Not found crystal! retrying...");
+					if (this.debug.getValue()) {
+                        Command.sendMessage("Not found crystal! retrying...");
+					}
                     this.r_redstone = true;
                     this.b_stage = 0;
                     return;
@@ -287,9 +296,11 @@ public class PistonAura
             PistonAura.mc.player.inventory.currentItem = oldslot;
             PistonAura.mc.playerController.updateController();
         } catch (Exception ex) {
-            Command.sendMessage("Has Error! : " + ex.toString());
-            Command.sendMessage("Stage : " + this.debug_stage);
-            Command.sendMessage("Trying to init...");
+			if (this.debug.getValue()) {
+                Command.sendMessage("Has Error! : " + ex.toString());
+                Command.sendMessage("Stage : " + this.debug_stage);
+                Command.sendMessage("Trying to init...");
+			}
             this.Init();
             return;
         }
@@ -447,14 +458,12 @@ public class PistonAura
         Smart,
         Force,
         None;
-
     }
 
     private static enum redstone {
         Block,
         Torch,
         Both;
-
     }
 
     private static enum arm {
@@ -467,7 +476,5 @@ public class PistonAura
     private static enum types {
         Nearest,
         Looking;
-
     }
 }
-
