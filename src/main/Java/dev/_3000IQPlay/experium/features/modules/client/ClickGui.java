@@ -20,19 +20,19 @@ public class ClickGui
 	public Setting<Boolean> rainbowRolling = this.register(new Setting<Object>("RollingRainbow", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.Misc && this.colorSync.getValue() != false && Colors.INSTANCE.rainbow.getValue() != false));
 	public Setting<Integer> guiWidth = this.register(new Setting<Integer>("GuiWidth", Integer.valueOf(113), Integer.valueOf(90), Integer.valueOf(115), v -> this.setting.getValue() == Settings.Scaling));
 	
-    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", false, v -> this.setting.getValue() == Settings.Main));
-	public Setting<Boolean> outlineNew = this.register(new Setting<Boolean>("OutlineNew", false, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Float> outlineThickness = this.register(new Setting<Float>("LineThickness", Float.valueOf(2.5f), Float.valueOf(0.5f), Float.valueOf(5.0f), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
-    public Setting<Integer> o_red = this.register(new Setting<Object>("OutlineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
-    public Setting<Integer> o_green = this.register(new Setting<Object>("OutlineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
-    public Setting<Integer> o_blue = this.register(new Setting<Object>("OutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
-    public Setting<Integer> o_alpha = this.register(new Setting<Object>("OutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.outlineNew.getValue()));
+    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", false, v -> this.setting.getValue() == Settings.Lines));
+	public Setting<Boolean> outlineNew = this.register(new Setting<Boolean>("OutlineNew", false, v -> this.setting.getValue() == Settings.Lines));
+    public Setting<Float> outlineThickness = this.register(new Setting<Float>("LineThickness", Float.valueOf(2.5f), Float.valueOf(0.5f), Float.valueOf(5.0f), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
+    public Setting<Integer> o_red = this.register(new Setting<Object>("OutlineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
+    public Setting<Integer> o_green = this.register(new Setting<Object>("OutlineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
+    public Setting<Integer> o_blue = this.register(new Setting<Object>("OutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
+    public Setting<Integer> o_alpha = this.register(new Setting<Object>("OutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
 	
-	public Setting<Boolean> sideSettings = this.register(new Setting<Boolean>("SideLine", false, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> sideRed = this.register(new Setting<Object>("SideLineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.sideSettings.getValue()));
-    public Setting<Integer> sideGreen = this.register(new Setting<Object>("SideLineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.sideSettings.getValue()));
-    public Setting<Integer> sideBlue = this.register(new Setting<Object>("SideLineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.sideSettings.getValue()));
-    public Setting<Integer> sideAlpha = this.register(new Setting<Object>("SideLineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.sideSettings.getValue()));
+	public Setting<Boolean> sideSettings = this.register(new Setting<Boolean>("SideLine", false, v -> this.setting.getValue() == Settings.Lines));
+    public Setting<Integer> sideRed = this.register(new Setting<Object>("SideLineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
+    public Setting<Integer> sideGreen = this.register(new Setting<Object>("SideLineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
+    public Setting<Integer> sideBlue = this.register(new Setting<Object>("SideLineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
+    public Setting<Integer> sideAlpha = this.register(new Setting<Object>("SideLineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
 	
     public Setting<Boolean> snowing = this.register(new Setting<Boolean>("Snowing", false, v -> this.setting.getValue() == Settings.Background));
 	
@@ -60,17 +60,17 @@ public class ClickGui
     public Setting<Integer> gbBlue = this.register(new Setting<Object>("GuiBackgroundBlue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Background && this.guiBackground.getValue()));
     public Setting<Integer> gbAlpha = this.register(new Setting<Object>("GuiBackgroundAlpha", Integer.valueOf(150), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Background && this.guiBackground.getValue()));
 	
-	public Setting<Boolean> moduleSeperate = this.register(new Setting<Boolean>("ModuleSeperateLine", true, v -> this.setting.getValue() == Settings.Main));
-	public Setting<Integer> mosRed = this.register(new Setting<Object>("ModuleSeperateRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleSeperate.getValue()));
-    public Setting<Integer> mosGreen = this.register(new Setting<Object>("ModuleSeperateGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleSeperate.getValue()));
-    public Setting<Integer> mosBlue = this.register(new Setting<Object>("ModuleSeperateBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleSeperate.getValue()));
-    public Setting<Integer> mosAlpha = this.register(new Setting<Object>("ModuleSeperateAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleSeperate.getValue()));
+	public Setting<Boolean> moduleSeperate = this.register(new Setting<Boolean>("ModuleSeperateLine", true, v -> this.setting.getValue() == Settings.Lines));
+	public Setting<Integer> mosRed = this.register(new Setting<Object>("ModuleSeperateRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleSeperate.getValue()));
+    public Setting<Integer> mosGreen = this.register(new Setting<Object>("ModuleSeperateGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleSeperate.getValue()));
+    public Setting<Integer> mosBlue = this.register(new Setting<Object>("ModuleSeperateBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleSeperate.getValue()));
+    public Setting<Integer> mosAlpha = this.register(new Setting<Object>("ModuleSeperateAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleSeperate.getValue()));
 	
-	public Setting<Boolean> moduleOutline = this.register(new Setting<Boolean>("ModuleOutline", false, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> moRed = this.register(new Setting<Object>("ModuleOutlineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleOutline.getValue()));
-    public Setting<Integer> moGreen = this.register(new Setting<Object>("ModuleOutlineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleOutline.getValue()));
-    public Setting<Integer> moBlue = this.register(new Setting<Object>("ModuleOutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleOutline.getValue()));
-    public Setting<Integer> moAlpha = this.register(new Setting<Object>("ModuleOutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.moduleOutline.getValue()));
+	public Setting<Boolean> moduleOutline = this.register(new Setting<Boolean>("ModuleOutline", false, v -> this.setting.getValue() == Settings.Lines));
+    public Setting<Integer> moRed = this.register(new Setting<Object>("ModuleOutlineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleOutline.getValue()));
+    public Setting<Integer> moGreen = this.register(new Setting<Object>("ModuleOutlineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleOutline.getValue()));
+    public Setting<Integer> moBlue = this.register(new Setting<Object>("ModuleOutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleOutline.getValue()));
+    public Setting<Integer> moAlpha = this.register(new Setting<Object>("ModuleOutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.moduleOutline.getValue()));
 	
     public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.setting.getValue() == Settings.Misc && this.scroll.getValue()));
@@ -108,11 +108,11 @@ public class ClickGui
     public Setting<Integer> topBlue = this.register(new Setting<Object>("TopBlue", Integer.valueOf(30), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.devSettings.getValue()));
     public Setting<Integer> topAlpha = this.register(new Setting<Object>("TopAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.devSettings.getValue()));
 	
-	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> frameRed = this.register(new Setting<Integer>("FrameRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.frameSettings.getValue()));
-    public Setting<Integer> frameGreen = this.register(new Setting<Integer>("FrameGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.frameSettings.getValue()));
-    public Setting<Integer> frameBlue = this.register(new Setting<Integer>("FrameBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.frameSettings.getValue()));
-    public Setting<Integer> frameAlpha = this.register(new Setting<Integer>("FrameAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.frameSettings.getValue()));
+	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true, v -> this.setting.getValue() == Settings.Lines));
+    public Setting<Integer> frameRed = this.register(new Setting<Integer>("FrameRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
+    public Setting<Integer> frameGreen = this.register(new Setting<Integer>("FrameGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
+    public Setting<Integer> frameBlue = this.register(new Setting<Integer>("FrameBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
+    public Setting<Integer> frameAlpha = this.register(new Setting<Integer>("FrameAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
 	
 	public Setting<Boolean> gradiant = this.register(new Setting<Boolean>("Gradiant", false, v -> this.setting.getValue() == Settings.Background));
     public Setting<Integer> gradiantRed = this.register(new Setting<Object>("GradiantRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Background && this.gradiant.getValue()));
@@ -198,6 +198,7 @@ public class ClickGui
 	
 	public enum Settings {
 		Main,
+		Lines,
 		Background,
 		FontC,
 		Scaling,
