@@ -38,7 +38,7 @@ public class ViewModel
     public Setting<Boolean> rotatex = this.register(new Setting("RotateXOff", Boolean.valueOf(false)));
     public Setting<Boolean> rotatey = this.register(new Setting("RotateYOff", Boolean.valueOf(false)));
     public Setting<Boolean> rotatez = this.register(new Setting("RotateZOff", Boolean.valueOf(false)));
-    public Setting<Integer> animDelay = this.register(new Setting("RotateSpeed", Integer.valueOf(500), Integer.valueOf(1), Integer.valueOf(1500), v -> this.rotatex.getValue() || this.rotatey.getValue() || this.rotatez.getValue()));
+    public Setting<Integer> animDelay = this.register(new Setting("RotateSpeed", Integer.valueOf(500), Integer.valueOf(1), Integer.valueOf(1500), v -> this.rotatex.getValue() || this.rotatey.getValue() || this.rotatez.getValue() || this.rotatexo.getValue() || this.rotateyo.getValue() || this.rotatezo.getValue()));
 	public Timer timer = new Timer();
 	int rotation = -180;
 
