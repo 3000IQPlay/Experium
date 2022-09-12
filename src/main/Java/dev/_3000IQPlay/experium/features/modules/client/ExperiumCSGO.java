@@ -72,7 +72,7 @@ public class ExperiumCSGO
             int posY = this.posY.getValue();
 			double barPosY = this.barPosY.getValue();
 			double textPosY = this.textPosY.getValue();
-            RenderUtil.drawRectangleCorrectly(posX - 4, posY - 4, (int)(width + 10.0f), height + 6, ColorUtil.toRGBA(0, 0, 0, 255));
+            RenderUtil.drawRectangleCorrectly(posX - 4, posY - 4, (int)(width + 10.0f), height + 6, ColorUtil.toRGBA(this.bRed.getValue(), this.bGreen.getValue(), this.bBlue.getValue(), this.bAlpha.getValue()));
             RenderUtil.drawRectangleCorrectly(posX - 4, posY - 4, (int)(width + 11.0f), height + 7, ColorUtil.toRGBA(this.bRed.getValue(), this.bGreen.getValue(), this.bBlue.getValue(), this.bAlpha.getValue()));
             ExperiumCSGO.drawRect(posX, posY, (float)posX + width + 2.0f, posY + height, new Color(this.bgRed.getValue(), this.bgGreen.getValue(), this.bgBlue.getValue(), this.bgAlpha.getValue()).getRGB());
             ExperiumCSGO.drawRect((double)posX + 2.5, (double)posY + 2.5, (double)((float)posX + width) - 0.5, (double)posY + 4.5, new Color(this.bgRed.getValue(), this.bgGreen.getValue(), this.bgBlue.getValue(), this.bgAlpha.getValue()).getRGB());
