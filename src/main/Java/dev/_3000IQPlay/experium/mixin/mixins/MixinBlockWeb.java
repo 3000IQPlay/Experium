@@ -1,7 +1,7 @@
 package dev._3000IQPlay.experium.mixin.mixins;
 
 import dev._3000IQPlay.experium.Experium;
-import dev._3000IQPlay.experium.features.modules.misc.SolidWeb;
+import dev._3000IQPlay.experium.features.modules.misc.SolidBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.block.material.Material;
@@ -24,10 +24,11 @@ extends Block {
     @Nullable
     @Overwrite
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        if (Experium.moduleManager.getModuleByClass(SolidWeb.class).isEnabled()) {
-            return FULL_BLOCK_AABB;
+        if (Experium.moduleManager.getModuleByClass(SolidBlock.class).isEnabled()) {
+			if (SolidBlock.getInstance().web.getValue().booleanValue()) {
+                return FULL_BLOCK_AABB;
+			}
         }
         return NULL_AABB;
     }
 }
-
