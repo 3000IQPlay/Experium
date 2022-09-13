@@ -27,13 +27,18 @@ jobs:
           overwrite-settings: true
           job-status: success
 
-      - name: Grant execute permission for gradlew.
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
-      - uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build --no-daemon
-
+        
+      - name: Build with Gradle
+        run: |
+          ./gradlew setupDecompWorkspace
+          ./gradlew build
+          
+      - name: List files
+        run: ls
+        
+      - name: Upload a Build Artifact
       - uses: actions/upload-artifact@v2
         with:
           name: package
