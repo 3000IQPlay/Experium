@@ -28,7 +28,7 @@ public class ClickGui
     public Setting<Integer> o_blue = this.register(new Setting<Object>("OutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
     public Setting<Integer> o_alpha = this.register(new Setting<Object>("OutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
 	
-	public Setting<Boolean> sideSettings = this.register(new Setting<Boolean>("SideLine", false, v -> this.setting.getValue() == Settings.Lines));
+	public Setting<Boolean> sideSettings = this.register(new Setting<Boolean>("SideLine", true, v -> this.setting.getValue() == Settings.Lines));
     public Setting<Integer> sideRed = this.register(new Setting<Object>("SideLineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
     public Setting<Integer> sideGreen = this.register(new Setting<Object>("SideLineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
     public Setting<Integer> sideBlue = this.register(new Setting<Object>("SideLineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
@@ -51,6 +51,7 @@ public class ClickGui
     public Setting<Integer> sdAlpha = this.register(new Setting<Object>("SwitchDisableAlpha", Integer.valueOf(200), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Misc && this.enableSwitch.getValue()));
 	
 	public Setting<Boolean> categoryDots = this.register(new Setting<Boolean>("CategoryDots", true, v -> this.setting.getValue() == Settings.Misc));
+	public Setting<Boolean> buttonTextCenter = this.register(new Setting<Boolean>("ButtonTextCenter", false, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Boolean> moduleDescription = this.register(new Setting<Boolean>("Description", true, v -> this.setting.getValue() == Settings.Misc));
 	public Setting<Boolean> blurEffect = this.register(new Setting<Boolean>("Blur", false, v -> this.setting.getValue() == Settings.Background));
 	
