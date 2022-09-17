@@ -1,5 +1,6 @@
 package dev._3000IQPlay.experium.util;
 
+import dev._3000IQPlay.experium.features.modules.combat.AutoCrystal;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -46,6 +47,22 @@ public class ColorUtil {
 
     public static int[] toRGBAArray(int colorBuffer) {
         return new int[]{colorBuffer >> 16 & 0xFF, colorBuffer >> 8 & 0xFF, colorBuffer & 0xFF, colorBuffer >> 24 & 0xFF};
+    }
+	
+	public static Color invert(Color color) {
+        int n;
+        int n2;
+        int n3 = color.getAlpha();
+        int n4 = 255 - color.getRed();
+        if (n4 + (n2 = 255 - color.getGreen()) + (n = 255 - color.getBlue()) > 740 || n4 + n2 + n < 20) {
+            return new Color(255, 255, 40, n3);
+        }
+        return new Color(n4, n2, n, n3);
+    }
+	
+	public static Color gradientRainbow(int n) {
+        double d = Math.ceil((double)(System.currentTimeMillis() + (long)n) / 20.0);
+        return Color.getHSBColor((float)((d %= 360.0) / 360.0), AutoCrystal.getInstance().rainbowSaturation.getValue().floatValue() / 255.0f, AutoCrystal.getInstance().rainbowBrightness.getValue().floatValue() / 255.0f);
     }
 
     public static int changeAlpha(int origColor, int userInputedAlpha) {
