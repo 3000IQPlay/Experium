@@ -18,6 +18,7 @@ import java.util.Objects;
 
 public class SpeedNew
         extends Module {
+	private static SpeedNew instance;
     private final Setting<SpeedNewModes> mode = this.register(new Setting<SpeedNewModes>("Mode", SpeedNewModes.CUSTOM));
     private final Setting<Float> customSpeedNew = this.register(new Setting<Float>("CustomSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(2.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("OnGroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(3.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
@@ -34,6 +35,14 @@ public class SpeedNew
 
     public SpeedNew() {
         super("SpeedNew", "placeholder", Module.Category.MOVEMENT, false, false, false);
+		instance = this;
+    }
+	
+	public static SpeedNew getInstance() {
+        if (instance == null) {
+            instance = new SpeedNew();
+        }
+        return instance;
     }
 
     @SubscribeEvent
