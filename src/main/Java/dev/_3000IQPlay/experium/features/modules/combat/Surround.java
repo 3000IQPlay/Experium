@@ -21,10 +21,10 @@ import java.util.*;
 public class Surround
         extends Module {
     public static boolean isPlacing = false;
-	private final Setting<Center> center = this.register(new Setting<Center>("CenterType", Center.Instant));
     private final Setting<Integer> blocksPerTick = this.register(new Setting<Integer>("BlocksPerTick", 12, 1, 20));
     private final Setting<Integer> delay = this.register(new Setting<Integer>("Delay", 0, 0, 250));
     private final Setting<Boolean> noGhost = this.register(new Setting<Boolean>("PacketPlace", false));
+    private final Setting<Boolean> center = this.register(new Setting<Boolean>("TPCenter", false));
     private final Setting<Boolean> rotate = this.register(new Setting<Boolean>("Rotate", true));
     private final dev._3000IQPlay.experium.util.Timer timer = new dev._3000IQPlay.experium.util.Timer();
     private final dev._3000IQPlay.experium.util.Timer retryTimer = new Timer();
@@ -52,15 +52,9 @@ public class Surround
         }
         this.lastHotbarSlot = Surround.mc.player.inventory.currentItem;
         this.startPos = EntityUtil.getRoundedBlockPos(Surround.mc.player);
-		this.CenterPos = EntityUtil.getCenter(Surround.mc.player.posX, Surround.mc.player.posY, Surround.mc.player.posZ);
-        switch (this.center.getValue()) {
-            case Instant: {
-                Experium.positionManager.setPositionPacket((double)this.startPos.getX() + 0.5, this.startPos.getY(), (double)this.startPos.getZ() + 0.5, true, true, true);
-            }
-            case Pull: {
-                Experium.movementManager.setMotion((this.CenterPos.x - Surround.mc.player.posX) / 2.0, Surround.mc.player.motionY, (this.CenterPos.z - Surround.mc.player.posZ) / 2.0);
-            }
-		}
+        if (this.center.getValue().booleanValue()) {
+            Experium.positionManager.setPositionPacket((double) this.startPos.getX() + 0.5, this.startPos.getY(), (double) this.startPos.getZ() + 0.5, true, true, true);
+        }
         this.retries.clear();
         this.retryTimer.reset();
     }
@@ -244,11 +238,5 @@ public class Surround
             this.didPlace = true;
             ++this.placements;
         }
-    }
-	
-	public static enum Center {
-        None,
-        Instant,
-        Pull;
     }
 }
