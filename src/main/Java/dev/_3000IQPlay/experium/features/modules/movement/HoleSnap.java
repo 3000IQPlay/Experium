@@ -166,7 +166,5 @@ public class HoleSnap
     public static enum Mode {
         Instant,
         Motion;
-
     }
 }
-
