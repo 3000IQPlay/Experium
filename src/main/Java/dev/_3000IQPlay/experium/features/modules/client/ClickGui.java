@@ -51,6 +51,7 @@ public class ClickGui
     public Setting<Integer> sdAlpha = this.register(new Setting<Object>("SwitchDisableAlpha", Integer.valueOf(200), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Misc && this.enableSwitch.getValue()));
 	
 	public Setting<Boolean> categoryDots = this.register(new Setting<Boolean>("CategoryDots", true, v -> this.setting.getValue() == Settings.Misc));
+	public Setting<Boolean> categoryTextCenter = this.register(new Setting<Boolean>("CategoryTextCenter", false, v -> this.setting.getValue() == Settings.Misc));
 	public Setting<Boolean> buttonTextCenter = this.register(new Setting<Boolean>("ButtonTextCenter", false, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Boolean> moduleDescription = this.register(new Setting<Boolean>("Description", true, v -> this.setting.getValue() == Settings.Misc));
 	public Setting<Boolean> blurEffect = this.register(new Setting<Boolean>("Blur", false, v -> this.setting.getValue() == Settings.Background));
@@ -76,9 +77,9 @@ public class ClickGui
     public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.setting.getValue() == Settings.Misc && this.scroll.getValue()));
 	
-    public Setting<Integer> red = this.register(new Setting<Integer>("EnableRed", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> green = this.register(new Setting<Integer>("EnableGreen", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> blue = this.register(new Setting<Integer>("EnableBlue", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> red = this.register(new Setting<Integer>("EnableButtonRed", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> green = this.register(new Setting<Integer>("EnableButtonGreen", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> blue = this.register(new Setting<Integer>("EnableButtonBlue", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("EnableAlpha", 0, 0, 255, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main));
 	public Setting<Integer> b_red = this.register(new Setting<Integer>("ButtonBGRed", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
