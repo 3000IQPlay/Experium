@@ -9,6 +9,7 @@ import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.modules.client.ModuleTools;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.manager.FileManager;
+import dev._3000IQPlay.experium.util.TextUtil;
 import dev._3000IQPlay.experium.util.Timer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -206,6 +207,14 @@ public class Notifications
                     TextComponentString text = new TextComponentString((Object)ChatFormatting.LIGHT_PURPLE + "[" + (Object)ChatFormatting.DARK_PURPLE + "Muffin" + (Object)ChatFormatting.LIGHT_PURPLE + "] " + (Object)ChatFormatting.LIGHT_PURPLE + module.getDisplayName() + (Object)ChatFormatting.DARK_PURPLE + " was " + (Object)ChatFormatting.GREEN + "enabled.");
                     return text;
                 }
+				case ABYSS: {
+                    TextComponentString text = new TextComponentString(TextUtil.coloredString("[Abyss] ", ModuleTools.getInstance().abyssColor.getPlannedValue()) + (Object)ChatFormatting.WHITE + module.getDisplayName() + (Object)ChatFormatting.GREEN + " ON");
+                    return text;
+                }
+				case LUIGIHACK: {
+                    TextComponentString text = new TextComponentString((Object)ChatFormatting.GREEN + "[LuigiHack] " + (Object)ChatFormatting.GRAY + module.getDisplayName() + " toggled " + (Object)ChatFormatting.GREEN + "on" + (Object)ChatFormatting.GRAY + ".");
+                    return text;
+                }
             }
         }
         TextComponentString text = new TextComponentString(Experium.commandManager.getClientMessage() + ChatFormatting.GREEN + module.getDisplayName() + " toggled on.");
@@ -261,6 +270,10 @@ public class Notifications
                 }
                 case MUFFIN: {
                     TextComponentString text = new TextComponentString((Object)ChatFormatting.LIGHT_PURPLE + "[" + (Object)ChatFormatting.DARK_PURPLE + "Muffin" + (Object)ChatFormatting.LIGHT_PURPLE + "] " + (Object)ChatFormatting.LIGHT_PURPLE + module.getDisplayName() + (Object)ChatFormatting.DARK_PURPLE + " was " + (Object)ChatFormatting.RED + "disabled.");
+                    return text;
+                }
+				case ABYSS: {
+                    TextComponentString text = new TextComponentString(TextUtil.coloredString("[Abyss] ", ModuleTools.getInstance().abyssColor.getPlannedValue()) + (Object)ChatFormatting.WHITE + module.getDisplayName() + (Object)ChatFormatting.RED + " OFF");
                     return text;
                 }
             }
