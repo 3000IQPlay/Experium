@@ -807,6 +807,191 @@ public class RenderUtil
             GlStateManager.popMatrix();
         }
     }
+	
+	public static void drawGradientPlaneBB(AxisAlignedBB axisAlignedBB, EnumFacing enumFacing, Color color, Color color2, double d) {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+        float f = (float)color.getRed() / 255.0f;
+        float f2 = (float)color.getGreen() / 255.0f;
+        float f3 = (float)color.getBlue() / 255.0f;
+        float f4 = (float)color.getAlpha() / 255.0f;
+        float f5 = (float)color2.getRed() / 255.0f;
+        float f6 = (float)color2.getGreen() / 255.0f;
+        float f7 = (float)color2.getBlue() / 255.0f;
+        float f8 = (float)color2.getAlpha() / 255.0f;
+        double d2 = 0.0;
+        double d3 = 0.0;
+        double d4 = 0.0;
+        double d5 = 0.0;
+        double d6 = 0.0;
+        double d7 = 0.0;
+        switch (enumFacing) {
+            case DOWN: {
+                d2 = axisAlignedBB.minX;
+                d5 = axisAlignedBB.maxX;
+                d3 = axisAlignedBB.minY;
+                d6 = axisAlignedBB.minY;
+                d4 = axisAlignedBB.minZ;
+                d7 = axisAlignedBB.maxZ;
+                break;
+            }
+            case UP: {
+                d2 = axisAlignedBB.minX;
+                d5 = axisAlignedBB.maxX;
+                d3 = axisAlignedBB.maxY;
+                d6 = axisAlignedBB.maxY;
+                d4 = axisAlignedBB.minZ;
+                d7 = axisAlignedBB.maxZ;
+                break;
+            }
+            case EAST: {
+                d2 = axisAlignedBB.maxX;
+                d5 = axisAlignedBB.maxX;
+                d3 = axisAlignedBB.minY;
+                d6 = axisAlignedBB.maxY;
+                d4 = axisAlignedBB.minZ;
+                d7 = axisAlignedBB.maxZ;
+                break;
+            }
+            case WEST: {
+                d2 = axisAlignedBB.minX;
+                d5 = axisAlignedBB.minX;
+                d3 = axisAlignedBB.minY;
+                d6 = axisAlignedBB.maxY;
+                d4 = axisAlignedBB.minZ;
+                d7 = axisAlignedBB.maxZ;
+                break;
+            }
+            case SOUTH: {
+                d2 = axisAlignedBB.minX;
+                d5 = axisAlignedBB.maxX;
+                d3 = axisAlignedBB.minY;
+                d6 = axisAlignedBB.maxY;
+                d4 = axisAlignedBB.maxZ;
+                d7 = axisAlignedBB.maxZ;
+                break;
+            }
+            case NORTH: {
+                d2 = axisAlignedBB.minX;
+                d5 = axisAlignedBB.maxX;
+                d3 = axisAlignedBB.minY;
+                d6 = axisAlignedBB.maxY;
+                d4 = axisAlignedBB.minZ;
+                d7 = axisAlignedBB.minZ;
+            }
+        }
+        if (enumFacing == EnumFacing.DOWN || enumFacing == EnumFacing.UP || enumFacing == EnumFacing.EAST || enumFacing == EnumFacing.WEST || enumFacing == EnumFacing.SOUTH || enumFacing == EnumFacing.NORTH) {
+            // empty if block
+        }
+        GlStateManager.pushMatrix();
+        GlStateManager.disableDepth();
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableAlpha();
+        GlStateManager.depthMask((boolean)false);
+        bufferBuilder.begin(5, DefaultVertexFormats.POSITION_COLOR);
+        if (enumFacing == EnumFacing.EAST || enumFacing == EnumFacing.WEST || enumFacing == EnumFacing.NORTH || enumFacing == EnumFacing.SOUTH) {
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+        } else if (enumFacing == EnumFacing.UP) {
+            bufferBuilder.pos(d2, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f5, f6, f7, f8).endVertex();
+        } else if (enumFacing == EnumFacing.DOWN) {
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d3, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d2, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d4).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f, f2, f3, f4).endVertex();
+            bufferBuilder.pos(d5, d6, d7).color(f, f2, f3, f4).endVertex();
+        }
+        tessellator.draw();
+        GlStateManager.depthMask((boolean)true);
+        GlStateManager.disableBlend();
+        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableDepth();
+        GlStateManager.popMatrix();
+    }
 
     public static void drawBoxESP(BlockPos pos, Color color, boolean secondC, Color secondColor, float lineWidth, boolean outline, boolean box, int boxAlpha, boolean air, double height, boolean gradientBox, boolean gradientOutline, boolean invertGradientBox, boolean invertGradientOutline, int gradientAlpha) {
         if (box) {

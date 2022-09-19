@@ -13,7 +13,7 @@ public class EnchantColor
     public Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
     public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
     public Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Rainbow", false));
-	public Setting<Boolean> betterRainbow = this.register(new Setting<Boolean>("BetterRainbow", false));
+	public Setting<Boolean> betterRainbow = this.register(new Setting<Boolean>("RainbowGlint", false));
 
     public EnchantColor() {
         super("EnchantColor", "Changes the enchant glint color", Module.Category.RENDER, true, false, true);

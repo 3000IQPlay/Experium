@@ -154,7 +154,11 @@ public class Component
                 }
             }
         }
-        Experium.textManager.drawStringWithShadow(this.getName(), (float)this.x + 3.0f, (float)this.y - 4.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);
+		if (ClickGui.getInstance().categoryTextCenter.getValue().booleanValue()) {
+            Experium.textManager.drawStringWithShadow(this.getName(), (float)this.x + (float)(this.width / 2) - (float)(this.renderer.getStringWidth(this.getName()) / 2), (float)this.y - 4.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);
+        } else {
+			Experium.textManager.drawStringWithShadow(this.getName(), (float)this.x + 3.0f, (float)this.y - 4.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);
+        }
         if (this.open) {
             if (ClickGui.getInstance().categoryDots.getValue().booleanValue()) {
                 mc.getTextureManager().bindTexture(this.dots);

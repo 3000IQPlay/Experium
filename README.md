@@ -4,6 +4,4 @@ Private project (Atrium continued???) <br />
 - Started: 2.2. 2022 18:15 (CZ Time)
 
 # Access list:
-![image](https://user-images.githubusercontent.com/75604883/189532860-7819b28c-818f-457c-b01b-12c0c4c999d9.png)
-
-Also make it private again because i have some ideas for my skid
+![image](https://user-images.githubusercontent.com/75604883/191041483-316d695c-ebcb-47b1-a3a1-a2acb2982a88.png)

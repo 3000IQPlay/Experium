@@ -17,6 +17,7 @@ import dev._3000IQPlay.experium.features.modules.misc.NoSoundLag;
 import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.BlockUtil;
+import dev._3000IQPlay.experium.util.ColorUtil;
 import dev._3000IQPlay.experium.util.DamageUtil;
 import dev._3000IQPlay.experium.util.EntityUtil;
 import dev._3000IQPlay.experium.util.InventoryUtil;
@@ -141,6 +142,8 @@ public class AutoCrystal
     public Setting<Boolean> justRender = this.register(new Setting<Object>("JustRender", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.RENDER && this.render.getValue() != false));
     public Setting<Boolean> fakeSwing = this.register(new Setting<Object>("FakeSwing", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.DEV && this.justRender.getValue() != false));
     public Setting<RenderMode> renderMode = this.register(new Setting<RenderMode>("Mode", RenderMode.STATIC, v -> this.setting.getValue() == Settings.RENDER && this.render.getValue() != false));
+	public final Setting<Float> rainbowBrightness = this.register(new Setting<Object>("Brightness", Float.valueOf(150.0f), Float.valueOf(1.0f), Float.valueOf(255.0f), v -> this.setting.getValue() == Settings.RENDER && this.renderMode.getValue() == RenderMode.GRADIENTRAINBOW));
+    public final Setting<Float> rainbowSaturation = this.register(new Setting<Object>("Saturation", Float.valueOf(150.0f), Float.valueOf(1.0f), Float.valueOf(255.0f), v -> this.setting.getValue() == Settings.RENDER && this.renderMode.getValue() == RenderMode.GRADIENTRAINBOW));
     private final Setting<Boolean> fadeFactor = this.register(new Setting<Boolean>("Fade", Boolean.valueOf(true), v -> this.setting.getValue() == Settings.RENDER && this.renderMode.getValue() == RenderMode.FADE && this.render.getValue() != false));
     private final Setting<Boolean> scaleFactor = this.register(new Setting<Boolean>("Shrink", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.RENDER && this.renderMode.getValue() == RenderMode.FADE && this.render.getValue() != false));
     private final Setting<Boolean> slabFactor = this.register(new Setting<Boolean>("Slab", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.RENDER && this.renderMode.getValue() == RenderMode.FADE && this.render.getValue() != false));
@@ -520,6 +523,14 @@ public class AutoCrystal
             }
             if (this.renderMode.getValue() == RenderMode.STATIC) {
                 RenderUtil.drawSexyBox(new AxisAlignedBB(this.renderPos), boxC, outlineC, this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.colorSync.getValue(), 1.0f, 1.0f, this.slabHeight.getValue().floatValue());
+            }
+			if (this.renderMode.getValue() == RenderMode.GRADIENTRAINBOW) {
+                AxisAlignedBB axisAlignedBB = AutoCrystal.mc.world.getBlockState(this.renderPos).getSelectedBoundingBox((World)AutoCrystal.mc.world, this.renderPos);
+                Vec3d vec3d = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, mc.getRenderPartialTicks());
+                for (EnumFacing enumFacing : EnumFacing.values()) {
+                    RenderUtil.drawGradientPlaneBB(axisAlignedBB.grow((double)0.002f).offset(-vec3d.x, -vec3d.y, -vec3d.z), enumFacing, new Color(ColorUtil.gradientRainbow(50).getRed(), ColorUtil.gradientRainbow(50).getGreen(), ColorUtil.gradientRainbow(50).getBlue(), 127), ColorUtil.invert(new Color(ColorUtil.gradientRainbow(50).getRed(), ColorUtil.gradientRainbow(50).getGreen(), ColorUtil.gradientRainbow(50).getBlue(), 127)), 2.0);
+                }
+                RenderUtil.drawGradientBlockOutline(axisAlignedBB.grow((double)0.002f).offset(-vec3d.x, -vec3d.y, -vec3d.z), ColorUtil.invert(new Color(ColorUtil.gradientRainbow(50).getRed(), ColorUtil.gradientRainbow(50).getGreen(), ColorUtil.gradientRainbow(50).getBlue(), 255)), new Color(ColorUtil.gradientRainbow(50).getRed(), ColorUtil.gradientRainbow(50).getGreen(), ColorUtil.gradientRainbow(50).getBlue(), 255), 2.0f);
             }
             if (this.renderMode.getValue() == RenderMode.GLIDE) {
                 if (this.lastRenderPos == null || AutoCrystal.mc.player.getDistance(this.renderBB.minX, this.renderBB.minY, this.renderBB.minZ) > (double)this.range.getValue().floatValue()) {
@@ -1488,7 +1499,8 @@ public class AutoCrystal
     public static enum RenderMode {
         STATIC,
         FADE,
-        GLIDE;
+        GLIDE,
+		GRADIENTRAINBOW;
     }
 	
 	public static enum Timing {
