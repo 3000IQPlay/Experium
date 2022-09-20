@@ -165,9 +165,6 @@ public class ModuleManager
         this.modules.add(new FastProjectiles());
 
         this.moduleColorMap.put(this.getModuleByClass(FastProjectiles.class), new Color(0, 255, 255 ));
-        this.modules.add(new BowBomb());
-
-        this.moduleColorMap.put(this.getModuleByClass(BowBomb.class), new Color(0, 255, 255 ));
 		this.moduleColorMap.put(this.getModuleByClass(KillEffect.class), new Color(87, 109, 223));
 	    this.moduleColorMap.put(this.getModuleByClass(StashFinder.class), new Color(0, 0, 223));
 		this.moduleColorMap.put(this.getModuleByClass(SolidBlock.class), new Color(46, 89, 0));
