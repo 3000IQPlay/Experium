@@ -9,8 +9,10 @@ import dev._3000IQPlay.experium.features.modules.client.*;
 import dev._3000IQPlay.experium.features.modules.combat.*;
 import dev._3000IQPlay.experium.features.modules.exploit.*;
 import dev._3000IQPlay.experium.features.modules.misc.*;
+import dev._3000IQPlay.experium.features.modules.misc.AntiPackets;
 import dev._3000IQPlay.experium.features.modules.movement.*;
 import dev._3000IQPlay.experium.features.modules.player.*;
+import dev._3000IQPlay.experium.features.modules.player.NoGlitchBlocks;
 import dev._3000IQPlay.experium.features.modules.render.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
@@ -84,7 +86,7 @@ public class ModuleManager
         this.modules.add(new FontMod());
         this.modules.add(new ClickGui());
         this.modules.add(new Managers());
-        this.modules.add(new Components());
+//      this.modules.add(new Components()); might add back
         this.modules.add(new Colors());
         this.modules.add(new PingBypass());
         this.modules.add(new NickHider());
@@ -105,6 +107,7 @@ public class ModuleManager
         this.modules.add(new FastProjectiles());
         this.modules.add(new BoatFly());
         this.modules.add(new PacketFly());
+        this.modules.add(new CCPacketflyBypass());
         this.modules.add(new NoFall());
         this.modules.add(new BowAim());
         this.modules.add(new Flight());
@@ -159,8 +162,9 @@ public class ModuleManager
 		this.modules.add(new SolidBlock());
 	    this.modules.add(new StashFinder());
 		this.modules.add(new KillEffect());
-		this.modules.add(new HoleSnap());
-		this.moduleColorMap.put(this.getModuleByClass(HoleSnap.class), new Color(17, 199, 0));
+        this.modules.add(new FastProjectiles());
+
+        this.moduleColorMap.put(this.getModuleByClass(FastProjectiles.class), new Color(0, 255, 255 ));
 		this.moduleColorMap.put(this.getModuleByClass(KillEffect.class), new Color(87, 109, 223));
 	    this.moduleColorMap.put(this.getModuleByClass(StashFinder.class), new Color(0, 0, 223));
 		this.moduleColorMap.put(this.getModuleByClass(SolidBlock.class), new Color(46, 89, 0));

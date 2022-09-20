@@ -71,7 +71,7 @@ public class CommandManager
             c.execute(parts);
             return;
         }
-        Command.sendMessage("Unknown command. try 'commands' for a list of commands.");
+        Command.sendMessage("Unknown command. Try 'help' for a list of commands.");
     }
 
     public Command getCommandByName(String name) {
