@@ -23,7 +23,7 @@ public class KillEffect
     public Setting<Boolean> sound = this.register(new Setting<Boolean>("Sound", true));
     public Setting<Integer> numberSound = this.register(new Setting<Integer>("Number Sound", 1, 1, 10));
     public Setting<Integer> timeActive = this.register(new Setting<Integer>("TimeActive", 20, 0, 50));
-    public Setting<Boolean> lightning = this.register(new Setting<Boolean>("lightning", true));
+    public Setting<Boolean> lightning = this.register(new Setting<Boolean>("Lightning", true));
     public Setting<Boolean> totemPop = this.register(new Setting<Boolean>("TotemPop", true));
     public Setting<Boolean> totemPopSound = this.register(new Setting<Boolean>("TotemPopSound", false));
     public Setting<Boolean> firework = this.register(new Setting<Boolean>("FireWork", false));
