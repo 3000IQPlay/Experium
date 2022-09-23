@@ -20,8 +20,8 @@ public class SpeedNew
         extends Module {
 	private static SpeedNew instance;
     private final Setting<SpeedNewModes> mode = this.register(new Setting<SpeedNewModes>("Mode", SpeedNewModes.CUSTOM));
-    private final Setting<Float> customSpeedNew = this.register(new Setting<Float>("CustomSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(2.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
-	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("OnGroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(3.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+    private final Setting<Float> customSpeedNew = this.register(new Setting<Float>("CustomSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("OnGroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Float> customY = this.register(new Setting<Float>("CustomY", Float.valueOf(0.44f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Boolean> timerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
