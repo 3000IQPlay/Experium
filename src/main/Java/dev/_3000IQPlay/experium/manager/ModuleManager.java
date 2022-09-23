@@ -124,7 +124,7 @@ public class ModuleManager
         this.modules.add(new AntiPing());
         this.modules.add(new AutoTwerk());
         this.modules.add(new ChorusPostpone());
-        this.modules.add(new AntiPackets());
+        //this.modules.add(new AntiPackets());
         this.modules.add(new Clip());
         this.modules.add(new Trails());
         this.modules.add(new TickShift());
@@ -200,7 +200,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(TickShift.class), new Color(171, 18, 26));
         this.moduleColorMap.put(this.getModuleByClass(Trails.class), new Color(131, 21, 66));
         this.moduleColorMap.put(this.getModuleByClass(Clip.class), new Color(136, 72, 219));
-        this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
+        //this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
         this.moduleColorMap.put(this.getModuleByClass(ChorusPostpone.class), new Color(43, 165, 216));
         this.moduleColorMap.put(this.getModuleByClass(AutoTwerk.class), new Color(97, 173, 162));
         this.moduleColorMap.put(this.getModuleByClass(AntiPing.class), new Color(172, 133, 192));
