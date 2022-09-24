@@ -1,8 +1,5 @@
 package dev._3000IQPlay.experium.features.modules.movement;
 
-import java.util.Objects;
-import java.util.Random;
-
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.event.events.ClientEvent;
 import dev._3000IQPlay.experium.event.events.MoveEvent;
@@ -18,6 +15,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.MovementInput;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class Speed
         extends Module {
@@ -60,7 +60,7 @@ public class Speed
     }
 
     private boolean shouldReturn() {
-        return Experium.moduleManager.isModuleEnabled("Freecam") || Experium.moduleManager.isModuleEnabled("PacketFly") || Experium.moduleManager.isModuleEnabled("ElytraFlight") || Experium.moduleManager.isModuleEnabled("Strafe") || Experium.moduleManager.isModuleEnabled("Flight");
+        return Experium.moduleManager.isModuleEnabled("Freecam") || Experium.moduleManager.isModuleEnabled("PacketFly") || Experium.moduleManager.isModuleEnabled("ElytraFlight") || Experium.moduleManager.isModuleEnabled("Strafe") || Experium.moduleManager.isModuleEnabled("Flight") || Experium.moduleManager.isModuleEnabled("SpeedNew");
     }
 
     @Override
