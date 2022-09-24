@@ -1,12 +1,11 @@
 package dev._3000IQPlay.experium.features.modules.combat;
 
-import dev._3000IQPlay.experium.util.BurrowUtil;
 import dev._3000IQPlay.experium.features.command.Command;
-import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.features.modules.Module;
-import net.minecraft.block.BlockAnvil;
-import net.minecraft.block.BlockEnderChest;
-import net.minecraft.block.BlockObsidian;
+import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.BurrowUtil;
+import net.minecraft.block.*;
+import net.minecraft.block.BlockSkull;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -22,14 +21,16 @@ public class Burrow
     private final Setting<Integer> offset = this.register(new Setting<Integer>("Offset", 3, -5, 5));
     private final Setting<Boolean> ground = this.register(new Setting<Boolean>("GroundCheck", true));
     private final Setting<Boolean> rotate = this.register(new Setting<Boolean>("Rotate", false));
-	private final Setting<Boolean> center = this.register(new Setting<Boolean>("Center", true));
+    private final Setting<Boolean> center = this.register(new Setting<Boolean>("Center", true));
     private final Setting<Boolean> echest = this.register(new Setting<Boolean>("UseEchest", false));
     private final Setting<Boolean> anvil = this.register(new Setting<Boolean>("UseAnvil", false));
+    private final Setting<Boolean> web = this.register(new Setting<Boolean>("UseWeb", false));
+    private final Setting<Boolean> skull = this.register(new Setting<Boolean>("UseSkull", false));
+
     private BlockPos originalPos;
     private int oldSlot = -1;
 
-    public Burrow() {
-        super("Burrow", "TPs you into a block", Module.Category.COMBAT, true, false, false);
+    public Burrow() {super("Burrow", "no skill require", Module.Category.COMBAT, true, false, false);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class Burrow
             this.toggle();
             return;
         }
-		if (this.center.getValue().booleanValue()) {
+        if (this.center.getValue().booleanValue()) {
             double x = Burrow.mc.player.posX - Math.floor(Burrow.mc.player.posX);
             double z = Burrow.mc.player.posZ - Math.floor(Burrow.mc.player.posZ);
             if (x <= 0.3 || x >= 0.7) {
@@ -49,7 +50,7 @@ public class Burrow
             if (z < 0.3 || z > 0.7) {
                 z = z > 0.5 ? 0.69 : 0.31;
             }
-            Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Math.floor(Burrow.mc.player.posX) + x, Burrow.mc.player.posY, Math.floor(Burrow.mc.player.posZ) + z, Burrow.mc.player.onGround));
+            Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Math.floor(Burrow.mc.player.posX) + x, Burrow.mc.player.posY, Math.floor(Burrow.mc.player.posZ) + z, Burrow.mc.player.onGround));
             Burrow.mc.player.setPosition(Math.floor(Burrow.mc.player.posX) + x, Burrow.mc.player.posY, Math.floor(Burrow.mc.player.posZ) + z);
         }
         this.oldSlot = Burrow.mc.player.inventory.currentItem;
@@ -61,10 +62,19 @@ public class Burrow
             this.toggle();
             return;
         }
+
         if (this.anvil.getValue().booleanValue() && BurrowUtil.findHotbarBlock(BlockAnvil.class) != -1) {
             BurrowUtil.switchToSlot(BurrowUtil.findHotbarBlock(BlockAnvil.class));
         } else if (this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) != -1 : BurrowUtil.findHotbarBlock(BlockObsidian.class) != -1) {
             BurrowUtil.switchToSlot(this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) : BurrowUtil.findHotbarBlock(BlockObsidian.class));
+            if (this.web.getValue().booleanValue() && BurrowUtil.findHotbarBlock(BlockWeb.class) != -1);
+                BurrowUtil.switchToSlot(BurrowUtil.findHotbarBlock(BlockWeb.class));
+        } else if (this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) != -1 : BurrowUtil.findHotbarBlock(BlockObsidian.class) != -1) {
+            BurrowUtil.switchToSlot(this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) : BurrowUtil.findHotbarBlock(BlockObsidian.class));
+            if (this.skull.getValue().booleanValue() && BurrowUtil.findHotbarBlock(BlockSkull.class) != -1)
+                BurrowUtil.switchToSlot(BurrowUtil.findHotbarBlock(BlockSkull.class));
+            } else if (this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) != -1 : BurrowUtil.findHotbarBlock(BlockObsidian.class) != -1) {
+                BurrowUtil.switchToSlot(this.echest.getValue() != false ? BurrowUtil.findHotbarBlock(BlockEnderChest.class) : BurrowUtil.findHotbarBlock(BlockObsidian.class));
         } else {
             Command.sendMessage("Unable to place burrow block (anvil, ec or oby)");
             this.toggle();
@@ -91,3 +101,4 @@ public class Burrow
         return false;
     }
 }
+
