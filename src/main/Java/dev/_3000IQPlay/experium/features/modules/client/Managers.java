@@ -4,19 +4,12 @@ import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.event.events.ClientEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
-import dev._3000IQPlay.experium.util.TextUtil;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Managers
         extends Module {
     private static Managers INSTANCE = new Managers();
     public Setting<Boolean> betterFrames = this.register(new Setting<Boolean>("BetterMaxFPS", false));
-    public Setting<String> commandBracket = this.register(new Setting<String>("Bracket", "["));
-    public Setting<String> commandBracket2 = this.register(new Setting<String>("Bracket2", "]"));
-    public Setting<String> command = this.register(new Setting<String>("Command", "Experium"));
-    public Setting<Boolean> rainbowPrefix = this.register(new Setting<Boolean>("RainbowPrefix", false));
-    public Setting<TextUtil.Color> bracketColor = this.register(new Setting<TextUtil.Color>("BColor", TextUtil.Color.WHITE));
-    public Setting<TextUtil.Color> commandColor = this.register(new Setting<TextUtil.Color>("CColor", TextUtil.Color.LIGHT_PURPLE));
     public Setting<Integer> betterFPS = this.register(new Setting<Object>("MaxFPS", Integer.valueOf(300), Integer.valueOf(30), Integer.valueOf(1000), v -> this.betterFrames.getValue()));
     public Setting<Boolean> potions = this.register(new Setting<Boolean>("Potions", true));
     public Setting<Integer> textRadarUpdates = this.register(new Setting<Integer>("TRUpdates", 500, 0, 1000));
@@ -53,11 +46,6 @@ public class Managers
         INSTANCE = this;
     }
 
-    @Override
-    public void onLoad() {
-        Experium.commandManager.setClientMessage(this.getCommandMessage());
-    }
-
     @SubscribeEvent
     public void onSettingChange(ClientEvent event) {
         if (event.getStage() == 2) {
@@ -68,37 +56,13 @@ public class Managers
                 if (event.getSetting().equals(this.holeThread)) {
                     Experium.holeManager.settingChanged();
                 }
-                Experium.commandManager.setClientMessage(this.getCommandMessage());
             }
         }
-    }
-
-    public String getCommandMessage() {
-        if (this.rainbowPrefix.getPlannedValue().booleanValue()) {
-            StringBuilder stringBuilder = new StringBuilder(this.getRawCommandMessage());
-            stringBuilder.insert(0, "\u00a7+");
-            stringBuilder.append("\u00a7r");
-            return stringBuilder.toString();
-        }
-        return TextUtil.coloredString(this.commandBracket.getPlannedValue(), this.bracketColor.getPlannedValue()) + TextUtil.coloredString(this.command.getPlannedValue(), this.commandColor.getPlannedValue()) + TextUtil.coloredString(this.commandBracket2.getPlannedValue(), this.bracketColor.getPlannedValue());
-    }
-
-    public String getRainbowCommandMessage() {
-        StringBuilder stringBuilder = new StringBuilder(this.getRawCommandMessage());
-        stringBuilder.insert(0, "\u00a7+");
-        stringBuilder.append("\u00a7r");
-        return stringBuilder.toString();
-    }
-
-    public String getRawCommandMessage() {
-        return this.commandBracket.getValue() + this.command.getValue() + this.commandBracket2.getValue();
     }
 
     public enum ThreadMode {
         POOL,
         WHILE,
         NONE
-
     }
 }
-
