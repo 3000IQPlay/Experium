@@ -42,7 +42,7 @@ public class ModuleManager
         this.modules.add(new ChatModifier());
         this.modules.add(new BuildHeight());
         this.modules.add(new AutoRespawn());
-        this.modules.add(new NoRotate());
+        //this.modules.add(new NoRotate());
         this.modules.add(new MCF());
         //this.modules.add(new AutoLog());
         this.modules.add(new AutoReconnect());
@@ -248,7 +248,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(BuildHeight.class), new Color(64, 136, 199));
         this.moduleColorMap.put(this.getModuleByClass(ChatModifier.class), new Color(255, 59, 216));
         this.moduleColorMap.put(this.getModuleByClass(MCF.class), new Color(17, 85, 255));
-        this.moduleColorMap.put(this.getModuleByClass(NoRotate.class), new Color(69, 81, 223));
+        //this.moduleColorMap.put(this.getModuleByClass(NoRotate.class), new Color(69, 81, 223));
         this.moduleColorMap.put(this.getModuleByClass(RPC.class), new Color(0, 64, 255));
         this.moduleColorMap.put(this.getModuleByClass(ToolTips.class), new Color(209, 125, 156));
         this.moduleColorMap.put(this.getModuleByClass(BlockHighlight.class), new Color(103, 182, 224));
