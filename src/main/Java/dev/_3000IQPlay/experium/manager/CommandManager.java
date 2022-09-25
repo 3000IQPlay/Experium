@@ -36,7 +36,6 @@ public class CommandManager
         this.commands.add(new UnloadCommand());
         this.commands.add(new ReloadSoundCommand());
         this.commands.add(new PeekCommand());
-		this.commands.add(new XrayCommand());
 		this.commands.add(new ToggleCommand());
         this.commands.add(new BookCommand());
         this.commands.add(new CrashCommand());
