@@ -7,7 +7,6 @@
     "MixinAbstractClientPlayer",
     "MixinActiveRenderInfo",
     "MixinBlock",
-    "MixinBlockEndPortalFrame",
     "MixinBlockLiquid",
     "MixinBlockSoulSand",
     "MixinBlockVine",
