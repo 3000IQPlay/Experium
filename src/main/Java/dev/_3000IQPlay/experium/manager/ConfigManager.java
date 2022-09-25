@@ -4,7 +4,6 @@ import com.google.gson.*;
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.Feature;
 import dev._3000IQPlay.experium.features.modules.Module;
-import dev._3000IQPlay.experium.features.modules.render.XRay;
 import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.EnumConverter;
 import dev._3000IQPlay.experium.features.setting.Setting;
@@ -86,10 +85,6 @@ public class ConfigManager
                     settingFound = true;
                 }
                 if (settingFound) continue;
-            }
-			if (feature instanceof XRay) {
-                feature.register(new Setting<Boolean>(settingName, Boolean.valueOf(true), v -> ((XRay) feature).showBlocks.getValue()));
-                continue;
             }
         }
     }
