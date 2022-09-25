@@ -44,7 +44,7 @@ public class ModuleManager
         this.modules.add(new AutoRespawn());
         this.modules.add(new NoRotate());
         this.modules.add(new MCF());
-        this.modules.add(new AutoLog());
+        //this.modules.add(new AutoLog());
         this.modules.add(new AutoReconnect());
         this.modules.add(new RPC());
         this.modules.add(new AutoGG());
@@ -244,7 +244,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Surround.class), new Color(100, 0, 150));
         this.moduleColorMap.put(this.getModuleByClass(AutoWeb.class), new Color(11, 161, 121));
         this.moduleColorMap.put(this.getModuleByClass(AutoGG.class), new Color(240, 49, 110));
-        this.moduleColorMap.put(this.getModuleByClass(AutoLog.class), new Color(176, 176, 176));
+        //this.moduleColorMap.put(this.getModuleByClass(AutoLog.class), new Color(176, 176, 176));
         this.moduleColorMap.put(this.getModuleByClass(AutoReconnect.class), new Color(17, 85, 153));
         this.moduleColorMap.put(this.getModuleByClass(BuildHeight.class), new Color(64, 136, 199));
         this.moduleColorMap.put(this.getModuleByClass(ChatModifier.class), new Color(255, 59, 216));
