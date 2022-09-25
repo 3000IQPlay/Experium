@@ -3,7 +3,6 @@ package dev._3000IQPlay.experium.features.modules.misc;
 import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.modules.Module;
-import dev._3000IQPlay.experium.features.modules.client.Managers;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.TextUtil;
 import dev._3000IQPlay.experium.util.Timer;
@@ -266,9 +265,7 @@ public class ChatModifier
             String timeString = "[" + date + "]" + (this.space.getValue() != false ? " " : "");
             StringBuilder builder = new StringBuilder(timeString);
             builder.insert(0, "\u00a7+");
-            if (!message.contains(Managers.getInstance().getRainbowCommandMessage())) {
-                builder.append("\u00a7r");
-            }
+            builder.append("\u00a7r");
             return builder.toString();
         }
         return (this.bracket.getValue() == TextUtil.Color.NONE ? "" : TextUtil.coloredString("<", this.bracket.getValue())) + TextUtil.coloredString(date, this.timeStamps.getValue()) + (this.bracket.getValue() == TextUtil.Color.NONE ? "" : TextUtil.coloredString(">", this.bracket.getValue())) + (this.space.getValue() != false ? " " : "") + "\u00a7r";
