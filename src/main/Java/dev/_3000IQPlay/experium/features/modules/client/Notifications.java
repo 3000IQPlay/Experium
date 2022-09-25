@@ -34,7 +34,6 @@ public class Notifications
     public Setting<Boolean> moduleMessage = this.register(new Setting<>("ModuleMessage", true));
     private final Setting<Boolean> readfile = this.register(new Setting<Object>("LoadFile", Boolean.FALSE, v -> this.moduleMessage.getValue()));
     public Setting<Boolean> list = this.register(new Setting<Object>("List", Boolean.FALSE, v -> this.moduleMessage.getValue()));
-    public Setting<Boolean> watermark = this.register(new Setting<Object>("Watermark", Boolean.TRUE, v -> this.moduleMessage.getValue()));
     public Setting<Boolean> visualRange = this.register(new Setting<>("VisualRange", false));
     public Setting<Boolean> VisualRangeSound = this.register(new Setting<>("VisualRangeSound", false));
     public Setting<Boolean> coords = this.register(new Setting<Object>("Coords", Boolean.TRUE, v -> this.visualRange.getValue()));
@@ -217,7 +216,7 @@ public class Notifications
                 }
             }
         }
-        TextComponentString text = new TextComponentString(Experium.commandManager.getClientMessage() + ChatFormatting.GREEN + module.getDisplayName() + " toggled on.");
+        TextComponentString text = new TextComponentString(Experium.commandManager.getClientMessage() + " " + ChatFormatting.GREEN + module.getDisplayName() + " toggled on.");
         return text;
     }
 
@@ -276,9 +275,13 @@ public class Notifications
                     TextComponentString text = new TextComponentString(TextUtil.coloredString("[Abyss] ", ModuleTools.getInstance().abyssColor.getPlannedValue()) + (Object)ChatFormatting.WHITE + module.getDisplayName() + (Object)ChatFormatting.RED + " OFF");
                     return text;
                 }
+				case LUIGIHACK: {
+                    TextComponentString text = new TextComponentString((Object)ChatFormatting.GREEN + ("[LuigiHack] ") + (Object)ChatFormatting.GRAY + module.getDisplayName() + " toggled " + (Object)ChatFormatting.RED + "off" + (Object)ChatFormatting.GRAY + ".");
+                    return text;
+                }
             }
         }
-        TextComponentString text = new TextComponentString(Experium.commandManager.getClientMessage() + ChatFormatting.RED + module.getDisplayName() + " toggled off.");
+        TextComponentString text = new TextComponentString(Experium.commandManager.getClientMessage() + " " + ChatFormatting.RED + module.getDisplayName() + " toggled off.");
         return text;
     }
 
