@@ -3,6 +3,8 @@ package dev._3000IQPlay.experium.manager;
 import dev._3000IQPlay.experium.features.Feature;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.command.commands.*;
+import dev._3000IQPlay.experium.features.modules.client.ModuleTools;
+import dev._3000IQPlay.experium.util.TextUtil;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.LinkedList;
 public class CommandManager
         extends Feature {
     private final ArrayList<Command> commands = new ArrayList();
-    private String clientMessage = "[Experium]";
+		private String clientMessage = TextUtil.coloredString("[", TextUtil.Color.WHITE) + TextUtil.coloredString("Experium", TextUtil.Color.LIGHT_PURPLE) + TextUtil.coloredString("]", TextUtil.Color.WHITE);
     private String prefix = ".";
 
     public CommandManager() {
