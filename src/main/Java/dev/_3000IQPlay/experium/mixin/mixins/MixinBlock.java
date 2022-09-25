@@ -1,6 +1,5 @@
 package dev._3000IQPlay.experium.mixin.mixins;
 
-import dev._3000IQPlay.experium.features.modules.render.XRay;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -16,16 +15,4 @@ public abstract class MixinBlock {
     @Shadow
     @Deprecated
     public abstract float getBlockHardness(IBlockState var1, World var2, BlockPos var3);
-
-    @Inject(method = {"isFullCube"}, at = {@At(value = "HEAD")}, cancellable = true)
-    public void isFullCubeHook(IBlockState blockState, CallbackInfoReturnable<Boolean> info) {
-        try {
-            if (XRay.getInstance().isOn()) {
-                info.setReturnValue(XRay.getInstance().shouldRender((Block) Block.class.cast(this)));
-                info.cancel();
-            }
-        } catch (Exception exception) {
-            // empty catch block
-        }
-    }
 }
