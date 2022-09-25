@@ -105,7 +105,6 @@ public class ModuleManager
         this.modules.add(new FastProjectiles());
         this.modules.add(new BoatFly());
         this.modules.add(new PacketFly());
-        this.modules.add(new CCPacketflyBypass());
         this.modules.add(new NoFall());
         this.modules.add(new BowAim());
         this.modules.add(new Flight());
