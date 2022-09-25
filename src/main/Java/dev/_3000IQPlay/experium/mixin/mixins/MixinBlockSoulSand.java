@@ -1,6 +1,5 @@
 package dev._3000IQPlay.experium.mixin.mixins;
 
-import dev._3000IQPlay.experium.features.modules.movement.NoSlowDown;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSoulSand;
 import net.minecraft.block.material.MapColor;
@@ -20,12 +19,4 @@ public class MixinBlockSoulSand
     public MixinBlockSoulSand() {
         super(Material.SAND, MapColor.BROWN);
     }
-
-    @Inject(method = {"onEntityCollision"}, at = {@At(value = "HEAD")}, cancellable = true)
-    public void onEntityCollisionHook(World worldIn, BlockPos pos, IBlockState state, Entity entityIn, CallbackInfo info) {
-        if (NoSlowDown.getInstance().isOn() && NoSlowDown.getInstance().soulSand.getValue().booleanValue()) {
-            info.cancel();
-        }
-    }
 }
-
