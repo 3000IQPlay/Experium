@@ -43,10 +43,8 @@ public class AutoReconnect
     public void sendPacket(GuiOpenEvent event) {
         if (event.getGui() instanceof GuiDisconnected) {
             this.updateLastConnectedServer();
-            if (AutoLog.getInstance().isOff()) {
-                GuiDisconnected disconnected = (GuiDisconnected) event.getGui();
-                event.setGui(new GuiDisconnectedHook(disconnected));
-            }
+            GuiDisconnected disconnected = (GuiDisconnected) event.getGui();
+            event.setGui(new GuiDisconnectedHook(disconnected));
         }
     }
 
@@ -85,4 +83,3 @@ public class AutoReconnect
         }
     }
 }
-
