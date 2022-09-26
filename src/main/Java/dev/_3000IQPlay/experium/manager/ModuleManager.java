@@ -42,6 +42,7 @@ public class ModuleManager
         this.modules.add(new ChatModifier());
         this.modules.add(new BuildHeight());
         this.modules.add(new AutoRespawn());
+        this.modules.add(new PreniumPorn());
         this.modules.add(new MCF());
         this.modules.add(new AutoReconnect());
         this.modules.add(new RPC());
@@ -114,7 +115,6 @@ public class ModuleManager
         this.modules.add(new PingSpoof());
         this.modules.add(new PenisESP());
         this.modules.add(new CevBreaker());
-        this.modules.add(new NoGlitchBlocks());
         this.modules.add(new PistonAura());
         this.modules.add(new PacketEat());
         this.modules.add(new AntiPing());
@@ -166,6 +166,7 @@ public class ModuleManager
 		this.moduleColorMap.put(this.getModuleByClass(MountBypass.class), new Color(91, 31, 194));
 		this.moduleColorMap.put(this.getModuleByClass(Blocker.class), new Color(63, 0, 158));
 		this.moduleColorMap.put(this.getModuleByClass(EnchantColor.class), new Color(66, 119, 9));
+        this.moduleColorMap.put(this.getModuleByClass(PreniumPorn.class), new Color(166, 219, 39));
 		this.moduleColorMap.put(this.getModuleByClass(AntiSpam.class), new Color(192, 225, 0));
 		this.moduleColorMap.put(this.getModuleByClass(PistonPush.class), new Color(112, 33, 0));
 		this.moduleColorMap.put(this.getModuleByClass(KeyChorus.class), new Color(90, 0, 121));
@@ -196,7 +197,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(AntiPing.class), new Color(172, 133, 192));
         this.moduleColorMap.put(this.getModuleByClass(PacketEat.class), new Color(215, 81, 248));
         this.moduleColorMap.put(this.getModuleByClass(PistonAura.class), new Color(85, 94, 58));
-        this.moduleColorMap.put(this.getModuleByClass(NoGlitchBlocks.class), new Color(53, 86, 134));
         this.moduleColorMap.put(this.getModuleByClass(CevBreaker.class), new Color(255, 68, 183));
         this.moduleColorMap.put(this.getModuleByClass(PenisESP.class), new Color(52, 148, 38));
         this.moduleColorMap.put(this.getModuleByClass(PingSpoof.class), new Color(246, 124, 137));
