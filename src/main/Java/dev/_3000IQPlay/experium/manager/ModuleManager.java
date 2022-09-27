@@ -153,8 +153,10 @@ public class ModuleManager
 	    this.modules.add(new StashFinder());
 		this.modules.add(new KillEffect());
 	    this.modules.add(new HoleSnap());
+		this.modules.add(new Shaders());
 
-        this.moduleColorMap.put(this.getModuleByClass(HoleSnap.class), new Color(0, 255, 255 ));
+        this.moduleColorMap.put(this.getModuleByClass(Shaders.class), new Color(133, 0, 118));
+        this.moduleColorMap.put(this.getModuleByClass(HoleSnap.class), new Color(0, 255, 255));
 		this.moduleColorMap.put(this.getModuleByClass(KillEffect.class), new Color(87, 109, 223));
 	    this.moduleColorMap.put(this.getModuleByClass(StashFinder.class), new Color(0, 0, 223));
 		this.moduleColorMap.put(this.getModuleByClass(SolidBlock.class), new Color(46, 89, 0));
