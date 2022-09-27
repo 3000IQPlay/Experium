@@ -17,14 +17,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-@Mod(modid = "experium", name = "Experium", version = "1.2.7")
+@Mod(modid = "experium", name = "Experium", version = "1.5.2")
 public class Experium {
     public static final String MODID = "experium";
     public static final String MODNAME = "Experium";
-    public static final String MODVER = "1.2.7";
+    public static final String MODVER = "1.5.2";
     public static final Logger LOGGER = LogManager.getLogger("Experium");
 	public static EventBus dispatcher;
     public static ModuleManager moduleManager;
+	public static MovementManager movementManager;
     public static SpeedManager speedManager;
     public static PositionManager positionManager;
     public static RotationManager rotationManager;
@@ -70,6 +71,7 @@ public class Experium {
         colorManager = new ColorManager();
         textManager = new TextManager();
         moduleManager = new ModuleManager();
+		movementManager = new MovementManager();
         speedManager = new SpeedManager();
         rotationManager = new RotationManager();
         positionManager = new PositionManager();
@@ -114,6 +116,7 @@ public class Experium {
         holeManager = null;
         timerManager = null;
         moduleManager = null;
+		movementManager = null;
         totemPopManager = null;
         serverManager = null;
         colorManager = null;
