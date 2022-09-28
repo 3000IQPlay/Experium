@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.item.EntityEnderCrystal;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -35,12 +36,13 @@ public class Shaders
         extends Module {
 	private Setting<fillShadermode> fillShader = this.register(new Setting<fillShadermode>("Fill Shader", fillShadermode.None));
     private Setting<glowESPmode> glowESP = this.register(new Setting<glowESPmode>("Glow ESP", glowESPmode.None));
+	private Setting<Crystal1> crystal = this.register(new Setting<Crystal1>("Crystals", Crystal1.None));
+    private Setting<Player1> player = this.register(new Setting<Player1>("Players", Player1.None));
+    private Setting<Mob1> mob = this.register(new Setting<Mob1>("Mobs", Mob1.None));
+	private Setting<Itemsl> items = this.register(new Setting<Itemsl>("Items", Itemsl.None));
     private Setting<Boolean> rangeCheck = this.register(new Setting<Boolean>("Range Check", true));
     public Setting<Float> maxRange = this.register(new Setting<Object>("Max Range", Float.valueOf(35.0f), Float.valueOf(10.0f), Float.valueOf(100.0f), object -> this.rangeCheck.getValue()));
     public Setting<Float> minRange = this.register(new Setting<Object>("Min range", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), object -> this.rangeCheck.getValue()));
-    private Setting<Crystal1> crystal = this.register(new Setting<Crystal1>("Crystals", Crystal1.None));
-    private Setting<Player1> player = this.register(new Setting<Player1>("Players", Player1.None));
-    private Setting<Mob1> mob = this.register(new Setting<Mob1>("Mobs", Mob1.None));
     private Setting<Boolean> default1 = this.register(new Setting<Boolean>("Reset Setting", false));
     private Setting<Boolean> Fpreset = this.register(new Setting<Boolean>("FutureRainbow Preset", false));
     private Setting<Boolean> fadeFill = this.register(new Setting<Boolean>("Fade Fill", Boolean.valueOf(false), bl -> this.fillShader.getValue() == fillShadermode.Astral || this.glowESP.getValue() == glowESPmode.Astral));
@@ -374,7 +376,7 @@ public class Shaders
                 if (atomicInteger.getAndIncrement() > n) {
                     return false;
                 }
-                return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Fill && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Fill || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Fill || this.crystal.getValue() == Crystal1.Both));
+                return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Fill && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityItem ? this.items.getValue() == Itemsl.Fill || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Fill || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Fill || this.crystal.getValue() == Crystal1.Both));
             }).filter(entity -> {
                 if (!bl) {
                     return true;
@@ -399,7 +401,7 @@ public class Shaders
             if (atomicInteger.getAndIncrement() > n) {
                 return false;
             }
-            return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Outline && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Outline || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Outline || this.crystal.getValue() == Crystal1.Both));
+            return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Outline && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityItem ? this.items.getValue() == Itemsl.Outline || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Outline || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Outline || this.crystal.getValue() == Crystal1.Both));
         }).filter(entity -> {
             if (!bl) {
                 return true;
@@ -438,6 +440,7 @@ public class Shaders
             this.crystal.setValue(Crystal1.None);
             this.player.setValue(Player1.None);
             this.mob.setValue(Mob1.None);
+			this.items.setValue(Itemsl.None);
             this.fadeFill.setValue(false);
             this.fadeOutline.setValue(false);
             this.duplicateOutline.setValue(Float.valueOf(1.0f));
@@ -602,6 +605,13 @@ public class Shaders
     }
 
     public static enum Mob1 {
+        None,
+        Fill,
+        Outline,
+        Both;
+    }
+	
+	public static enum Itemsl {
         None,
         Fill,
         Outline,
