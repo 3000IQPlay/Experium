@@ -40,7 +40,7 @@ public class Shaders
     private Setting<Player1> player = this.register(new Setting<Player1>("Players", Player1.None));
     private Setting<Mob1> mob = this.register(new Setting<Mob1>("Mobs", Mob1.None));
 	private Setting<Itemsl> items = this.register(new Setting<Itemsl>("Items", Itemsl.None));
-	private Setting<XPl> xpOrb = this.register(new Setting<Player1>("XP", XPl.None));
+	private Setting<XPl> xpOrb = this.register(new Setting<XPl>("XP", XPl.None));
     private Setting<Boolean> rangeCheck = this.register(new Setting<Boolean>("Range Check", true));
     public Setting<Float> maxRange = this.register(new Setting<Object>("Max Range", Float.valueOf(35.0f), Float.valueOf(10.0f), Float.valueOf(100.0f), object -> this.rangeCheck.getValue()));
     public Setting<Float> minRange = this.register(new Setting<Object>("Min range", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), object -> this.rangeCheck.getValue()));
