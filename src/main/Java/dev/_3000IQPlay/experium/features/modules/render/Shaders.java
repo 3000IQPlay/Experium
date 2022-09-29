@@ -40,6 +40,7 @@ public class Shaders
     private Setting<Player1> player = this.register(new Setting<Player1>("Players", Player1.None));
     private Setting<Mob1> mob = this.register(new Setting<Mob1>("Mobs", Mob1.None));
 	private Setting<Itemsl> items = this.register(new Setting<Itemsl>("Items", Itemsl.None));
+	private Setting<XPl> xpOrb = this.register(new Setting<Player1>("XP", XPl.None));
     private Setting<Boolean> rangeCheck = this.register(new Setting<Boolean>("Range Check", true));
     public Setting<Float> maxRange = this.register(new Setting<Object>("Max Range", Float.valueOf(35.0f), Float.valueOf(10.0f), Float.valueOf(100.0f), object -> this.rangeCheck.getValue()));
     public Setting<Float> minRange = this.register(new Setting<Object>("Min range", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), object -> this.rangeCheck.getValue()));
@@ -376,7 +377,7 @@ public class Shaders
                 if (atomicInteger.getAndIncrement() > n) {
                     return false;
                 }
-                return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Fill && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityItem ? this.items.getValue() == Itemsl.Fill || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Fill || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Fill || this.crystal.getValue() == Crystal1.Both));
+                return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Fill && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityXPOrb ? this.xpOrb.getValue() == XPl.Fill || this.xpOrb.getValue() == XPl.Both : entity instanceof EntityItem ? this.items.getValue() == Itemsl.Fill || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Fill || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Fill || this.crystal.getValue() == Crystal1.Both));
             }).filter(entity -> {
                 if (!bl) {
                     return true;
@@ -401,7 +402,7 @@ public class Shaders
             if (atomicInteger.getAndIncrement() > n) {
                 return false;
             }
-            return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Outline && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityItem ? this.items.getValue() == Itemsl.Outline || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Outline || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Outline || this.crystal.getValue() == Crystal1.Both));
+            return entity instanceof EntityPlayer ? !(this.player.getValue() != Player1.Outline && this.player.getValue() != Player1.Both || entity == Shaders.mc.player && Shaders.mc.gameSettings.thirdPersonView == 0) : (entity instanceof EntityXPOrb ? this.xpOrb.getValue() == XPl.Outline || this.xpOrb.getValue() == XPl.Both : entity instanceof EntityItem ? this.items.getValue() == Itemsl.Outline || this.items.getValue() == Itemsl.Both : entity instanceof EntityCreature ? this.mob.getValue() == Mob1.Outline || this.mob.getValue() == Mob1.Both : entity instanceof EntityEnderCrystal && (this.crystal.getValue() == Crystal1.Outline || this.crystal.getValue() == Crystal1.Both));
         }).filter(entity -> {
             if (!bl) {
                 return true;
@@ -598,6 +599,13 @@ public class Shaders
     }
 
     public static enum Crystal1 {
+        None,
+        Fill,
+        Outline,
+        Both;
+    }
+	
+	public static enum XPl {
         None,
         Fill,
         Outline,
