@@ -173,7 +173,6 @@ public class ModuleManager
 		this.moduleColorMap.put(this.getModuleByClass(AntiHunger.class), new Color(155, 99, 231));
 		this.moduleColorMap.put(this.getModuleByClass(BurrowESP.class), new Color(76, 175, 253));
 		this.moduleColorMap.put(this.getModuleByClass(PearlBait.class), new Color(21, 132, 212));
-	    	this.moduleColorMap.put(this.getModuleByClass(CIV.class), new Color(76, 171, 253));
 		this.moduleColorMap.put(this.getModuleByClass(ExplosionChams.class), new Color(72, 123, 82));
 		this.moduleColorMap.put(this.getModuleByClass(NoWeb.class), new Color(12, 12, 135));
 		this.moduleColorMap.put(this.getModuleByClass(EntityDesync.class), new Color(174, 44, 92));
