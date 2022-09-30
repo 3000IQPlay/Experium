@@ -11,12 +11,10 @@ public class CancelSwing extends Module {
 
     public CancelSwing() {
         super("Swing", "turn crystal to ak-47", Category.RENDER, true, false, false);
-        register(switchSetting);
-        register(swing);
     }
 
-    public Setting<Switch> switchSetting = new Setting<>("Switch", Switch.ONEDOTEIGHT);
-    public Setting<Swing> swing = new Setting<>("Swing", Swing.MAINHAND);
+    public Setting<Switch> switchSetting = this.register(new Setting<Switch>("Switch", Switch.ONEDOTEIGHT));
+    public Setting<Swing> swing = this.register(new Setting<Switch>("Swing", Swing.MAINHAND));
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {
