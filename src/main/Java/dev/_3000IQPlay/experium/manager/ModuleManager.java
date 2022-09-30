@@ -31,7 +31,6 @@ public class ModuleManager
     public void init() {
 		this.modules.add(new ModuleTools());
         this.modules.add(new FriendSettings());
-	this.modules.add(new CIV());
 	this.modules.add(new OffhandRewrite());
         this.modules.add(new Surround());
         this.modules.add(new AutoTrap());
