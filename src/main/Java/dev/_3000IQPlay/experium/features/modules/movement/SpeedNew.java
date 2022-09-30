@@ -23,7 +23,8 @@ public class SpeedNew
 	private final Setting<Boolean> customStrafe = this.register(new Setting<Boolean>("CustomStrafe", Boolean.valueOf(true), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Float> airSpeed = this.register(new Setting<Float>("AirSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("OnGroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
-    private final Setting<Float> customY = this.register(new Setting<Float>("MotionY", Float.valueOf(0.44f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+	private final Setting<Boolean> autoJump = this.register(new Setting<Boolean>("AutoJump", Boolean.valueOf(true), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
+    private final Setting<Float> jumpMotionY = this.register(new Setting<Float>("JumpMotionY", Float.valueOf(0.42f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Boolean> timerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
 	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
     private final Setting<Boolean> resetXZ = this.register(new Setting<Boolean>("ResetXZ", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.CUSTOM)));
@@ -121,8 +122,10 @@ public class SpeedNew
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         EntityUtil.moveEntityStrafe(this.onGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
-                        SpeedNew.mc.player.motionY = this.customY.getValue().floatValue();
-                        break;
+                        if (this.autoJump.getValue().booleanValue()) {
+                            SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
+					    	break;
+						}
                     }
 					if (this.customStrafe.getValue().booleanValue()) {
                         EntityUtil.moveEntityStrafe(this.airSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
@@ -149,8 +152,10 @@ public class SpeedNew
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         EntityUtil.moveEntityStrafe(this.onGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
-                        SpeedNew.mc.player.motionY = this.customY.getValue().floatValue();
-                        break;
+						if (this.autoJump.getValue().booleanValue()) {
+                            SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
+					    	break;
+						}
                     }
                     if (this.customStrafe.getValue().booleanValue()) {
                         EntityUtil.moveEntityStrafe(this.airSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
