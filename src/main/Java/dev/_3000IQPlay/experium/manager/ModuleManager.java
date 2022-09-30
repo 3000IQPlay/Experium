@@ -109,7 +109,7 @@ public class ModuleManager
         this.modules.add(new SkyColor());
         this.modules.add(new Suicide());
         this.modules.add(new ChorusLag());
-        this.modules.add(new AutoSignKick());
+        //this.modules.add(new AutoSignKick());
         this.modules.add(new CowDupeExploit());
         this.modules.add(new PingSpoof());
         this.modules.add(new PenisESP());
@@ -201,7 +201,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(PenisESP.class), new Color(52, 148, 38));
         this.moduleColorMap.put(this.getModuleByClass(PingSpoof.class), new Color(246, 124, 137));
         this.moduleColorMap.put(this.getModuleByClass(CowDupeExploit.class), new Color(174, 64, 83));
-        this.moduleColorMap.put(this.getModuleByClass(AutoSignKick.class), new Color(135, 198, 36));
+        //this.moduleColorMap.put(this.getModuleByClass(AutoSignKick.class), new Color(135, 198, 36));
         this.moduleColorMap.put(this.getModuleByClass(ChorusLag.class), new Color(35, 28, 192));
         this.moduleColorMap.put(this.getModuleByClass(Suicide.class), new Color(36, 147, 128));
         this.moduleColorMap.put(this.getModuleByClass(SkyColor.class), new Color(123, 32, 13));
