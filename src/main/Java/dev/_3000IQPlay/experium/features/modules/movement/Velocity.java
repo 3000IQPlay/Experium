@@ -1,5 +1,6 @@
 package dev._3000IQPlay.experium.features.modules.movement;
 
+import dev._3000IQPlay.experium.event.events.EntityCollisionEvent;
 import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.event.events.PushEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
@@ -20,10 +21,12 @@ public class Velocity
     public Setting<Float> horizontal = this.register(new Setting<Float>("Horizontal", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f)));
     public Setting<Float> vertical = this.register(new Setting<Float>("Vertical", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f)));
     public Setting<Boolean> explosions = this.register(new Setting<Boolean>("Explosions", true));
+	public Setting<Boolean> entities = this.register(new Setting<Boolean>("Entities", true));
     public Setting<Boolean> bobbers = this.register(new Setting<Boolean>("Bobbers", true));
     public Setting<Boolean> water = this.register(new Setting<Boolean>("Water", false));
     public Setting<Boolean> blocks = this.register(new Setting<Boolean>("Blocks", false));
     public Setting<Boolean> ice = this.register(new Setting<Boolean>("Ice", false));
+	private float collisionReduction;
 
     public Velocity() {
         super("Velocity", "Allows you to control your velocity", Module.Category.MOVEMENT, true, false, false);
@@ -48,13 +51,22 @@ public class Velocity
             Blocks.PACKED_ICE.slipperiness = 0.6f;
             Blocks.FROSTED_ICE.slipperiness = 0.6f;
         }
+		if (this.entities.getValue().booleanValue()) {
+			mc.player.entityCollisionReduction = 1;
+		}
     }
+	
+	@Override
+	public void onEnable() {
+	    collisionReduction = mc.player.entityCollisionReduction;
+	}
 
     @Override
     public void onDisable() {
         Blocks.ICE.slipperiness = 0.98f;
         Blocks.PACKED_ICE.slipperiness = 0.98f;
         Blocks.FROSTED_ICE.slipperiness = 0.98f;
+		mc.player.entityCollisionReduction = collisionReduction;
     }
 
     @SubscribeEvent
@@ -87,6 +99,13 @@ public class Velocity
             }
         }
     }
+	
+	@SubscribeEvent
+	public void onEntityCollision(EntityCollisionEvent event) {
+		if (this.entities.getValue().booleanValue()) {
+			event.setCanceled(true);
+		}
+	}
 
     @SubscribeEvent
     public void onPush(PushEvent event) {
