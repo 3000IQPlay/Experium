@@ -20,17 +20,20 @@ public class SpeedNew
         extends Module {
 	private static SpeedNew instance;
     private final Setting<SpeedNewModes> mode = this.register(new Setting<SpeedNewModes>("Mode", SpeedNewModes.Custom));
-	private final Setting<Float> yPortAirSpeed = this.register(new Setting<Float>("YPortAirSpeed", Float.valueOf(0.8f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
-	private final Setting<Float> yPortGroundSpeed = this.register(new Setting<Float>("YPortGroundSpeed", Float.valueOf(0.8f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
+	private final Setting<Float> yPortAirSpeed = this.register(new Setting<Float>("AirSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
+	private final Setting<Float> yPortGroundSpeed = this.register(new Setting<Float>("GroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Float> yPortJumpMotionY = this.register(new Setting<Float>("JumpMotionY", Float.valueOf(0.42f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
-	private final Setting<Float> yPortFallSpeed = this.register(new Setting<Float>("YPortFallSpeed", Float.valueOf(1.2f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
+	private final Setting<Float> yPortFallSpeed = this.register(new Setting<Float>("FallSpeed", Float.valueOf(1.0f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Boolean> yPortTimerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Float> yPortTimerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.yPortTimerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
+	
 	private final Setting<Boolean> customStrafe = this.register(new Setting<Boolean>("CustomStrafe", Boolean.valueOf(true), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Float> airSpeed = this.register(new Setting<Float>("AirSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("OnGroundSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Boolean> autoJump = this.register(new Setting<Boolean>("AutoJump", Boolean.valueOf(true), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Float> jumpMotionY = this.register(new Setting<Float>("JumpMotionY", Float.valueOf(0.42f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
+	private final Setting<Boolean> fallModify = this.register(new Setting<Boolean>("FallModify", Boolean.valueOf(false), t -> this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
+	private final Setting<Float> fallSpeed = this.register(new Setting<Float>("FallSpeed", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), t -> this.fallModify.getValue() && this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Boolean> timerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Boolean> resetXZ = this.register(new Setting<Boolean>("ResetXZ", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
@@ -58,7 +61,7 @@ public class SpeedNew
         }
         if (Strafe.mc.player.isInWater() || Strafe.mc.player.isInLava()) {
             return;
-        }
+		}
         if (Strafe.mc.player.onGround) {
             this.stage = 2;
         }
@@ -132,7 +135,11 @@ public class SpeedNew
                             SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
 					    	break;
 						}
-                    }
+                    } else {
+						if (this.fallModify.getValue().booleanValue()) {
+						    SpeedNew.mc.player.motionY =- this.fallSpeed.getValue().floatValue();
+				        }
+					}
 					if (this.customStrafe.getValue().booleanValue()) {
                         EntityUtil.moveEntityStrafe(this.airSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                         break;
@@ -161,7 +168,7 @@ public class SpeedNew
                     SpeedNew.mc.player.motionY = this.yPortJumpMotionY.getValue().floatValue();
                     EntityUtil.moveEntityStrafe(this.yPortGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 } else {
-                    Speed.mc.player.motionY =- this.yPortFallSpeed.getValue();
+                    Speed.mc.player.motionY =- this.yPortFallSpeed.getValue().floatValue();
                 }
 				if (!Speed.mc.player.onGround) {
                     SpeedNew.mc.player.motionY = this.yPortJumpMotionY.getValue().floatValue();
@@ -182,7 +189,11 @@ public class SpeedNew
                             SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
 					    	break;
 						}
-                    }
+                    } else {
+						if (this.fallModify.getValue().booleanValue()) {
+						    SpeedNew.mc.player.motionY =- this.fallSpeed.getValue().floatValue();
+				        }
+					}
                     if (this.customStrafe.getValue().booleanValue()) {
                         EntityUtil.moveEntityStrafe(this.airSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                         break;
@@ -211,7 +222,7 @@ public class SpeedNew
                     SpeedNew.mc.player.motionY = this.yPortJumpMotionY.getValue().floatValue();
                     EntityUtil.moveEntityStrafe(this.yPortGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 } else {
-                    Speed.mc.player.motionY =- this.yPortFallSpeed.getValue();
+                    Speed.mc.player.motionY =- this.yPortFallSpeed.getValue().floatValue();
                 }
 				if (!Speed.mc.player.onGround) {
                     EntityUtil.moveEntityStrafe(this.yPortAirSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
