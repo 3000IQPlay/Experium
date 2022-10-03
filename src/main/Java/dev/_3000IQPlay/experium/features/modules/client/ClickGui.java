@@ -103,6 +103,9 @@ public class ClickGui
     public Setting<String> open = this.register(new Setting<Object>("Open:", "+", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue()).setRenderName(true));
     public Setting<String> close = this.register(new Setting<Object>("Close:", "-", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue()).setRenderName(true));
     public Setting<String> moduleButton = this.register(new Setting<Object>("Buttons:", "", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() == false).setRenderName(true));
+	public Setting<Integer> ocsRed = this.register(new Setting<Integer>("SideStringRed", 255, 0, 255, v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() || this.gear.getValue()));
+    public Setting<Integer> ocsGreen = this.register(new Setting<Integer>("SideStringGreen", 255, 0, 255, v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() || this.gear.getValue()));
+    public Setting<Integer> ocsBlue = this.register(new Setting<Integer>("SideStringBlue", 255, 0, 255, v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() || this.gear.getValue()));
 	
     public Setting<Boolean> devSettings = this.register(new Setting<Boolean>("TopColor", true, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> topRed = this.register(new Setting<Object>("TopRed", Integer.valueOf(30), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Main && this.devSettings.getValue()));
