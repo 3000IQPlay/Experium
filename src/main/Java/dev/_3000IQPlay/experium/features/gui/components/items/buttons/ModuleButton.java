@@ -15,6 +15,7 @@ import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.ColorUtil;
 import dev._3000IQPlay.experium.util.Util;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class ModuleButton
         super.drawScreen(mouseX, mouseY, partialTicks);
         if (!this.items.isEmpty()) {
             ClickGui gui = Experium.moduleManager.getModuleByClass(ClickGui.class);
-            Experium.textManager.drawStringWithShadow(gui.openCloseChange.getValue().booleanValue() ? (this.subOpen ? gui.close.getValue() : gui.open.getValue()) : gui.moduleButton.getValue(), this.x - 1.5f + (float)this.width - 7.4f, this.y - 2.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);
+            Experium.textManager.drawStringWithShadow(gui.openCloseChange.getValue().booleanValue() ? (this.subOpen ? gui.close.getValue() : gui.open.getValue()) : gui.moduleButton.getValue(), this.x - 1.5f + (float)this.width - 7.4f, this.y - 2.0f - (float)ExperiumGui.getClickGui().getTextOffset(), ColorUtil.toRGBA(ClickGui.getInstance().ocsRed.getValue(), ClickGui.getInstance().ocsGreen.getValue(), ClickGui.getInstance().ocsBlue.getValue(), 255));
             if (this.subOpen) {
                 float height = 1.0f;
                 for (Item item : this.items) {
