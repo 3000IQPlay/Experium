@@ -128,8 +128,7 @@ public class ModuleManager
 	    this.modules.add(new Scaffold());
 	    this.modules.add(new BreadCrumbs());
 	    this.modules.add(new Aspect());
-	    this.modules.add(new AntiBookBan());
-	    this.modules.add(new AntiChunkBan());
+	    this.modules.add(new AntiBan());
 	    this.modules.add(new SpeedNew());
 	    this.modules.add(new FakeVanilla());
 	    this.modules.add(new ManualIllegalStack());
@@ -181,8 +180,7 @@ public class ModuleManager
 	    this.moduleColorMap.put(this.getModuleByClass(ManualIllegalStack.class), new Color(51, 152, 236));
 		this.moduleColorMap.put(this.getModuleByClass(FakeVanilla.class), new Color(64, 134, 245));
 		this.moduleColorMap.put(this.getModuleByClass(SpeedNew.class), new Color(124, 156, 62));
-		this.moduleColorMap.put(this.getModuleByClass(AntiChunkBan.class), new Color(47, 232, 67));
-		this.moduleColorMap.put(this.getModuleByClass(AntiBookBan.class), new Color(165, 10, 141));
+		this.moduleColorMap.put(this.getModuleByClass(AntiBan.class), new Color(47, 232, 67));
 		this.moduleColorMap.put(this.getModuleByClass(Aspect.class), new Color(96, 114, 27));
 		this.moduleColorMap.put(this.getModuleByClass(BreadCrumbs.class), new Color(182, 218, 153));
 		this.moduleColorMap.put(this.getModuleByClass(Scaffold.class), new Color(163, 63, 95));
