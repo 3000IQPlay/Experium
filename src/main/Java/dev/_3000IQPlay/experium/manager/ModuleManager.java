@@ -35,6 +35,7 @@ public class ModuleManager
         this.modules.add(new Surround());
         this.modules.add(new AutoTrap());
         this.modules.add(new AutoCrystal());
+        this.modules.add(new AutoKit());
         this.modules.add(new Criticals());
         this.modules.add(new Killaura());
         this.modules.add(new HoleFiller());
