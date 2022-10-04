@@ -22,7 +22,7 @@ extends Module {
         public Setting<Boolean> AbookBan = this.register(new Setting<Boolean>("AntiBookBan", false));
 
     public AntiBan() {
-        super("AntiBan", "Prevents You From Getting Banned Using Gay Exploits!", Module.Category.MISC, true, false, false);
+        super("AntiBan", "Prevents You From Getting Banned Using Gay Exploits! (Can desync you)", Module.Category.MISC, true, false, false);
     }
 
     @SubscribeEvent
