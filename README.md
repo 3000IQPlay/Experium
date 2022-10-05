@@ -4,8 +4,8 @@ Private project (Atrium continued???) <br />
 - Start Date: 2.2. 2022 18:15 (CZ Time)
 - Main Dev: [_3000IQPlay](https://github.com/3000IQPlay)
 - Small Contributions: 
-  - [master7720](https://github.com/master7720)
-  - [GentlemanMc](https://github.com/GentlemanMC)
+  - [Master7720](https://github.com/master7720)
+  - [GentlemanMC](https://github.com/GentlemanMC)
   - [Nutelaspaceman4](https://github.com/Nutelaspaceman)
   - [cow167](https://github.com/cow167)
   - [Zane2b2t](https://github.com/Zane2b2t)
