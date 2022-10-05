@@ -1,11 +1,15 @@
 package dev._3000IQPlay.experium.features.modules.misc;
 
 import dev._3000IQPlay.experium.event.events.PacketEvent;
+import dev._3000IQPlay.experium.event.events.Render2DEvent;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.ColorUtil;
+import dev._3000IQPlay.experium.util.RenderUtil;
 import dev._3000IQPlay.experium.util.TextUtil;
 import dev._3000IQPlay.experium.util.Timer;
+import net.minecraft.client.gui.GuiChat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.server.SPacketChat;
@@ -20,7 +24,11 @@ public class ChatModifier
         extends Module {
     private static ChatModifier INSTANCE = new ChatModifier();
     private final Timer timer = new Timer();
-    public Setting<Suffix> suffix = this.register(new Setting<Suffix>("Suffix", Suffix.NONE, "Your Suffix."));
+	private Setting<Integer> chatBGred = this.register(new Setting<Integer>("ChatBGRed", 20, 0, 255));
+    private Setting<Integer> chatBGgreen = this.register(new Setting<Integer>("ChatBGGreen", 20, 0, 255));
+    private Setting<Integer> chatBGblue = this.register(new Setting<Integer>("ChatBGBlue", 20, 0, 255));
+    private Setting<Integer> chatBGalpha = this.register(new Setting<Integer>("ChatBGAlpha", 35, 0, 255));
+	public Setting<Suffix> suffix = this.register(new Setting<Suffix>("Suffix", Suffix.NONE, "Your Suffix."));
 	public Setting<TextColor> textcolor = this.register(new Setting<TextColor>("TextColor", TextColor.NONE, "Your text color."));
 	public Setting<StiTextColor> stiTextColor = this.register(new Setting<StiTextColor>("StiTextColor", StiTextColor.NONE, "Your sti text color."));
     public Setting<Boolean> clean = this.register(new Setting<Boolean>("CleanChat", Boolean.valueOf(false), "Cleans your chat"));
@@ -45,6 +53,13 @@ public class ChatModifier
 
     private void setInstance() {
         INSTANCE = this;
+    }
+	
+	@Override
+    public void onRender2D(Render2DEvent event) {
+        if (ChatModifier.mc.currentScreen instanceof GuiChat) {
+            RenderUtil.drawRectangleCorrectly(0, 0, 1920, 1080, ColorUtil.toRGBA(this.chatBGred.getValue(), this.chatBGgreen.getValue(), this.chatBGblue.getValue(), this.chatBGalpha.getValue()));
+        }
     }
 
     @SubscribeEvent
