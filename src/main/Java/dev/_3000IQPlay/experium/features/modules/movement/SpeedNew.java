@@ -25,7 +25,7 @@ public class SpeedNew
 	private final Setting<Float> yPortJumpMotionY = this.register(new Setting<Float>("JumpMotionY", Float.valueOf(0.42f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Float> yPortFallSpeed = this.register(new Setting<Float>("FallSpeed", Float.valueOf(1.0f), Float.valueOf(0.0f), Float.valueOf(4.0f), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Boolean> yPortTimerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
-	private final Setting<Float> yPortTimerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.yPortTimerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
+	private final Setting<Float> yPortTimerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(0.1f), Float.valueOf(5.0f), t -> this.yPortTimerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	
 	private final Setting<Boolean> customStrafe = this.register(new Setting<Boolean>("CustomStrafe", Boolean.valueOf(true), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Float> airSpeed = this.register(new Setting<Float>("AirSpeed", Float.valueOf(0.35f), Float.valueOf(0.2f), Float.valueOf(5.0f), t -> this.customStrafe.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
@@ -35,7 +35,7 @@ public class SpeedNew
 	private final Setting<Boolean> fallModify = this.register(new Setting<Boolean>("FallModify", Boolean.valueOf(false), t -> this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> fallSpeed = this.register(new Setting<Float>("FallSpeed", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), t -> this.fallModify.getValue() && this.autoJump.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Boolean> timerSpeed = this.register(new Setting<Boolean>("Timer", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
-	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(1.0f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
+	private final Setting<Float> timerSpeedVal = this.register(new Setting<Float>("TimerSpeed", Float.valueOf(1.8f), Float.valueOf(0.1f), Float.valueOf(5.0f), t -> this.timerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Boolean> resetXZ = this.register(new Setting<Boolean>("ResetXZ", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Boolean> resetY = this.register(new Setting<Boolean>("ResetY", Boolean.valueOf(false), t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private double lastDist;
