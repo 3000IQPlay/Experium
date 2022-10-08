@@ -8,7 +8,7 @@ Private project (Atrium continued???) <br />
   - [GentlemanMC](https://github.com/GentlemanMC)
   - [cow167](https://github.com/cow167)
   - [MrBubblecum](https://github.com/MrBubblegum)
-- Fake packet fly man (pls no access remove)
+- Fake Packet Fly (That got removed)
   - [Nutelaspaceman4](https://github.com/Nutelaspaceman)
 
 # Access list:
