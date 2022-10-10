@@ -45,7 +45,9 @@
     "accessors.ICPacketPlayer",
     "accessors.IEntityLivingBase",
     "accessors.IEntityRenderer",
+	"accessors.INetworkManager",
     "accessors.IServerAddress",
+	"accessors.ISPacketPlayerPosLook",
     "accessors.ISPacketSetSlot"
   ]
 }
