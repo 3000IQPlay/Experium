@@ -156,8 +156,10 @@ public class ModuleManager
 	    this.modules.add(new Shaders());
 	    this.modules.add(new AntiUnicode());
 		this.modules.add(new AntiContainer());
-        this.modules.add(new CityPhase());		
+        this.modules.add(new CityPhase());
+		this.modules.add(new FastSwim());
 
+        this.moduleColorMap.put(this.getModuleByClass(FastSwim.class), new Color(0, 144, 121));
         this.moduleColorMap.put(this.getModuleByClass(CityPhase.class), new Color(134, 0, 55));
         this.moduleColorMap.put(this.getModuleByClass(AntiContainer.class), new Color(0, 69, 0));
         this.moduleColorMap.put(this.getModuleByClass(AntiUnicode.class), new Color(22, 0, 118));
