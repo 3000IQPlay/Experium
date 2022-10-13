@@ -82,7 +82,7 @@ public class ModuleManager
         this.modules.add(new FontMod());
         this.modules.add(new ClickGui());
         this.modules.add(new Managers());
-//      this.modules.add(new Components()); might add back
+        this.modules.add(new DisplayNotify());
         this.modules.add(new Colors());
         this.modules.add(new PingBypass());
         this.modules.add(new NickHider());
@@ -276,7 +276,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Yaw.class), new Color(115, 39, 141));
         this.moduleColorMap.put(this.getModuleByClass(ClickGui.class), new Color(26, 81, 135));
         this.moduleColorMap.put(this.getModuleByClass(Colors.class), new Color(135, 133, 26));
-        this.moduleColorMap.put(this.getModuleByClass(Components.class), new Color(135, 26, 26));
+        this.moduleColorMap.put(this.getModuleByClass(DisplayNotify.class), new Color(135, 26, 26));
         this.moduleColorMap.put(this.getModuleByClass(FontMod.class), new Color(135, 26, 88));
         this.moduleColorMap.put(this.getModuleByClass(HUD.class), new Color(110, 26, 135));
         this.moduleColorMap.put(this.getModuleByClass(Managers.class), new Color(26, 90, 135));
