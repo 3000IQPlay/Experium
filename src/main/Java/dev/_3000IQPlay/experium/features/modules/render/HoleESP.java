@@ -14,12 +14,11 @@ import java.util.Random;
 public class HoleESP
         extends Module {
     private static HoleESP INSTANCE = new HoleESP();
-	public Setting<RenderType> renderType = this.register(new Setting<RenderType>("RenderType", RenderType.Gradient));
 	public Setting<Boolean> renderBedrockHoles = this.register(new Setting<Boolean>("RenderBedrock", true));
 	public Setting<Boolean> renderObsidianHoles = this.register(new Setting<Boolean>("RenderObsidian", true));
 	private final Setting<Integer> holes = this.register(new Setting<Integer>("Holes", 5, 1, 500));
 	public Setting<Boolean> ownHole = this.register(new Setting<Boolean>("OwnHole", false));
-	private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f), v -> this.renderType.getValue() == RenderType.Gradient));
+	private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f)));
 	private final Setting<Integer> bBoxTopAlpha = this.register(new Setting<Object>("BedrockBoxTopAlpha", Integer.valueOf(60), Integer.valueOf(0), Integer.valueOf(255), v -> this.renderBedrockHoles.getValue()));
 	private final Setting<Integer> bBoxBottomAlpha = this.register(new Setting<Object>("BedrockBoxBottomAlpha", Integer.valueOf(110), Integer.valueOf(0), Integer.valueOf(255), v -> this.renderBedrockHoles.getValue()));
 	private final Setting<Integer> oBoxTopAlpha = this.register(new Setting<Object>("ObsidianBoxTopAlpha", Integer.valueOf(60), Integer.valueOf(0), Integer.valueOf(255), v -> this.renderObsidianHoles.getValue()));
