@@ -47,14 +47,14 @@ public class HoleESP
     private final Setting<Integer> boBottomAlpha = this.register(new Setting<Integer>("BedrockBottomOulineAlpha", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
 	
 	
-	private final Setting<Integer> oTopRed = this.register(new Setting<Integer>("ObsidianTopRed", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oTopGreen = this.register(new Setting<Integer>("ObsidianTopGreen", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oTopBlue = this.register(new Setting<Integer>("ObsidianTopBlue", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Integer> oTopRed = this.register(new Setting<Integer>("ObsidianTopRed", 135, 0, 255, v -> this.renderObsidianHoles.getValue()));
+    private final Setting<Integer> oTopGreen = this.register(new Setting<Integer>("ObsidianTopGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
+    private final Setting<Integer> oTopBlue = this.register(new Setting<Integer>("ObsidianTopBlue", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
     private final Setting<Integer> oTopAlpha = this.register(new Setting<Integer>("ObsidianTopAlpha", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
 	
-	private final Setting<Integer> ooTopRed = this.register(new Setting<Integer>("ObsidianTopOutlineRed", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooTopGreen = this.register(new Setting<Integer>("ObsidianTopOutlineGreen", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooTopBlue = this.register(new Setting<Integer>("ObsidianTopOutlineBlue", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Integer> ooTopRed = this.register(new Setting<Integer>("ObsidianTopOutlineRed", 135, 0, 255, v -> this.renderObsidianHoles.getValue()));
+    private final Setting<Integer> ooTopGreen = this.register(new Setting<Integer>("ObsidianTopOutlineGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
+    private final Setting<Integer> ooTopBlue = this.register(new Setting<Integer>("ObsidianTopOutlineBlue", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
     private final Setting<Integer> ooTopAlpha = this.register(new Setting<Integer>("ObsidianTopOulineAlpha", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
 	
 	
