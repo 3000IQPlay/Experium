@@ -116,7 +116,7 @@ public class ModuleManager
         this.modules.add(new PenisESP());
         this.modules.add(new CevBreaker());
         this.modules.add(new PistonAura());
-        this.modules.add(new PacketEat());
+        this.modules.add(new FastEat());
         this.modules.add(new AntiPing());
         this.modules.add(new AutoTwerk());
         this.modules.add(new ChorusPostpone());
@@ -200,7 +200,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(ChorusPostpone.class), new Color(43, 165, 216));
         this.moduleColorMap.put(this.getModuleByClass(AutoTwerk.class), new Color(97, 173, 162));
         this.moduleColorMap.put(this.getModuleByClass(AntiPing.class), new Color(172, 133, 192));
-        this.moduleColorMap.put(this.getModuleByClass(PacketEat.class), new Color(215, 81, 248));
+        this.moduleColorMap.put(this.getModuleByClass(FastEat.class), new Color(215, 81, 248));
         this.moduleColorMap.put(this.getModuleByClass(PistonAura.class), new Color(85, 94, 58));
         this.moduleColorMap.put(this.getModuleByClass(CevBreaker.class), new Color(255, 68, 183));
         this.moduleColorMap.put(this.getModuleByClass(PenisESP.class), new Color(52, 148, 38));
