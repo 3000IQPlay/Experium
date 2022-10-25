@@ -60,7 +60,7 @@ public class Speed
     }
 
     private boolean shouldReturn() {
-        return Experium.moduleManager.isModuleEnabled("Freecam") || Experium.moduleManager.isModuleEnabled("PacketFly") || Experium.moduleManager.isModuleEnabled("ElytraFlight") || Experium.moduleManager.isModuleEnabled("Strafe") || Experium.moduleManager.isModuleEnabled("Flight") || Experium.moduleManager.isModuleEnabled("SpeedNew");
+        return Experium.moduleManager.isModuleEnabled("Freecam") || Experium.moduleManager.isModuleEnabled("PacketFly") || Experium.moduleManager.isModuleEnabled("ElytraFlight") || Experium.moduleManager.isModuleEnabled("Strafe") || Experium.moduleManager.isModuleEnabled("Flight") || Experium.moduleManager.isModuleEnabled("SpeedNew") || (Experium.moduleManager.isModuleEnabled("NoWeb") && Speed.mc.player.isInWeb);
     }
 
     @Override
