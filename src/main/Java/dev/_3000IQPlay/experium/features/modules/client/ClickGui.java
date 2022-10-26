@@ -18,7 +18,8 @@ public class ClickGui
 	public Setting<String> prefix = this.register(new Setting<String>("Prefix", ".").setRenderName(true));
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false, v -> this.setting.getValue() == Settings.Misc));
 	public Setting<Boolean> rainbowRolling = this.register(new Setting<Object>("RollingRainbow", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.Misc && this.colorSync.getValue() != false && Colors.INSTANCE.rainbow.getValue() != false));
-	public Setting<Integer> guiWidth = this.register(new Setting<Integer>("GuiWidth", Integer.valueOf(113), Integer.valueOf(90), Integer.valueOf(115), v -> this.setting.getValue() == Settings.Scaling));
+	public Setting<Integer> guiWidth = this.register(new Setting<Integer>("GuiWidth", Integer.valueOf(113), Integer.valueOf(90), Integer.valueOf(115), v -> this.setting.getValue() == Settings.Misc));
+	public Setting<SliderType> sliderType = this.register(new Setting<SliderType>("SliderType", SliderType.Fill, v -> this.setting.getValue() == Settings.Main));
 	
     public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", false, v -> this.setting.getValue() == Settings.Lines));
 	public Setting<Boolean> outlineNew = this.register(new Setting<Boolean>("OutlineNew", false, v -> this.setting.getValue() == Settings.Lines));
@@ -27,6 +28,13 @@ public class ClickGui
     public Setting<Integer> o_green = this.register(new Setting<Object>("OutlineGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
     public Setting<Integer> o_blue = this.register(new Setting<Object>("OutlineBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
     public Setting<Integer> o_alpha = this.register(new Setting<Object>("OutlineAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
+	
+	public Setting<Boolean> shader = this.register(new Setting<Boolean>("Shader", false, v -> this.setting.getValue() == Settings.Lines));
+	public Setting<Integer> shaderRadius = this.register(new Setting<Object>("ShaderRadius", Integer.valueOf(5), Integer.valueOf(1), Integer.valueOf(10), v -> this.setting.getValue() == Settings.Lines && this.shader.getValue()));
+	public Setting<Integer> shaderRed = this.register(new Setting<Object>("ShaderRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.shader.getValue()));
+    public Setting<Integer> shaderGreen = this.register(new Setting<Object>("ShaderGreen", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.shader.getValue()));
+    public Setting<Integer> shaderBlue = this.register(new Setting<Object>("ShaderBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.shader.getValue()));
+    public Setting<Integer> shaderAlpha = this.register(new Setting<Object>("ShaderAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.shader.getValue()));
 	
 	public Setting<Boolean> sideSettings = this.register(new Setting<Boolean>("SideLine", true, v -> this.setting.getValue() == Settings.Lines));
     public Setting<Integer> sideRed = this.register(new Setting<Object>("SideLineRed", Integer.valueOf(135), Integer.valueOf(0), Integer.valueOf(255), v -> this.setting.getValue() == Settings.Lines && this.sideSettings.getValue()));
@@ -82,10 +90,10 @@ public class ClickGui
     public Setting<Integer> blue = this.register(new Setting<Integer>("EnableButtonBlue", 75, 0, 255, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("EnableAlpha", 0, 0, 255, v -> this.setting.getValue() == Settings.Main));
     public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main));
-	public Setting<Integer> b_red = this.register(new Setting<Integer>("ButtonBGRed", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_green = this.register(new Setting<Integer>("ButtonBGGreen", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_blue = this.register(new Setting<Integer>("ButtonBGBlue", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
-    public Setting<Integer> b_alpha = this.register(new Setting<Integer>("ButtonBGAlpha", 255, 0, 255, v -> this.setting.getValue() == Settings.Main));
+	public Setting<Integer> b_red = this.register(new Setting<Integer>("DisableButtonRed", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_green = this.register(new Setting<Integer>("DisableButtonGreen", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_blue = this.register(new Setting<Integer>("DisableButtonBlue", 40, 0, 255, v -> this.setting.getValue() == Settings.Main));
+    public Setting<Integer> b_alpha = this.register(new Setting<Integer>("DisableButtonAlpha", 255, 0, 255, v -> this.setting.getValue() == Settings.Main));
 	
 	public Setting<Integer> textRed = this.register(new Setting<Integer>("EnabledTextRed", 135, 0, 255, v -> this.setting.getValue() == Settings.FontC));
     public Setting<Integer> textGreen = this.register(new Setting<Integer>("EnabledTextGreen", 135, 0, 255, v -> this.setting.getValue() == Settings.FontC));
@@ -206,7 +214,11 @@ public class ClickGui
 		Lines,
 		Background,
 		FontC,
-		Scaling,
 		Misc;
-	}	
+	}
+	
+	public enum SliderType {
+		Fill,
+		Line;
+	}
 }
