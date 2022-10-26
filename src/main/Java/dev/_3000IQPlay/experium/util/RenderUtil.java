@@ -478,6 +478,41 @@ public class RenderUtil
         GlStateManager.enableAlpha();
         GlStateManager.enableTexture2D();
     }
+	
+	public static void drawGradientRectTwo(float left, float top, float right, float bottom, int coltl, int coltr, int colbl, int colbr) {
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableAlpha();
+        GlStateManager.tryBlendFuncSeparate((int)770, (int)771, (int)1, (int)0);
+        GlStateManager.shadeModel((int)7425);
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        buffer.pos((double)right, (double)top, 0.0).color((coltr & 0xFF0000) >> 16, (coltr & 0xFF00) >> 8, coltr & 0xFF, (coltr & 0xFF000000) >>> 24).endVertex();
+        buffer.pos((double)left, (double)top, 0.0).color((coltl & 0xFF0000) >> 16, (coltl & 0xFF00) >> 8, coltl & 0xFF, (coltl & 0xFF000000) >>> 24).endVertex();
+        buffer.pos((double)left, (double)bottom, 0.0).color((colbl & 0xFF0000) >> 16, (colbl & 0xFF00) >> 8, colbl & 0xFF, (colbl & 0xFF000000) >>> 24).endVertex();
+        buffer.pos((double)right, (double)bottom, 0.0).color((colbr & 0xFF0000) >> 16, (colbr & 0xFF00) >> 8, colbr & 0xFF, (colbr & 0xFF000000) >>> 24).endVertex();
+        tessellator.draw();
+        GlStateManager.shadeModel((int)7424);
+        GlStateManager.disableBlend();
+        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture2D();
+    }
+	
+	public static void drawColorShader(int x1, int y1, int x2, int y2, int color, int radius) {
+        int a = 50;
+        float f = (float)(color >> 16 & 0xFF) / 255.0f;
+        float f1 = (float)(color >> 8 & 0xFF) / 255.0f;
+        float f2 = (float)(color >> 0 & 0xFF) / 255.0f;
+        RenderUtil.drawGradientRectTwo(x1 - radius, y1, x1, y2, ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a));
+        RenderUtil.drawGradientRectTwo(x2, y1, x2 + radius, y2, ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f));
+        RenderUtil.drawGradientRectTwo(x1, y1 - radius, x2, y1, ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, (float)a));
+        RenderUtil.drawGradientRectTwo(x1, y2, x2, y2 + radius, ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f));
+        RenderUtil.drawGradientRectTwo(x1 - radius, y1 - radius, x1, y1, ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a));
+        RenderUtil.drawGradientRectTwo(x2, y1 - radius, x2 + radius, y1, ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f));
+        RenderUtil.drawGradientRectTwo(x1 - radius, y2, x1, y2 + radius, ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f));
+        RenderUtil.drawGradientRectTwo(x2, y2, x2 + radius, y2 + radius, ColorUtil.toRGBA(f, f1, f2, (float)a), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f), ColorUtil.toRGBA(f, f1, f2, 0.0f));
+    }
 
     public static void drawGradientBlockOutline(BlockPos pos, Color startColor, Color endColor, float linewidth, double height) {
         IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
