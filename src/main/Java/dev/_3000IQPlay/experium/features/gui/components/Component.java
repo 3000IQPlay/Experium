@@ -154,6 +154,9 @@ public class Component
                 }
             }
         }
+		if (ClickGui.getInstance().shader.getValue().booleanValue()) {
+            RenderUtil.drawColorShader(this.x, (int)((double)this.y - 1.5), this.x + this.width, this.y + this.height + (int)totalItemHeight, ColorUtil.toRGBA(new Color(ClickGui.getInstance().shaderRed.getValue(), ClickGui.getInstance().shaderGreen.getValue(), ClickGui.getInstance().shaderBlue.getValue(), ClickGui.getInstance().shaderAlpha.getValue())), ClickGui.getInstance().shaderRadius.getValue());
+        }
 		if (ClickGui.getInstance().categoryTextCenter.getValue().booleanValue()) {
             Experium.textManager.drawStringWithShadow(this.getName(), (float)this.x + (float)(this.width / 2) - (float)(this.renderer.getStringWidth(this.getName()) / 2), (float)this.y - 4.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);
         } else {
