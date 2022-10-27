@@ -158,7 +158,9 @@ public class ModuleManager
 		this.modules.add(new AntiContainer());
         this.modules.add(new CornerClip());
 		this.modules.add(new FastSwim());
+		this.modules.add(new HighJump());
 
+        this.moduleColorMap.put(this.getModuleByClass(HighJump.class), new Color(82, 5, 51));
         this.moduleColorMap.put(this.getModuleByClass(FastSwim.class), new Color(0, 144, 121));
         this.moduleColorMap.put(this.getModuleByClass(CornerClip.class), new Color(134, 0, 55));
         this.moduleColorMap.put(this.getModuleByClass(AntiContainer.class), new Color(0, 69, 0));
