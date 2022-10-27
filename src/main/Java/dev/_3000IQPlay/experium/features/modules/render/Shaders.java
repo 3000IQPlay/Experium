@@ -36,7 +36,7 @@ import java.util.function.Predicate;
 
 public class Shaders
         extends Module {
-	private Setting<fillShadermode> fillShader = this.register(new Setting<fillShadermode>("Fill Shader", fillShadermode.None));
+	private final Setting<fillShadermode> fillShader = this.register(new Setting<fillShadermode>("Fill Shader", fillShadermode.None));
     private Setting<glowESPmode> glowESP = this.register(new Setting<glowESPmode>("Glow ESP", glowESPmode.None));
 	private Setting<Crystal1> crystal = this.register(new Setting<Crystal1>("Crystals", Crystal1.None));
     private Setting<Player1> player = this.register(new Setting<Player1>("Players", Player1.None));
