@@ -102,7 +102,7 @@ public class ModuleManager
         this.modules.add(new NoSoundLag());
         this.modules.add(new FastProjectiles());
         //this.modules.add(new BoatFly());
-   //     this.modules.add(new PacketFly());
+        this.modules.add(new PacketFly());
         this.modules.add(new NoFall());
         this.modules.add(new BowAim());
         this.modules.add(new Flight());
@@ -213,7 +213,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Flight.class), new Color(73, 21, 92));
         this.moduleColorMap.put(this.getModuleByClass(BowAim.class), new Color(62, 98, 71));
         this.moduleColorMap.put(this.getModuleByClass(NoFall.class), new Color(123, 9, 200));
-       // this.moduleColorMap.put(this.getModuleByClass(PacketFly.class), new Color(211, 82, 112));
+        this.moduleColorMap.put(this.getModuleByClass(PacketFly.class), new Color(211, 82, 112));
         //this.moduleColorMap.put(this.getModuleByClass(BoatFly.class), new Color(67, 111, 38));
         this.moduleColorMap.put(this.getModuleByClass(FastProjectiles.class), new Color(199, 91, 251));
         this.moduleColorMap.put(this.getModuleByClass(NoSoundLag.class), new Color(57, 133, 192));
