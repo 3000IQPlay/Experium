@@ -12,21 +12,18 @@ import net.minecraft.network.play.client.CPacketKeepAlive;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.input.Keyboard;
 
 public class Flight
         extends Module {
     private static Flight INSTANCE = new Flight();
     public Setting<FlyMode> flyMode = this.register(new Setting<FlyMode>("FlyType", FlyMode.Motion));
-	public Setting<Float> aacMotion = this.register(new Setting<Float>("AACMotion", 10.0f, 0.5f, 10.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Float> vanillaSpeed = this.register(new Setting<Float>("VanillaSpeed", 5.0f, 1.0f, 30.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Float> verticalSpeed = this.register(new Setting<Float>("VerticalSpeed", 10.0f, 1.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> keepAlive = this.register(new Setting<Boolean>("KeepAlive", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> noClip = this.register(new Setting<Boolean>("NoClip", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> spoof = this.register(new Setting<Boolean>("SpoofGround", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Float> jumpSpeed = this.register(new Setting<Float>("AutoAirJumpSpeed", 3.25f, 2.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.AutoAirJump));
-	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("MHorizontalSpeed", 0.5f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
-	public Setting<Float> mVerticalSpeed = this.register(new Setting<Float>("MVerticalSpeed", 10.0f, 1.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
+	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("HorizontalSpeed", 0.5f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
 	public Setting<Float> mTimerSpeed = this.register(new Setting<Float>("Timer", 1.0f, 0.1f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
 	public Setting<Float> jumpMotion = this.register(new Setting<Float>("JumpMotionY", 0.42f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.ManualAirJump));
 
@@ -50,12 +47,6 @@ public class Flight
 	public void onUpdate() {
 		if (this.flyMode.getValue() == FlyMode.Motion) {
 		    Flight.mc.player.motionY = 0.0;
-			if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
-				Flight.mc.player.motionY += this.mVerticalSpeed.getValue().floatValue() / 10;
-			}
-            if (Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
-				Flight.mc.player.motionY -= this.mVerticalSpeed.getValue().floatValue() / 10;
-			}
 		    Flight.mc.player.setVelocity(0.0, 0.0, 0.0);
 	        Experium.timerManager.setTimer(this.mTimerSpeed.getValue().floatValue());
 	        EntityUtil.moveEntityStrafe(this.mHorizontalSpeed.getValue().floatValue() / 10, (Entity)Flight.mc.player);
@@ -97,16 +88,6 @@ public class Flight
                 Flight.mc.player.motionZ *= 1.1;
 			}
         }
-		if (this.flyMode.getValue() == FlyMode.AACv3312) {
-		    if (Flight.mc.player.posY < -70) {
-                Flight.mc.player.motionY = this.aacMotion.getValue().floatValue();
-            }
-            Experium.timerManager.reset();
-            if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-                Experium.timerManager.setTimer(0.2f);
-                Flight.mc.rightClickDelayTimer = 0;
-            }
-		}
     }
 	
 	@SubscribeEvent
@@ -130,7 +111,6 @@ public class Flight
 		Motion,
 		Vanilla,
 		Jetpack,
-		AACv3312,
 		AutoAirJump,
 		ManualAirJump;
 	}
