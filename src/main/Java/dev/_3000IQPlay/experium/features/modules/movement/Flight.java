@@ -1,20 +1,15 @@
 package dev._3000IQPlay.experium.features.modules.movement;
 
 import dev._3000IQPlay.experium.Experium;
-import dev._3000IQPlay.experium.event.events.MoveEvent;
 import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.EntityUtil;
-import dev._3000IQPlay.experium.util.Timer;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketKeepAlive;
 import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Flight
@@ -29,10 +24,12 @@ public class Flight
 	public Setting<Boolean> noClip = this.register(new Setting<Boolean>("NoClip", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> spoof = this.register(new Setting<Boolean>("SpoofGround", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Float> jumpSpeed = this.register(new Setting<Float>("AutoAirJumpSpeed", 3.25f, 2.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.AutoAirJump));
-	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("HorizontalSpeed", 5.0f, 2.0f, 3.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
+	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("HorizontalSpeed", 5.0f, 2.0f, 30.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
 	public Setting<Float> mTimerSpeed = this.register(new Setting<Float>("Timer", 1.0f, 0.1f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
 	public Setting<Float> jumpMotion = this.register(new Setting<Float>("JumpMotionY", 0.42f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.ManualAirJump));
+	private boolean flyable;
 	private int ticks = 0;
+	private double y;
 
     public Flight() {
         super("Flight", "Makes you fly.", Module.Category.MOVEMENT, true, false, false);
@@ -52,6 +49,9 @@ public class Flight
 	
 	@Override
 	public void onEnable() {
+		if (Flight.fullNullCheck()) {
+			return;
+		}
 		this.ticks = 1;
     }
 	
@@ -136,7 +136,7 @@ public class Flight
                 if (this.reDamage.getValue().booleanValue()) {
                     this.ticks = 1;
                 }
-                EntityUtil.moveEntityStrafe(Math.sqrt(mc.player.motionX * mc.player.motionX + mc.player.motionZ * mc.player.motionZ), (Entity)Flight.mc.player);
+                EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
             }
 			this.ticks++;
         }
@@ -164,7 +164,6 @@ public class Flight
 		Vanilla,
 		Jetpack,
 		VerusBoost,
-		ZoneCraft,
 		AutoAirJump,
 		ManualAirJump;
 	}
