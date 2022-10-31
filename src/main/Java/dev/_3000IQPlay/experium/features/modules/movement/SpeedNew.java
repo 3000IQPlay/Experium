@@ -40,6 +40,7 @@ public class SpeedNew
     private final Setting<Boolean> resetY = this.register(new Setting<Boolean>("ResetY", false, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private double lastDist;
     private double moveSpeedNew;
+	private int airDance;
     int stage;
 
     public SpeedNew() {
@@ -142,7 +143,7 @@ public class SpeedNew
                         break;
 	                } else {
 						if (this.downMode.getValue() == DownMode.Timer) {
-		                    Experium.timerManager.setTimer(this.downTimerValue.getValue());
+		                    Experium.timerManager.setTimer(this.downTimerValue.getValue().floatValue());
 					    } else if (this.downMode.getValue() == DownMode.Motion) {
 							SpeedNew.mc.player.motionY =- this.downMotionValue.getValue().floatValue();
 					    }
@@ -167,10 +168,7 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(this.yPortGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 } else {
                     SpeedNew.mc.player.motionY =- this.yPortFallSpeed.getValue().floatValue();
-                }
-				if (!SpeedNew.mc.player.onGround) {
-                    SpeedNew.mc.player.motionY = this.yPortJumpMotionY.getValue().floatValue();
-                    EntityUtil.moveEntityStrafe(this.yPortAirSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
+					EntityUtil.moveEntityStrafe(this.yPortAirSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 }
             }
         }
@@ -194,7 +192,7 @@ public class SpeedNew
                         break;
 	                } else {
 						if (this.downMode.getValue() == DownMode.Timer) {
-		                    Experium.timerManager.setTimer(this.downTimerValue.getValue());
+		                    Experium.timerManager.setTimer(this.downTimerValue.getValue().floatValue());
 					    } else if (this.downMode.getValue() == DownMode.Motion) {
 							SpeedNew.mc.player.motionY =- this.downMotionValue.getValue().floatValue();
 					    }
@@ -219,9 +217,7 @@ public class SpeedNew
                     EntityUtil.moveEntityStrafe(this.yPortGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 } else {
                     SpeedNew.mc.player.motionY =- this.yPortFallSpeed.getValue().floatValue();
-                }
-				if (!SpeedNew.mc.player.onGround) {
-                    EntityUtil.moveEntityStrafe(this.yPortAirSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
+					EntityUtil.moveEntityStrafe(this.yPortAirSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
                 }
             }
         }
@@ -229,12 +225,14 @@ public class SpeedNew
 
     @Override
     public void onEnable() {
-        if (this.resetXZ.getValue().booleanValue()) {
-            SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
-        }
-        if (this.resetY.getValue().booleanValue()) {
-            SpeedNew.mc.player.motionX = 0.0;
-        }
+		if (this.mode.getValue() == SpeedNewModes.Custom) {
+            if (this.resetXZ.getValue().booleanValue()) {
+                SpeedNew.mc.player.motionX = SpeedNew.mc.player.motionZ = 0.0;
+            }
+            if (this.resetY.getValue().booleanValue()) {
+                SpeedNew.mc.player.motionX = 0.0;
+            }
+		}
         super.onEnable();
     }
 	
