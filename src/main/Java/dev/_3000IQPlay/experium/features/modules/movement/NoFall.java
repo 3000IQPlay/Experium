@@ -31,14 +31,15 @@ public class NoFall
         extends Module {
     private static final Timer bypassTimer = new Timer();
     private static int ogslot = -1;
-    private final Setting<Mode> mode = this.register(new Setting<Mode>("Mode", Mode.PACKET));
-    private final Setting<Integer> distance = this.register(new Setting<Object>("Distance", Integer.valueOf(15), Integer.valueOf(0), Integer.valueOf(50), v -> this.mode.getValue() == Mode.BUCKET));
-    private final Setting<Boolean> glide = this.register(new Setting<Object>("Glide", Boolean.valueOf(false), v -> this.mode.getValue() == Mode.ELYTRA));
-    private final Setting<Boolean> silent = this.register(new Setting<Object>("Silent", Boolean.valueOf(true), v -> this.mode.getValue() == Mode.ELYTRA));
-    private final Setting<Boolean> bypass = this.register(new Setting<Object>("Bypass", Boolean.valueOf(false), v -> this.mode.getValue() == Mode.ELYTRA));
+    private final Setting<Mode> mode = this.register(new Setting<Mode>("Mode", Mode.AlwaysSpoof));
+    private final Setting<Integer> distance = this.register(new Setting<Object>("Distance", Integer.valueOf(15), Integer.valueOf(0), Integer.valueOf(50), v -> this.mode.getValue() == Mode.Bucket));
+    private final Setting<Boolean> glide = this.register(new Setting<Object>("Glide", Boolean.valueOf(false), v -> this.mode.getValue() == Mode.Elytra));
+    private final Setting<Boolean> silent = this.register(new Setting<Object>("Silent", Boolean.valueOf(true), v -> this.mode.getValue() == Mode.Elytra));
+    private final Setting<Boolean> bypass = this.register(new Setting<Object>("Bypass", Boolean.valueOf(false), v -> this.mode.getValue() == Mode.Elytra));
     private final Timer timer = new Timer();
     private boolean equipped = false;
     private boolean gotElytra = false;
+	private boolean needSpoof = false;
     private State currentState = State.FALL_CHECK;
 
     public NoFall() {
@@ -49,6 +50,7 @@ public class NoFall
     public void onEnable() {
         ogslot = -1;
         this.currentState = State.FALL_CHECK;
+		this.needSpoof = false;
     }
 
     @SubscribeEvent
@@ -56,7 +58,7 @@ public class NoFall
         if (NoFall.fullNullCheck()) {
             return;
         }
-        if (this.mode.getValue() == Mode.ELYTRA) {
+        if (this.mode.getValue() == Mode.Elytra) {
             if (this.bypass.getValue().booleanValue()) {
                 this.currentState = this.currentState.onSend(event);
             } else if (!this.equipped && event.getPacket() instanceof CPacketPlayer && NoFall.mc.player.fallDistance >= 3.0f) {
@@ -79,7 +81,7 @@ public class NoFall
                 }
             }
         }
-        if (this.mode.getValue() == Mode.PACKET && event.getPacket() instanceof CPacketPlayer) {
+		if (this.mode.getValue() == Mode.Damage && event.getPacket() instanceof CPacketPlayer && NoFall.mc.player != null && NoFall.mc.player.fallDistance > 3.5) {
             CPacketPlayer packet = event.getPacket();
             packet.onGround = true;
         }
@@ -90,7 +92,7 @@ public class NoFall
         if (NoFall.fullNullCheck()) {
             return;
         }
-        if ((this.equipped || this.bypass.getValue().booleanValue()) && this.mode.getValue() == Mode.ELYTRA && (event.getPacket() instanceof SPacketWindowItems || event.getPacket() instanceof SPacketSetSlot)) {
+        if ((this.equipped || this.bypass.getValue().booleanValue()) && this.mode.getValue() == Mode.Elytra && (event.getPacket() instanceof SPacketWindowItems || event.getPacket() instanceof SPacketSetSlot)) {
             if (this.bypass.getValue().booleanValue()) {
                 this.currentState = this.currentState.onReceive(event);
             } else {
@@ -104,7 +106,7 @@ public class NoFall
         if (NoFall.fullNullCheck()) {
             return;
         }
-        if (this.mode.getValue() == Mode.ELYTRA) {
+        if (this.mode.getValue() == Mode.Elytra) {
             int slot;
             if (this.bypass.getValue().booleanValue()) {
                 this.currentState = this.currentState.onUpdate();
@@ -119,6 +121,12 @@ public class NoFall
                 NoFall.mc.playerController.updateController();
             }
         }
+		if (this.mode.getValue() == Mode.LessFall) {
+            if (NoFall.mc.player.fallDistance > 3.5) {
+                this.needSpoof = true;
+                NoFall.mc.player.fallDistance = 4.5f;
+            }
+		}
     }
 
     @Override
@@ -128,7 +136,7 @@ public class NoFall
         if (NoFall.fullNullCheck()) {
             return;
         }
-        if (this.mode.getValue() == Mode.BUCKET && NoFall.mc.player.fallDistance >= (float) this.distance.getValue().intValue() && !EntityUtil.isAboveWater(NoFall.mc.player) && this.timer.passedMs(100L) && (result = NoFall.mc.world.rayTraceBlocks(posVec = NoFall.mc.player.getPositionVector(), posVec.add(0.0, -5.33f, 0.0), true, true, false)) != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+        if (this.mode.getValue() == Mode.Bucket && NoFall.mc.player.fallDistance >= (float) this.distance.getValue().intValue() && !EntityUtil.isAboveWater(NoFall.mc.player) && this.timer.passedMs(100L) && (result = NoFall.mc.world.rayTraceBlocks(posVec = NoFall.mc.player.getPositionVector(), posVec.add(0.0, -5.33f, 0.0), true, true, false)) != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             EnumHand hand = EnumHand.MAIN_HAND;
             if (NoFall.mc.player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET) {
                 hand = EnumHand.OFF_HAND;
@@ -231,9 +239,9 @@ public class NoFall
     }
 
     public enum Mode {
-        PACKET,
-        BUCKET,
-        ELYTRA
-
+        AlwaysSpoof,
+		Damage,
+        Bucket,
+        Elytra;
     }
 }
