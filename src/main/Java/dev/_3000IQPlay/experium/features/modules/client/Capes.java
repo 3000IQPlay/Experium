@@ -20,7 +20,10 @@ extends Module {
 
     public Capes() {
         super("Capes", "Renders the client's capes.", Module.Category.CLIENT, false, false, false);
-
+UUIDs.put("Brotherismad", new String[]{"647e7cd0-fb35-4fdc-b413-ed53bc34b082"});
+UUIDS.put("MrBubblegum123", new String[]{"a6a6de0e-e0f9-418f-8ea7-373a2ec87aa3"});
+UUIDS.put("_3000IQPlay", new String[]{"5d0d3c96-bd09-4490-9cf3-a718d250e4ca"});
+UUIDS.put("PlsDontStealname", new String[]{"0b9b9bf4-bb0e-43ae-a703-c987b4eb52d9"});        
         instance = this;
     }
 
