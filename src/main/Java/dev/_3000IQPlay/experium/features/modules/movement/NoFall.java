@@ -121,12 +121,6 @@ public class NoFall
                 NoFall.mc.playerController.updateController();
             }
         }
-		if (this.mode.getValue() == Mode.LessFall) {
-            if (NoFall.mc.player.fallDistance > 3.5) {
-                this.needSpoof = true;
-                NoFall.mc.player.fallDistance = 4.5f;
-            }
-		}
     }
 
     @Override
