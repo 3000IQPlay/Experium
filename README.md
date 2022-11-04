@@ -9,7 +9,7 @@ Private project (Atrium continued???) <br />
   - [cow167](https://github.com/cow167)
   - [MrBubblecum](https://github.com/MrBubblegum)
   - [noatmc (Top help)](https://github.com/noatmc)
-  - [ZANE](https://github.com/Zane2b2t
+  - [ZANE](https://github.com/Zane2b2t)
 
 # Access list:
 ![image](https://user-images.githubusercontent.com/75604883/198683245-4f69d6fa-aede-43ef-a502-0564098054b1.png)
