@@ -1,5 +1,6 @@
 package dev._3000IQPlay.experium.features.modules.movement;
 
+import dev._3000IQPlay.experium.event.events.MoveEvent;
 import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.modules.Module;
@@ -85,7 +86,28 @@ public class NoFall
             CPacketPlayer packet = event.getPacket();
             packet.onGround = true;
         }
+		if (this.mode.getValue() == Mode.AAC) {
+			CPacketPlayer packet = event.getPacket();
+            if (NoFall.mc.player.fallDistance > 3.0F) {
+                NoFall.mc.player.onGround = true;
+                NoFall.mc.player.capabilities.isFlying = true;
+				NoFall.mc.player.capabilities.allowFlying = true;
+                packet.onGround = false;
+                NoFall.mc.player.velocityChanged = true;
+                NoFall.mc.player.capabilities.isFlying = false;
+                NoFall.mc.player.jump();
+            }
+        }
     }
+	
+	@SubscribeEvent
+	public void onMoveEvent(MoveEvent event) {
+	    if (this.mode.getValue() == Mode.Anti) {
+            if (NoFall.mc.player.fallDistance > 3.0F) {
+				event.setY(NoFall.mc.player.posY + 0.10000000149011612);
+            }
+		}
+	}
 
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
@@ -235,6 +257,8 @@ public class NoFall
     public enum Mode {
         AlwaysSpoof,
 		Damage,
+		Anti,
+		AAC,
         Bucket,
         Elytra;
     }
