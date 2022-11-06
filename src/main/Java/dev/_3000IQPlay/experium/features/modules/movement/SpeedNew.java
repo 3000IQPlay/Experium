@@ -27,7 +27,8 @@ public class SpeedNew
 	private final Setting<Boolean> yPortTimerSpeed = this.register(new Setting<Boolean>("Timer", false, t -> this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	private final Setting<Float> yPortTimerSpeedVal = this.register(new Setting<Float>("TimerSpeed", 1.8f, 0.1f, 5.0f, t -> this.yPortTimerSpeed.getValue() && this.mode.getValue().equals((Object)SpeedNewModes.YPort)));
 	
-	private final Setting<Float> cpvpccSpeed = this.register(new Setting<Float>("TestSpeed", 0.435f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.CPVPCC)));
+	private final Setting<Float> cpvpccSpeed = this.register(new Setting<Float>("Speed", 0.435f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.CPVPCC)));
+	private final Setting<Float> ccTimer = this.register(new Setting<Float>("Timer", 1.0f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.CPVPCC)));
 	
     private final Setting<Float> upAirSpeed = this.register(new Setting<Float>("UpAirSpeed", 0.35f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> downAirSpeed = this.register(new Setting<Float>("DownAirSpeed", 0.35f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
@@ -177,9 +178,12 @@ public class SpeedNew
 			    if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         SpeedNew.mc.player.jump();
+					    Experium.timerManager.setTimer(this.ccTimer.getValue().floatValue());
 						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
 						break;
-                    }
+                    } else {
+						Experium.timerManager.reset();
+					}
                     EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
 					break;
                 } else {
@@ -240,9 +244,12 @@ public class SpeedNew
 			    if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         SpeedNew.mc.player.jump();
+					    Experium.timerManager.setTimer(this.ccTimer.getValue().floatValue());
 						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
 						break;
-                    }
+                    } else {
+						Experium.timerManager.reset();
+					}
                     EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
 					break;
                 } else {
