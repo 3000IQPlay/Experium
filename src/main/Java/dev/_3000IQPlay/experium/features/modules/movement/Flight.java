@@ -32,6 +32,7 @@ public class Flight
 	public Setting<Float> jumpSpeed = this.register(new Setting<Float>("AutoAirJumpSpeed", 3.25f, 2.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.AutoAirJump));
 	public Setting<Boolean> vanillaKickBypass = this.register(new Setting<Boolean>("VanillaKickBypass", true, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
 	public Setting<Float> jumpMotion = this.register(new Setting<Float>("JumpMotionY", 0.42f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.ManualAirJump));
+	public Setting<Boolean> damage = this.register(new Setting<Boolean>("Damage", true));
 	private final Timer groundTimer = new Timer();
 	private boolean flyable;
 	private int ticks = 0;
@@ -59,6 +60,11 @@ public class Flight
 			return;
 		}
 		this.ticks = 1;
+		if (this.damage.getValue().booleanValue()) {
+            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY + 3.5, Flight.mc.player.posZ, false));
+            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY, Flight.mc.player.posZ, false));
+            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY, Flight.mc.player.posZ, true));
+        }
     }
 	
 	@Override
