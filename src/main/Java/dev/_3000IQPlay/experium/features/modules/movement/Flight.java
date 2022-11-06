@@ -21,17 +21,16 @@ public class Flight
     private static Flight INSTANCE = new Flight();
     public Setting<FlyMode> flyMode = this.register(new Setting<FlyMode>("FlyType", FlyMode.Motion));
 	public Setting<Boolean> reDamage = this.register(new Setting<Boolean>("ReDamage", true, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
-	public Setting<Float> vbSpeed = this.register(new Setting<Float>("VerusBoostSpeed", 15.0f, 2.0f, 30.0f, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
-	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("MotionHorizSpeed", 5.0f, 2.0f, 30.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
-	public Setting<Float> mVerticalSpeed = this.register(new Setting<Float>("MotionVertSpeed", 0.42f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
-	public Setting<Float> vanillaSpeed = this.register(new Setting<Float>("VanillaHorizSpeed", 5.0f, 2.0f, 30.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
-	public Setting<Float> verticalSpeed = this.register(new Setting<Float>("VanillaVertSpeed", 10.0f, 1.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
+	public Setting<Float> vbSpeed = this.register(new Setting<Float>("VerusBoostSpeed", 1.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
+	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("MotionHorizSpeed", 0.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
+	public Setting<Float> mVerticalSpeed = this.register(new Setting<Float>("MotionVertSpeed", 0.42f, 0.1f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
+	public Setting<Float> vanillaSpeed = this.register(new Setting<Float>("VanillaHorizSpeed", 0.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
+	public Setting<Float> verticalSpeed = this.register(new Setting<Float>("VanillaVertSpeed", 1.0f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> keepAlive = this.register(new Setting<Boolean>("KeepAlive", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> noClip = this.register(new Setting<Boolean>("NoClip", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> spoofGround = this.register(new Setting<Boolean>("SpoofGround", false, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
 	public Setting<Float> jumpSpeed = this.register(new Setting<Float>("AutoAirJumpSpeed", 3.25f, 2.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.AutoAirJump));
 	public Setting<Boolean> vanillaKickBypass = this.register(new Setting<Boolean>("VanillaKickBypass", true, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
-	public Setting<Float> jumpMotion = this.register(new Setting<Float>("JumpMotionY", 0.42f, 0.1f, 3.0f, v -> this.flyMode.getValue() == FlyMode.ManualAirJump));
 	public Setting<Boolean> damage = this.register(new Setting<Boolean>("Damage", true));
 	private final Timer groundTimer = new Timer();
 	private boolean flyable;
@@ -80,7 +79,7 @@ public class Flight
             if (Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
                 Flight.mc.player.motionY -= this.mVerticalSpeed.getValue().floatValue();
 			}
-            EntityUtil.moveEntityStrafe(this.mHorizontalSpeed.getValue().floatValue() / 10, (Entity)Flight.mc.player);
+            EntityUtil.moveEntityStrafe(this.mHorizontalSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
             Flight.getInstance().handleVanillaKickBypass();
 		}
 		if (this.flyMode.getValue() == FlyMode.ManualAirJump) {
@@ -91,7 +90,7 @@ public class Flight
 			if (Flight.mc.player.onGround) {
 				Flight.mc.player.jump();
 			}
-			EntityUtil.moveEntityStrafe(this.jumpSpeed.getValue().floatValue() / 10, (Entity)Flight.mc.player);
+			EntityUtil.moveEntityStrafe(this.jumpSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
 			if (Flight.mc.player.fallDistance > 1) {
 				Flight.mc.player.motionY = 0.5D;
 				Flight.mc.player.fallDistance = 0F;
@@ -108,12 +107,12 @@ public class Flight
 			Flight.mc.player.capabilities.isFlying = false;
             Flight.mc.player.motionX = Flight.mc.player.motionZ = Flight.mc.player.motionY = 0.0;
             if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
-				Flight.mc.player.motionY += this.verticalSpeed.getValue().floatValue() / 10;
+				Flight.mc.player.motionY += this.verticalSpeed.getValue().floatValue();
 			}
             if (Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
-				Flight.mc.player.motionY -= this.verticalSpeed.getValue().floatValue() / 10;
+				Flight.mc.player.motionY -= this.verticalSpeed.getValue().floatValue();
 			}
-            EntityUtil.moveEntityStrafe(this.vanillaSpeed.getValue().floatValue() / 10, (Entity)Flight.mc.player);
+            EntityUtil.moveEntityStrafe(this.vanillaSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
 			Flight.getInstance().handleVanillaKickBypass();
 		}
 		if (this.flyMode.getValue() == FlyMode.Jetpack) {
@@ -149,7 +148,7 @@ public class Flight
                 Flight.mc.player.fallDistance = 0f;
             }
             if (this.ticks < 25) {
-                EntityUtil.moveEntityStrafe(this.vbSpeed.getValue().floatValue() / 10, (Entity)Flight.mc.player);
+                EntityUtil.moveEntityStrafe(this.vbSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
             } else {
                 if (this.ticks == 25){
                     EntityUtil.moveEntityStrafe(0.48f, (Entity)Flight.mc.player);
