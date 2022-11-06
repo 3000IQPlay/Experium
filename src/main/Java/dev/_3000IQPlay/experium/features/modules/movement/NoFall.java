@@ -85,18 +85,6 @@ public class NoFall
             CPacketPlayer packet = event.getPacket();
             packet.onGround = true;
         }
-		if (this.mode.getValue() == Mode.AAC) {
-			CPacketPlayer packet = event.getPacket();
-            if (NoFall.mc.player.fallDistance > 3.0F) {
-                NoFall.mc.player.onGround = true;
-                NoFall.mc.player.capabilities.isFlying = true;
-				NoFall.mc.player.capabilities.allowFlying = true;
-                packet.onGround = false;
-                NoFall.mc.player.velocityChanged = true;
-                NoFall.mc.player.capabilities.isFlying = false;
-                NoFall.mc.player.jump();
-            }
-        }
     }
 
     @SubscribeEvent
@@ -247,7 +235,6 @@ public class NoFall
     public enum Mode {
         AlwaysSpoof,
 		Damage,
-		AAC,
         Bucket,
         Elytra;
     }
