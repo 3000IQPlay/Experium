@@ -6,8 +6,10 @@ import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.EntityUtil;
+import dev._3000IQPlay.experium.util.MovementUtil;
 import dev._3000IQPlay.experium.util.Timer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketEntityAction;
@@ -20,6 +22,7 @@ public class Flight
         extends Module {
     private static Flight INSTANCE = new Flight();
     public Setting<FlyMode> flyMode = this.register(new Setting<FlyMode>("FlyType", FlyMode.Motion));
+	public Setting<Float> collideSpeed = this.register(new Setting<Float>("CollideSpeed", 1.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Collide));
 	public Setting<Boolean> reDamage = this.register(new Setting<Boolean>("ReDamage", true, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
 	public Setting<Float> vbSpeed = this.register(new Setting<Float>("VerusBoostSpeed", 1.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
 	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("MotionHorizSpeed", 0.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
@@ -36,6 +39,7 @@ public class Flight
 	private boolean flyable;
 	private int ticks = 0;
 	private double y;
+	private int offGroundTicks, onGroundTicks = -1;
 
     public Flight() {
         super("Flight", "Makes you fly.", Module.Category.MOVEMENT, true, false, false);
@@ -66,8 +70,19 @@ public class Flight
         }
     }
 	
+	public static double roundToOnGround(final double posY) {
+        return posY - (posY % 0.015625);
+    }
+	
 	@Override
 	public void onUpdate() {
+		if (Flight.mc.player.onGround) {
+            this.offGroundTicks = 0;
+            ++this.onGroundTicks;
+        } else {
+            this.onGroundTicks = 0;
+            ++this.offGroundTicks;
+        }
 		if (this.flyMode.getValue() == FlyMode.Motion) {
             Flight.mc.player.capabilities.isFlying = false;
             Flight.mc.player.motionY = 0.0f;
@@ -125,14 +140,14 @@ public class Flight
         }
 		if (this.flyMode.getValue() == FlyMode.VerusBoost) {
 			if (this.ticks == 1) {
-            Flight.mc.player.connection.sendPacket((Packet)new CPacketEntityAction(Flight.mc.player, CPacketEntityAction.Action.START_SPRINTING));
-            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, true));
-            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY + 3.42, Flight.mc.player.posZ, false));
-            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, false));
-            Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, true));
-            Experium.timerManager.setTimer(0.15f);
-            Flight.mc.player.jump();
-            Flight.mc.player.onGround = true;
+                Flight.mc.player.connection.sendPacket((Packet)new CPacketEntityAction(Flight.mc.player, CPacketEntityAction.Action.START_SPRINTING));
+                Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, true));
+                Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY + 3.42, Flight.mc.player.posZ, false));
+                Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, false));
+                Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.posY, Flight.mc.player.posZ, true));
+                Experium.timerManager.setTimer(0.15f);
+                Flight.mc.player.jump();
+                Flight.mc.player.onGround = true;
             } else if (this.ticks == 2) {
                 Experium.timerManager.reset();
             }
@@ -164,6 +179,56 @@ public class Flight
             Flight.mc.player.capabilities.isFlying = true;
             Flight.getInstance().handleVanillaKickBypass();
 		}
+        if (this.flyMode.getValue() == FlyMode.ACR) {
+            EntityUtil.moveEntityStrafe(0.06f, (Entity)Flight.mc.player);
+            if (Flight.mc.player.ticksExisted % 3 == 0) {
+                Flight.mc.player.motionY = 0.40444491418477213;
+                this.offGroundTicks = 0;
+            }
+            if (this.offGroundTicks == 1) {
+                EntityUtil.moveEntityStrafe(0.36f, (Entity)Flight.mc.player);
+                Flight.mc.player.motionY = 0.33319999363422365;
+            }
+        }
+		if (this.flyMode.getValue() == FlyMode.VerusAirJump) {
+            EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
+            if (!Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
+                if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
+                    if (Flight.mc.player.ticksExisted % 2 == 0)
+                        Flight.mc.player.motionY = 0.42f;
+                } else {
+                    if (Flight.mc.player.onGround) {
+                        Flight.mc.player.jump();
+                    }
+                    if (Flight.mc.player.fallDistance > 1) {
+                        Flight.mc.player.motionY =- ((Flight.mc.player.posY) - Math.floor(Flight.mc.player.posY));
+                    }
+                    if (Flight.mc.player.motionY == 0) {
+                        Flight.mc.player.jump();
+                        Flight.mc.player.onGround = true;
+                        Flight.mc.player.fallDistance = 0;
+                        Flight.mc.player.onGround = true;
+                    }
+                }
+            }
+		}
+		if (this.flyMode.getValue() == FlyMode.Collide) {
+            if (!Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
+                if (MovementUtil.isMoving((EntityLivingBase)Speed.mc.player)) {
+					EntityUtil.moveEntityStrafe(this.collideSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
+                } else {
+                    Flight.mc.player.motionX = Flight.mc.player.motionZ = 0.0f;
+                }
+                if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
+                    Flight.mc.player.motionY =- (Flight.mc.player.posY - Flight.roundToOnGround(Flight.mc.player.posY + 0.5));
+                } else {
+                    Flight.mc.player.motionY =- (Flight.mc.player.posY - Flight.roundToOnGround(Flight.mc.player.posY));
+                }
+                if (Flight.mc.player.posY % (1.0F / 64.0F) < 0.005) {
+                    Flight.mc.player.onGround = true;
+                }
+            }
+        }
     }
 	
 	private void handleVanillaKickBypass() {
@@ -216,12 +281,14 @@ public class Flight
     }
 	
 	public static enum FlyMode {
-		Motion,
 		Vanilla,
+		Motion,
+		Collide,
+		VerusBoost,
+		VerusAirJump,
+		ACR,
 		Jetpack,
 		Creative,
-		VerusBoost,
-		AutoAirJump,
 		ManualAirJump;
 	}
 }
