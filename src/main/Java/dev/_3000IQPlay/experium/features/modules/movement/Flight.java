@@ -32,7 +32,6 @@ public class Flight
 	public Setting<Boolean> keepAlive = this.register(new Setting<Boolean>("KeepAlive", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> noClip = this.register(new Setting<Boolean>("NoClip", false, v -> this.flyMode.getValue() == FlyMode.Vanilla));
 	public Setting<Boolean> spoofGround = this.register(new Setting<Boolean>("SpoofGround", false, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
-	public Setting<Float> jumpSpeed = this.register(new Setting<Float>("AutoAirJumpSpeed", 3.25f, 2.0f, 10.0f, v -> this.flyMode.getValue() == FlyMode.AutoAirJump));
 	public Setting<Boolean> vanillaKickBypass = this.register(new Setting<Boolean>("VanillaKickBypass", true, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
 	public Setting<Boolean> damage = this.register(new Setting<Boolean>("Damage", true));
 	private final Timer groundTimer = new Timer();
@@ -99,17 +98,6 @@ public class Flight
 		}
 		if (this.flyMode.getValue() == FlyMode.ManualAirJump) {
 		    Flight.mc.player.onGround = true;
-		}
-		if (this.flyMode.getValue() == FlyMode.AutoAirJump) {
-			Experium.timerManager.reset();
-			if (Flight.mc.player.onGround) {
-				Flight.mc.player.jump();
-			}
-			EntityUtil.moveEntityStrafe(this.jumpSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
-			if (Flight.mc.player.fallDistance > 1) {
-				Flight.mc.player.motionY = 0.5D;
-				Flight.mc.player.fallDistance = 0F;
-			}
 		}
 		if (this.flyMode.getValue() == FlyMode.Vanilla) {
 			Experium.timerManager.reset();
