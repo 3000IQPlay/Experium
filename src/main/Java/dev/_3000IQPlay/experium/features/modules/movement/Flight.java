@@ -22,7 +22,8 @@ public class Flight
         extends Module {
     private static Flight INSTANCE = new Flight();
     public Setting<FlyMode> flyMode = this.register(new Setting<FlyMode>("FlyType", FlyMode.Motion));
-	public Setting<Float> collideSpeed = this.register(new Setting<Float>("CollideSpeed", 1.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Collide));
+	public Setting<Boolean> glide = this.register(new Setting<Boolean>("Glide", false, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion));
+	public Setting<Float> glideSpeed = this.register(new Setting<Float>("GlideSpeed", 0.315f, 0.1f, 2.0f, v -> this.glide.getValue() && this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion));
 	public Setting<Boolean> reDamage = this.register(new Setting<Boolean>("ReDamage", true, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
 	public Setting<Float> vbSpeed = this.register(new Setting<Float>("VerusBoostSpeed", 1.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.VerusBoost));
 	public Setting<Float> mHorizontalSpeed = this.register(new Setting<Float>("MotionHorizSpeed", 0.5f, 0.2f, 5.0f, v -> this.flyMode.getValue() == FlyMode.Motion));
@@ -87,6 +88,9 @@ public class Flight
             Flight.mc.player.motionY = 0.0f;
             Flight.mc.player.motionX = 0.0f;
             Flight.mc.player.motionZ = 0.0f;
+			if (this.glide.getValue().booleanValue() && !Flight.mc.player.onGround) {
+                Flight.mc.player.motionY = -0.0315f;
+            }
             if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
                 Flight.mc.player.motionY += this.mVerticalSpeed.getValue().floatValue();
 			}
@@ -109,6 +113,9 @@ public class Flight
             }
 			Flight.mc.player.capabilities.isFlying = false;
             Flight.mc.player.motionX = Flight.mc.player.motionZ = Flight.mc.player.motionY = 0.0;
+			if (this.glide.getValue().booleanValue() || !Flight.mc.player.onGround) {
+                Flight.mc.player.motionY =- this.glideSpeed.getValue().floatValue() / 100;
+            }
             if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
 				Flight.mc.player.motionY += this.verticalSpeed.getValue().floatValue();
 			}
@@ -199,23 +206,6 @@ public class Flight
                     }
                 }
             }
-		}
-		if (this.flyMode.getValue() == FlyMode.Collide) {
-            if (!Flight.mc.gameSettings.keyBindSneak.isKeyDown()) {
-                if (MovementUtil.isMoving((EntityLivingBase)Speed.mc.player)) {
-					EntityUtil.moveEntityStrafe(this.collideSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
-                } else {
-                    Flight.mc.player.motionX = Flight.mc.player.motionZ = 0.0f;
-                }
-                if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
-                    Flight.mc.player.motionY =- (Flight.mc.player.posY - Flight.roundToOnGround(Flight.mc.player.posY + 0.5));
-                } else {
-                    Flight.mc.player.motionY =- (Flight.mc.player.posY - Flight.roundToOnGround(Flight.mc.player.posY));
-                }
-                if (Flight.mc.player.posY % (1.0F / 64.0F) < 0.005) {
-                    Flight.mc.player.onGround = true;
-                }
-            }
         }
     }
 	
@@ -271,7 +261,6 @@ public class Flight
 	public static enum FlyMode {
 		Vanilla,
 		Motion,
-		Collide,
 		VerusBoost,
 		VerusAirJump,
 		ACR,
