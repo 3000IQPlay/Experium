@@ -2,6 +2,7 @@ package dev._3000IQPlay.experium.features.modules.movement;
 
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.event.events.MoveEvent;
+import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.event.events.UpdateWalkingPlayerEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.modules.movement.Strafe;
@@ -12,6 +13,7 @@ import dev._3000IQPlay.experium.util.MovementUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
+import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Objects;
@@ -39,6 +41,7 @@ public class SpeedNew
 	private final Setting<Float> downTimerValue = this.register(new Setting<Float>("CustomDownTimer", 1.0f, 0.1f, 3.0f, t -> this.downMode.getValue() == DownMode.Timer && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> downMotionValue = this.register(new Setting<Float>("CustomDownMotion", 0.2f, 0.0f, 3.0f, t -> this.downMode.getValue() == DownMode.Motion && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> upTimerValue = this.register(new Setting<Float>("CustomUpTimer", 1.0f, 0.1f, 3.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
+	private final Setting<Boolean> sprintPacket = this.register(new Setting<Boolean>("SprintPacket", true));
     private final Setting<Boolean> resetXZ = this.register(new Setting<Boolean>("ResetXZ", false, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Boolean> resetY = this.register(new Setting<Boolean>("ResetY", false, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private double lastDist;
@@ -130,6 +133,11 @@ public class SpeedNew
         if (event.getStage() == 1 || Strafe.fullNullCheck()) {
             return;
         }
+		if (this.sprintPacket.getValue().booleanValue() && !SpeedNew.mc.player.isSprinting()) {
+            if (SpeedNew.mc.getConnection() != null) {
+                SpeedNew.mc.getConnection().getNetworkManager().sendPacket(new CPacketEntityAction(SpeedNew.mc.player, CPacketEntityAction.Action.START_SPRINTING));
+            }
+        }
 		switch (this.mode.getValue()) {
             case Custom: {
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
@@ -196,6 +204,11 @@ public class SpeedNew
 
     @Override
     public void onTick() {
+		if (this.sprintPacket.getValue().booleanValue() && !SpeedNew.mc.player.isSprinting()) {
+            if (SpeedNew.mc.getConnection() != null) {
+                SpeedNew.mc.getConnection().getNetworkManager().sendPacket(new CPacketEntityAction(SpeedNew.mc.player, CPacketEntityAction.Action.START_SPRINTING));
+            }
+        }
 		switch (this.mode.getValue()) {
             case Custom: {
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
@@ -256,6 +269,17 @@ public class SpeedNew
                     SpeedNew.mc.player.motionX = 0.0;
                     SpeedNew.mc.player.motionZ = 0.0;
 				}
+            }
+        }
+    }
+	
+	@SubscribeEvent
+    public void onPacketSend(PacketEvent.Send event) {
+        if (event.getPacket() instanceof CPacketEntityAction) {
+            if (((CPacketEntityAction) event.getPacket()).getAction().equals(CPacketEntityAction.Action.STOP_SPRINTING) || ((CPacketEntityAction) event.getPacket()).getAction().equals(CPacketEntityAction.Action.START_SNEAKING)) {
+                if (this.sprintPacket.getValue().booleanValue()) {
+                    event.setCanceled(true);
+                }
             }
         }
     }
