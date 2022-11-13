@@ -255,6 +255,7 @@ public class Flight
 	@Override
 	public void onDisable() {
 		Experium.timerManager.reset();
+		Flight.mc.player.capabilities.isFlying = false;
 		super.onDisable();
     }
 	
