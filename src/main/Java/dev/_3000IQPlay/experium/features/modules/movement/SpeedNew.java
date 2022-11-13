@@ -187,12 +187,12 @@ public class SpeedNew
                     if (SpeedNew.mc.player.onGround) {
                         SpeedNew.mc.player.jump();
 					    Experium.timerManager.setTimer(this.ccTimer.getValue().floatValue());
-						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
+						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
 						break;
                     } else {
 						Experium.timerManager.reset();
 					}
-                    EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
+                    EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
 					break;
                 } else {
                     SpeedNew.mc.player.motionX = 0.0;
@@ -258,12 +258,12 @@ public class SpeedNew
                     if (SpeedNew.mc.player.onGround) {
                         SpeedNew.mc.player.jump();
 					    Experium.timerManager.setTimer(this.ccTimer.getValue().floatValue());
-						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)Flight.mc.player);
+						EntityUtil.moveEntityStrafe(this.cpvpccSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
 						break;
                     } else {
 						Experium.timerManager.reset();
 					}
-                    EntityUtil.moveEntityStrafe(Math.sqrt(Flight.mc.player.motionX * Flight.mc.player.motionX + Flight.mc.player.motionZ * Flight.mc.player.motionZ), (Entity)Flight.mc.player);
+                    EntityUtil.moveEntityStrafe(Math.sqrt(SpeedNew.mc.player.motionX * SpeedNew.mc.player.motionX + SpeedNew.mc.player.motionZ * SpeedNew.mc.player.motionZ), (Entity)SpeedNew.mc.player);
 					break;
                 } else {
                     SpeedNew.mc.player.motionX = 0.0;
