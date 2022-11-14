@@ -87,6 +87,8 @@ shadowJar {
         include(dependency('com.googlecode.json-simple:json-simple:1.1.1'))
         include(dependency('org.spongepowered:mixin'))
     }
+    exclude 'dummyThing'
+    exclude 'LICENSE.txt'
     classifier = 'release'
 }
 
