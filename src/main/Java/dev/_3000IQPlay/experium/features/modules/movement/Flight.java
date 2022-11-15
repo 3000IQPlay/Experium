@@ -5,6 +5,7 @@ import dev._3000IQPlay.experium.event.events.BlockCollisionBoundingBoxEvent;
 import dev._3000IQPlay.experium.event.events.PacketEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.DamageUtil;
 import dev._3000IQPlay.experium.util.EntityUtil;
 import dev._3000IQPlay.experium.util.MovementUtil;
 import dev._3000IQPlay.experium.util.Timer;
@@ -35,6 +36,10 @@ public class Flight
 	public Setting<Boolean> spoofGround = this.register(new Setting<Boolean>("SpoofGround", false, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
 	public Setting<Boolean> vanillaKickBypass = this.register(new Setting<Boolean>("VanillaKickBypass", true, v -> this.flyMode.getValue() == FlyMode.Vanilla || this.flyMode.getValue() == FlyMode.Motion || this.flyMode.getValue() == FlyMode.Creative));
 	public Setting<Boolean> damage = this.register(new Setting<Boolean>("Damage", true));
+	public Setting<Float> plusYPos = this.register(new Setting<Float>("PlusYPos", 3.42f, 2.0f, 10.0f, v -> this.damage.getValue()));
+	public Setting<Integer> damagePackets = this.register(new Setting<Integer>("PacketAmount", 1, 1, 3, v -> this.damage.getValue()));
+	public Setting<Boolean> groundCheck = this.register(new Setting<Boolean>("GroundCheck", true, v -> this.damage.getValue()));
+	public Setting<Boolean> hurtTimeCheck = this.register(new Setting<Boolean>("HurtTimeCheck", false, v -> this.damage.getValue()));
 	private final Timer groundTimer = new Timer();
 	private boolean flyable;
 	private int ticks = 0;
@@ -63,11 +68,16 @@ public class Flight
 			return;
 		}
 		this.ticks = 1;
+		/*
 		if (this.damage.getValue().booleanValue()) {
             Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY + 3.5, Flight.mc.player.posZ, false));
             Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY, Flight.mc.player.posZ, false));
             Flight.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Flight.mc.player.posX, Flight.mc.player.getEntityBoundingBox().minY, Flight.mc.player.posZ, true));
         }
+		*/
+		if (this.damage.getValue().booleanValue()) {
+			DamageUtil.damagePlayer(DamageUtil.DamageType.POSITION, 3.42f, 1, this.groundCheck.getValue().booleanValue(), this.hurtTimeCheck.getValue().booleanValue());
+		}
     }
 	
 	public static double roundToOnGround(final double posY) {
@@ -110,10 +120,12 @@ public class Flight
             }
             if (this.noClip.getValue().booleanValue()) {
                 Flight.mc.player.noClip = true;
-            }
+            } else {
+				Flight.mc.player.noClip = false;
+			}
 			Flight.mc.player.capabilities.isFlying = false;
             Flight.mc.player.motionX = Flight.mc.player.motionZ = Flight.mc.player.motionY = 0.0;
-			if (this.glide.getValue().booleanValue() || !Flight.mc.player.onGround) {
+			if (this.glide.getValue().booleanValue() && !Flight.mc.player.onGround) {
                 Flight.mc.player.motionY =- this.glideSpeed.getValue().floatValue() / 100;
             }
             if (Flight.mc.gameSettings.keyBindJump.isKeyDown()) {
@@ -256,6 +268,7 @@ public class Flight
 	public void onDisable() {
 		Experium.timerManager.reset();
 		Flight.mc.player.capabilities.isFlying = false;
+		Flight.mc.player.noClip = false;
 		super.onDisable();
     }
 	
