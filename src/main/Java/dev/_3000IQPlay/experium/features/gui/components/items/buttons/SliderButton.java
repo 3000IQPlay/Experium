@@ -3,7 +3,6 @@ package dev._3000IQPlay.experium.features.gui.components.items.buttons;
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.gui.ExperiumGui;
 import dev._3000IQPlay.experium.features.gui.components.Component;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.Button;
 import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.modules.client.HUD;
 import dev._3000IQPlay.experium.features.setting.Setting;
@@ -12,14 +11,16 @@ import dev._3000IQPlay.experium.util.MathUtil;
 import dev._3000IQPlay.experium.util.RenderUtil;
 import org.lwjgl.input.Mouse;
 
-public class Slider
+public class SliderButton
         extends Button {
     private final Number min;
     private final Number max;
     private final int difference;
     public Setting setting;
+    public int sliderColor = ColorUtil.toRGBA(ClickGui.getInstance().sliderRed.getValue(), ClickGui.getInstance().sliderGreen.getValue(), ClickGui.getInstance().sliderBlue.getValue(), ClickGui.getInstance().sliderAlpha.getValue());
 
-    public Slider(Setting setting) {
+
+    public SliderButton(Setting setting) {
         super(setting.getName());
         this.setting = setting;
         this.min = (Number)setting.getMin();
@@ -42,9 +43,9 @@ public class Slider
             RenderUtil.drawGradientRect(this.x, this.y, ((Number)this.setting.getValue()).floatValue() <= this.min.floatValue() ? 0.0f : ((float)this.width + 7.4f) * this.partialMultiplier(), (float)this.height - 0.5f, !this.isHovering(mouseX, mouseY) ? HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y, 0, this.renderer.scaledHeight)) : color, !this.isHovering(mouseX, mouseY) ? HUD.getInstance().colorMap.get(MathUtil.clamp((int)this.y, 0, this.renderer.scaledHeight)) : color1);
         } else {
 			if (ClickGui.getInstance().sliderType.getValue() == ClickGui.SliderType.Line) {
-                RenderUtil.drawRect(this.x, this.y + (float)this.height - 2.0f, ((Number)this.setting.getValue()).floatValue() <= this.min.floatValue() ? this.x : this.x + ((float)this.width + 7.4f) * this.partialMultiplier(), this.y + (float)this.height - 0.5f, !this.isHovering(mouseX, mouseY) ? Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue()));
+                RenderUtil.drawRect(this.x, this.y + (float)this.height - 2.0f, ((Number)this.setting.getValue()).floatValue() <= this.min.floatValue() ? this.x : this.x + ((float)this.width + 7.4f) * this.partialMultiplier(), this.y + (float)this.height - 0.5f, sliderColor);
 			} else if (ClickGui.getInstance().sliderType.getValue() == ClickGui.SliderType.Fill) {
-				RenderUtil.drawRect(this.x, this.y, ((Number)this.setting.getValue()).floatValue() <= this.min.floatValue() ? this.x : this.x + ((float)this.width + 7.4f) * this.partialMultiplier(), this.y + (float)this.height - 0.5f, !this.isHovering(mouseX, mouseY) ? Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).hoverAlpha.getValue()) : Experium.colorManager.getColorWithAlpha(Experium.moduleManager.getModuleByClass(ClickGui.class).alpha.getValue()));
+				RenderUtil.drawRect(this.x, this.y, ((Number)this.setting.getValue()).floatValue() <= this.min.floatValue() ? this.x : this.x + ((float)this.width + 7.4f) * this.partialMultiplier(), this.y + (float)this.height - 0.5f, sliderColor);
             }
 		}
         Experium.textManager.drawStringWithShadow(this.getName() + " \u00a77" + (this.setting.getValue() instanceof Float ? (Number)((Number)this.setting.getValue()) : (Number)((Number)this.setting.getValue()).doubleValue()), this.x + 2.3f, this.y - 1.7f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);

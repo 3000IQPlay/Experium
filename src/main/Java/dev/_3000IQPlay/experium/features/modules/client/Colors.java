@@ -12,6 +12,8 @@ import java.util.Map;
 public class Colors
         extends Module {
     public static Colors INSTANCE;
+    public Setting<Color> c = register(new Setting("Color", new Color(-1)));
+
     public Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Rainbow", Boolean.valueOf(false), "Rainbow colors."));
     public Setting<Integer> rainbowSpeed = this.register(new Setting<Object>("Speed", Integer.valueOf(20), Integer.valueOf(0), Integer.valueOf(100), v -> this.rainbow.getValue()));
     public Setting<Integer> rainbowSaturation = this.register(new Setting<Object>("Saturation", Integer.valueOf(150), Integer.valueOf(0), Integer.valueOf(255), v -> this.rainbow.getValue()));

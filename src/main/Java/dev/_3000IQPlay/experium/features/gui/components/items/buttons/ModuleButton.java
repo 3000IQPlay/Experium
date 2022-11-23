@@ -4,19 +4,14 @@ import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.gui.ExperiumGui;
 import dev._3000IQPlay.experium.features.gui.components.items.DescriptionDisplay;
 import dev._3000IQPlay.experium.features.gui.components.items.Item;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.BindButton;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.BooleanButton;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.Button;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.EnumButton;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.Slider;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.StringButton;
-import dev._3000IQPlay.experium.features.gui.components.items.buttons.UnlimitedSlider;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.ColorUtil;
 import dev._3000IQPlay.experium.util.Util;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.audio.ISound;
@@ -68,9 +63,12 @@ public class ModuleButton
                 if (setting.getValue() instanceof String || setting.getValue() instanceof Character) {
                     newItems.add(new StringButton(setting));
                 }
+                if (setting.getValue() instanceof Color)
+                    newItems.add(new ColorButton(setting));
+
                 if (setting.isNumberSetting()) {
                     if (setting.hasRestriction()) {
-                        newItems.add(new Slider(setting));
+                        newItems.add(new SliderButton(setting));
                         continue;
                     }
                     newItems.add(new UnlimitedSlider(setting));
@@ -88,14 +86,18 @@ public class ModuleButton
         if (!this.items.isEmpty()) {
             ClickGui gui = Experium.moduleManager.getModuleByClass(ClickGui.class);
             Experium.textManager.drawStringWithShadow(gui.openCloseChange.getValue().booleanValue() ? (this.subOpen ? gui.close.getValue() : gui.open.getValue()) : gui.moduleButton.getValue(), this.x - 1.5f + (float)this.width - 7.4f, this.y - 2.0f - (float)ExperiumGui.getClickGui().getTextOffset(), ColorUtil.toRGBA(ClickGui.getInstance().ocsRed.getValue(), ClickGui.getInstance().ocsGreen.getValue(), ClickGui.getInstance().ocsBlue.getValue(), 255));
-            if (this.subOpen) {
+            if (subOpen) {
                 float height = 1.0f;
-                for (Item item : this.items) {
+                for (Item item : items) {
                     if (!item.isHidden()) {
-                        item.setLocation(this.x + 1.0f, this.y + (height += 15.0f));
-                        item.setHeight(15);
-                        item.setWidth(this.width - 9);
+                        item.setLocation(x + 1.0f, y + (height += 15.0f));
+                        item.setHeight((int) 15.0f);
+                        item.setWidth(width - 9);
                         item.drawScreen(mouseX, mouseY, partialTicks);
+                        if (item instanceof ColorButton && ((ColorButton) item).setting.isOpen)
+                            height += 110;
+                        if (item instanceof EnumButton && ((EnumButton) item).setting.isOpen)
+                            height += ((EnumButton) item).setting.getValue().getClass().getEnumConstants().length * 15;
                     }
                     item.update();
                 }

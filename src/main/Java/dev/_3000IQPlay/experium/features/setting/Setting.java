@@ -4,6 +4,7 @@ import dev._3000IQPlay.experium.event.events.ClientEvent;
 import dev._3000IQPlay.experium.features.Feature;
 import net.minecraftforge.common.MinecraftForge;
 
+import java.awt.*;
 import java.util.function.Predicate;
 
 public class Setting<T> {
@@ -14,6 +15,8 @@ public class Setting<T> {
     private T min;
     private T max;
     private boolean hasRestriction;
+    public boolean isOpen;
+
     private boolean shouldRenderStringName;
     private Predicate<T> visibility;
     private String description;
@@ -223,7 +226,7 @@ public class Setting<T> {
     }
 
     public boolean isEnumSetting() {
-        return !this.isNumberSetting() && !(this.value instanceof String) && !(this.value instanceof Bind) && !(this.value instanceof Character) && !(this.value instanceof Boolean);
+        return !this.isNumberSetting() && !(this.value instanceof String) && !(this.value instanceof Bind) && !(this.value instanceof Character) && !(this.value instanceof Boolean) && !(this.value instanceof Color);
     }
 
     public boolean isStringSetting() {
