@@ -43,9 +43,12 @@
     "accessors.IContainer",
     "accessors.ICPacketCustomPayload",
     "accessors.ICPacketPlayer",
+	"accessors.ICPacketUseEntity",
     "accessors.IEntityLivingBase",
+	"accessors.IEntityPlayerSP",
     "accessors.IEntityRenderer",
 	"accessors.INetworkManager",
+	"accessors.IRenderManager",
     "accessors.IServerAddress",
 	"accessors.ISPacketPlayerPosLook",
     "accessors.ISPacketSetSlot"

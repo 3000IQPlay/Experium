@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-@Mod(modid = "experium", name = "Experium", version = "1.5.2")
+@Mod(modid = "experium", name = "Experium", version = "1.8.7")
 public class Experium {
     public static final String MODID = "experium";
     public static final String MODNAME = "Experium";
-    public static final String MODVER = "1.5.2";
+    public static final String MODVER = "1.8.7";
     public static final Logger LOGGER = LogManager.getLogger("Experium");
 	public static EventBus dispatcher;
     public static ModuleManager moduleManager;

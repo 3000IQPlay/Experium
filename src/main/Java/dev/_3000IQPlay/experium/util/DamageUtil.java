@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.*;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.CombatRules;
 import net.minecraft.util.DamageSource;
@@ -147,6 +149,67 @@ public class DamageUtil
             return 1000;
         }
         return 250;
+    }
+	
+    public static void damagePlayer(DamageType type, double plusYVal, boolean groundCheck, boolean hurtTimeCheck) {
+        if ((!groundCheck || DamageUtil.mc.player.onGround) && (!hurtTimeCheck || DamageUtil.mc.player.hurtTime == 0)) {
+            final double x = DamageUtil.mc.player.posX;
+            final double y = DamageUtil.mc.player.posY;
+            final double z = DamageUtil.mc.player.posZ;
+            double fallDistanceReq = 3.1;
+            if (DamageUtil.mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
+                final int amplifier = mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier();
+                fallDistanceReq += (float) (amplifier + 1);
+            }
+            final int packetCount = (int) Math.ceil(fallDistanceReq / plusYVal); // Don't change this unless you know the change wont break the self damage.
+            for (int i = 0; i < packetCount; i++) {
+                switch (type) {
+                    case POSITION_ROTATION: {
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y + plusYVal, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, false));
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, false));
+						DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, true));
+                        break;
+                    }
+                    case POSITION: {
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y + plusYVal, z, false));
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, false));
+						DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, true));
+                        break;
+                    }
+                }
+            }
+            DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer(true));
+        }
+    }
+
+    public static void damagePlayer(DamageType type, double plusYVal, int packets, boolean groundCheck, boolean hurtTimeCheck) {
+        if ((!groundCheck || DamageUtil.mc.player.onGround) && (!hurtTimeCheck || DamageUtil.mc.player.hurtTime == 0)) {
+            final double x = DamageUtil.mc.player.posX;
+            final double y = DamageUtil.mc.player.posY;
+            final double z = DamageUtil.mc.player.posZ;
+            for (int i = 0; i < packets; i++) {
+                switch (type) {
+                    case POSITION_ROTATION: {
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y + plusYVal, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, false));
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, false));
+						DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.PositionRotation(x, y, z, DamageUtil.mc.player.rotationYaw, DamageUtil.mc.player.rotationPitch, true));
+                        break;
+                    }
+                    case POSITION: {
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y + plusYVal, z, false));
+                        DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, false));
+						DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, true));
+                        break;
+                    }
+                }
+            }
+            DamageUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer(true));
+        }
+    }
+
+    public enum DamageType {
+        POSITION_ROTATION,
+        POSITION
     }
 }
 

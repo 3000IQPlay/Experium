@@ -5,10 +5,8 @@ Private project (Atrium continued???) <br />
 - Main Dev: [_3000IQPlay](https://github.com/3000IQPlay)
 - Not Gradle Contributors: 
   - [Master7720](https://github.com/master7720)
-  - [GentlemanMC](https://github.com/GentlemanMC)
-  - [cow167](https://github.com/cow167)
   - [MrBubblecum](https://github.com/MrBubblegum)
   - [noatmc (Top help)](https://github.com/noatmc)
 
 # Access list:
-![image](https://user-images.githubusercontent.com/75604883/194146799-d0864d43-a7d3-4017-88e7-04c8531c1e33.png)
+![image](https://user-images.githubusercontent.com/75604883/201526546-44e80d7a-95be-45c1-9eca-19154676737e.png)

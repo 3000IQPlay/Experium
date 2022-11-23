@@ -64,7 +64,7 @@ public class ExperiumCSGO
             String fpsText = Minecraft.debugFPS + "fps ";
 			String name = mc.player.getDisplayNameString();
 			String server = Minecraft.getMinecraft().isSingleplayer() ? "singleplayer".toLowerCase() : ExperiumCSGO.mc.getCurrentServerData().serverIP.toLowerCase();
-			String Experium = "Experium";
+			String Experium = "Experium 1.8.7";
 			String text = Experium + " | " + server + " | " + ping + " | " + fpsText;
             float width = Minecraft.getMinecraft().fontRenderer.getStringWidth(text) + 6;
             int height = 20;
