@@ -161,6 +161,7 @@ public class ModuleManager
 		this.modules.add(new FastSwim());
 		this.modules.add(new HighJump());
 		this.modules.add(new CrystalAura());
+		this.modules.add(new ReverseStep());
 
         this.moduleColorMap.put(this.getModuleByClass(CrystalAura.class), new Color(0, 255, 255));
         this.moduleColorMap.put(this.getModuleByClass(HighJump.class), new Color(82, 5, 51));
@@ -288,6 +289,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Notifications.class), new Color(170, 153, 255));
         this.moduleColorMap.put(this.getModuleByClass(PingBypass.class), new Color(60, 110, 175));
         this.moduleColorMap.put(this.getModuleByClass(NickHider.class), new Color(138, 45, 13));
+        this.moduleColorMap.put(this.getModuleByClass(ReverseStep.class), new Color(124, 252, 109));
         for (Module module : this.modules) {
             module.animation.start();
         }
