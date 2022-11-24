@@ -6,6 +6,8 @@ Private project (Atrium continued???) <br />
 - Not Gradle Contributors: 
   - [Master7720](https://github.com/master7720)
   - [MrBubblecum](https://github.com/MrBubblegum)
+  - [GentlemanMC](https://github.com/GentlemanMC)
+  - [Cubic](https://github.com/Cuubicc)
   - [noatmc (Top help)](https://github.com/noatmc)
 
 # Access list:
