@@ -4,6 +4,7 @@ Private project (Atrium continued???) <br />
 - Start Date: 2.2. 2022 18:15 (CZ Time)
 - Main Dev: [_3000IQPlay](https://github.com/3000IQPlay)
 - Not Gradle Contributors: 
+  - [_kisman_](https://github.com/kisman2000) - he made a lot of modules(more than 3000iq!!!(no))(no)
   - [Master7720](https://github.com/master7720)
   - [MrBubblecum](https://github.com/MrBubblegum)
   - [GentlemanMC (Top Help)](https://github.com/GentlemanMC)
