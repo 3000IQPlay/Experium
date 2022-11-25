@@ -3,7 +3,6 @@ package dev._3000IQPlay.experium;
 import dev._3000IQPlay.experium.features.modules.client.RPC;
 import dev._3000IQPlay.experium.util.IconUtil;
 import dev._3000IQPlay.experium.manager.*;
-import me.zero.alpine.bus.EventBus;
 import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +22,6 @@ public class Experium {
     public static final String MODNAME = "Experium";
     public static final String MODVER = "1.8.7";
     public static final Logger LOGGER = LogManager.getLogger("Experium");
-	public static EventBus dispatcher;
     public static ModuleManager moduleManager;
 	public static MovementManager movementManager;
     public static SpeedManager speedManager;
@@ -62,7 +60,6 @@ public class Experium {
             reloadManager.unload();
             reloadManager = null;
         }
-		dispatcher = new me.zero.alpine.bus.EventManager();
         baritoneManager = new NoStopManager();
         totemPopManager = new TotemPopManager();
         timerManager = new TimerManager();
@@ -111,7 +108,6 @@ public class Experium {
             baritoneManager.stop();
         }
         Experium.onUnload();
-		dispatcher = null;
         eventManager = null;
         holeManager = null;
         timerManager = null;
