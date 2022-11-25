@@ -38,6 +38,9 @@ public class ColorButton extends Button {
     public static Tessellator tessellator;
     public static BufferBuilder builder;
 
+    private int oldMouseX = -1;
+    private int oldMouseY = -1;
+
     static {
         tessellator = Tessellator.getInstance();
         builder = tessellator.getBuffer();
@@ -200,10 +203,20 @@ public class ColorButton extends Button {
         RenderUtil.drawOutlineRect(cursorX - 2, cursorY - 2, cursorX - 2, cursorY - 2, 0); //cursorX - 2, cursorY - 2, cursorX + 2, cursorY + 2
         Gui.drawRect(cursorX - 2, cursorY - 2, cursorX - 2, cursorY - 2, -1); //cursorX - 2, cursorY - 2, cursorX + 2, cursorY + 2
 
-
         drawAlphaSlider(alphaSliderX, alphaSliderY, pickerWidth -5, alphaSliderHeight, selectedRed, selectedGreen, selectedBlue, color[3]);
 
+        if((Mouse.isButtonDown(0) && mouseOver(pickerX, pickerY, pickerX + pickerWidth, pickerY + pickerHeight, mouseX, mouseY)) || oldMouseX < 0 || oldMouseY < 0){
+            oldMouseX = mouseX;
+            oldMouseY = mouseY;
+        }
+
+        drawIndicator();
+
         finalColor = getColor(new Color(Color.HSBtoRGB(color[0], color[1], color[2])), color[3]);
+    }
+
+    void drawIndicator(){
+        Gui.drawRect(oldMouseX - 2, oldMouseY + 2, oldMouseX + 2, oldMouseY - 2, Color.WHITE.getRGB());
     }
 
     boolean mouseOver(int minX, int minY, int maxX, int maxY, int mX, int mY) {
