@@ -10,7 +10,6 @@ import dev._3000IQPlay.experium.features.modules.combat.*;
 import dev._3000IQPlay.experium.features.modules.exploit.*;
 import dev._3000IQPlay.experium.features.modules.misc.*;
 import dev._3000IQPlay.experium.features.modules.movement.*;
-import dev._3000IQPlay.experium.features.modules.movement.PacketFly;
 import dev._3000IQPlay.experium.features.modules.player.*;
 import dev._3000IQPlay.experium.features.modules.render.*;
 import net.minecraftforge.common.MinecraftForge;

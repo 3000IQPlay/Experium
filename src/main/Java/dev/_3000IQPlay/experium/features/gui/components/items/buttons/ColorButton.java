@@ -4,7 +4,9 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import dev._3000IQPlay.experium.Experium;
 import dev._3000IQPlay.experium.features.command.Command;
 import dev._3000IQPlay.experium.features.gui.ExperiumGui;
+import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.setting.Setting;
+import dev._3000IQPlay.experium.util.ColorUtil;
 import dev._3000IQPlay.experium.util.RenderUtil;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.Gui;
@@ -49,6 +51,10 @@ public class ColorButton extends Button {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        if (ClickGui.getInstance().sideSettings.getValue().booleanValue()) {
+            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sideRed.getValue(), ClickGui.getInstance().sideGreen.getValue(), ClickGui.getInstance().sideBlue.getValue(), ClickGui.getInstance().sideAlpha.getValue());
+            RenderUtil.drawRect(this.x, this.y, this.x + 1.0f, this.y + (float) this.height + 1.0f, sideColor);
+        }
         try {
             RenderUtil.drawRect(x + width - 5, y + 2, x + width + 7, y + height - 2, finalColor.getRGB());
         } catch (Exception ex) {
@@ -58,10 +64,11 @@ public class ColorButton extends Button {
         RenderUtil.drawOutlineRect(x + width - 5, y + 2, x + width + 7, y + height - 2, 0);
         Experium.textManager.drawStringWithShadow(getName(), x + 2.3f, y - 1.7f - (float) ExperiumGui.getClickGui().getTextOffset(), -1);
         if (setting.isOpen) {
-            drawPicker(setting, (int) x - 1, (int) y + 15, (int) x, (int) y + 103, (int) x, (int) y + 95, mouseX, mouseY);
-            Experium.textManager.drawStringWithShadow(isInsideCopy(mouseX, mouseY) ? ChatFormatting.UNDERLINE + "Copy" : "Copy", x + 1f, y + 113, -1);
-            Experium.textManager.drawStringWithShadow(isInsidePaste(mouseX, mouseY) ? ChatFormatting.UNDERLINE + "Paste" : "Paste", x + 30f, y + 113, -1);
+            drawPicker(setting, (int) x + 4, (int) y + 15, (int) x + 4, (int) y + 103, (int) x + 4, (int) y + 95, mouseX, mouseY);
+            Experium.textManager.drawStringWithShadow(isInsideCopy(mouseX, mouseY) ? ChatFormatting.UNDERLINE + "Copy" : "Copy", x + 25f, y + 113, -1);
+            Experium.textManager.drawStringWithShadow(isInsidePaste(mouseX, mouseY) ? ChatFormatting.UNDERLINE + "Paste" : "Paste", x + 60f, y + 113, -1);
             setting.setValue(finalColor);
+
         }
     }
 
@@ -84,7 +91,7 @@ public class ColorButton extends Button {
             StringSelection selection = new StringSelection(hex);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(selection, selection);
-            Command.sendMessage("Color has been successfully copied to clipboard!");
+            Command.sendMessage("Color" + setting.getValue() + "has been successfully copied to clipboard!");
         }
         if (mouseButton == 0 && isInsidePaste(mouseX, mouseY) && setting.isOpen) {
             try {
@@ -110,11 +117,11 @@ public class ColorButton extends Button {
     }
 
     public boolean isInsideCopy(int mouseX, int mouseY) {
-        return mouseOver((int) x + 1, (int) y + 113, (int) (x + 1) + Experium.textManager.getStringWidth("Copy"), (int) (y + 112) + Experium.textManager.getFontHeight(), mouseX, mouseY);
+        return mouseOver((int) x + 25, (int) y + 113, (int) (x + 25) + Experium.textManager.getStringWidth("Copy"), (int) (y + 112) + Experium.textManager.getFontHeight(), mouseX, mouseY);
     }
 
     public boolean isInsidePaste(int mouseX, int mouseY) {
-        return mouseOver((int) x + 30, (int) y + 113, (int) (x + 30) + Experium.textManager.getStringWidth("Paste"), (int) (y + 112) + Experium.textManager.getFontHeight(), mouseX, mouseY);
+        return mouseOver((int) x + 60, (int) y + 113, (int) (x + 60) + Experium.textManager.getStringWidth("Paste"), (int) (y + 112) + Experium.textManager.getFontHeight(), mouseX, mouseY);
     }
 
     public void drawPicker(Setting setting, int pickerX, int pickerY, int hueSliderX, int hueSliderY, int alphaSliderX, int alphaSliderY, int mouseX, int mouseY) {
@@ -132,7 +139,7 @@ public class ColorButton extends Button {
 
         int pickerWidth = 101;
         int pickerHeight = 78;
-        int hueSliderWidth = pickerWidth + 3;
+        int hueSliderWidth = pickerWidth;
         int hueSliderHeight = 7;
         int alphaSliderHeight = 7;
 
@@ -185,7 +192,7 @@ public class ColorButton extends Button {
 
         drawPickerBase(pickerX, pickerY, pickerWidth, pickerHeight, selectedRed, selectedGreen, selectedBlue, color[3]);
 
-        drawHueSlider(hueSliderX, hueSliderY, hueSliderWidth - 2, hueSliderHeight, color[0]);
+        drawHueSlider(hueSliderX, hueSliderY, hueSliderWidth -5, hueSliderHeight, color[0]);
 
         int cursorX = (int) (pickerX + color[1] * pickerWidth);
         int cursorY = (int) ((pickerY + pickerHeight) - color[2] * pickerHeight);
@@ -194,7 +201,7 @@ public class ColorButton extends Button {
         Gui.drawRect(cursorX - 2, cursorY - 2, cursorX - 2, cursorY - 2, -1); //cursorX - 2, cursorY - 2, cursorX + 2, cursorY + 2
 
 
-        drawAlphaSlider(alphaSliderX, alphaSliderY, pickerWidth - 1, alphaSliderHeight, selectedRed, selectedGreen, selectedBlue, color[3]);
+        drawAlphaSlider(alphaSliderX, alphaSliderY, pickerWidth -5, alphaSliderHeight, selectedRed, selectedGreen, selectedBlue, color[3]);
 
         finalColor = getColor(new Color(Color.HSBtoRGB(color[0], color[1], color[2])), color[3]);
     }
