@@ -90,12 +90,16 @@ public class ModuleButton
                 float height = 1.0f;
                 for (Item item : items) {
                     if (!item.isHidden()) {
-                        item.setLocation(x + 1.0f, y + (height += 15.0f));
+                        if(item instanceof ColorButton){
+                            item.setLocation(x + 1.0f, y + (height + 15.0f));
+                        } else {
+                            item.setLocation(x + 1.0f, y + (height += 15.0f));
+                        }
                         item.setHeight((int) 15.0f);
                         item.setWidth(width - 9);
                         item.drawScreen(mouseX, mouseY, partialTicks);
-                        if (item instanceof ColorButton && ((ColorButton) item).setting.isOpen)
-                            height += 110;
+                        if (item instanceof ColorButton)
+                            height += item.getHeight();
                         if (item instanceof EnumButton && ((EnumButton) item).setting.isOpen)
                             height += ((EnumButton) item).setting.getValue().getClass().getEnumConstants().length * 15;
                     }

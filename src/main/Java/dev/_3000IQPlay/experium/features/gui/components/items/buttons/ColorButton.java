@@ -416,4 +416,9 @@ public class ColorButton extends Button {
         }
 
     }
+
+    @Override
+    public int getHeight() {
+        return setting.isOpen ? 124 : 14;
+    }
 }
