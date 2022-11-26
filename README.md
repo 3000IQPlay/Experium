@@ -1,7 +1,7 @@
 # Experium
 Private project (Atrium continued???) <br />
 - Started by [_3000IQPlay](https://github.com/3000IQPlay) <br />
-- Start Date: 2.2. 2022 18:15 (CZ Time)
+- Start Date: 02.02.2022 18:15 (CZ Time)
 - Main Dev: [_3000IQPlay](https://github.com/3000IQPlay)
 - Real and Based Contributors: 
   - [_kisman_ (PearlBypass)](https://github.com/kisman2000) - he made a lot of modules(more than 3000iq!!!(no))(no)
