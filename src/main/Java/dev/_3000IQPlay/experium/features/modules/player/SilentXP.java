@@ -81,8 +81,7 @@ public class SilentXP
         }
     }
 
-    public
-    enum Mode {
+    public enum Mode {
         MIDDLECLICK,
         TOGGLE,
         PRESS
