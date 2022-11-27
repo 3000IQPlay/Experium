@@ -39,6 +39,7 @@ public class SpeedNew
 	private final Setting<Float> onGroundSpeed = this.register(new Setting<Float>("GroundSpeed", 0.272f, 0.2f, 5.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Boolean> autoJump = this.register(new Setting<Boolean>("AutoJump", true, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
     private final Setting<Float> jumpMotionY = this.register(new Setting<Float>("JumpMotionY", 0.42f, 0.0f, 4.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
+	private final Setting<Float> groundTimer = this.register(new Setting<Float>("GroundTimer", 1.0f, 0.1f, 3.0f, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<DownMode> downMode = this.register(new Setting<DownMode>("DownType", DownMode.Timer, t -> this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> downTimerValue = this.register(new Setting<Float>("CustomDownTimer", 1.0f, 0.1f, 3.0f, t -> this.downMode.getValue() == DownMode.Timer && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
 	private final Setting<Float> downMotionValue = this.register(new Setting<Float>("CustomDownMotion", 0.2f, 0.0f, 3.0f, t -> this.downMode.getValue() == DownMode.Motion && this.mode.getValue().equals((Object)SpeedNewModes.Custom)));
@@ -145,6 +146,7 @@ public class SpeedNew
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         EntityUtil.moveEntityStrafe(this.onGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
+						Experium.timerManager.setTimer(this.groundTimer.getValue().floatValue());
                         if (this.autoJump.getValue().booleanValue()) {
                             SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
 					    	break;
@@ -228,6 +230,7 @@ public class SpeedNew
                 if (MovementUtil.isMoving((EntityLivingBase)SpeedNew.mc.player)) {
                     if (SpeedNew.mc.player.onGround) {
                         EntityUtil.moveEntityStrafe(this.onGroundSpeed.getValue().floatValue(), (Entity)SpeedNew.mc.player);
+						Experium.timerManager.setTimer(this.groundTimer.getValue().floatValue());
                         if (this.autoJump.getValue().booleanValue()) {
                             SpeedNew.mc.player.motionY = this.jumpMotionY.getValue().floatValue();
 					    	break;
