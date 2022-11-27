@@ -11,7 +11,7 @@
     "authorList": [
       "_3000IQPlay"
     ],
-    "screenshots": [experium.png],
+    "screenshots": "experium.png",
     "dependencies": []
   }
 ]
