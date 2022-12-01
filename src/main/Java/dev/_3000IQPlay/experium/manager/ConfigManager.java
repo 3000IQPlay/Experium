@@ -9,6 +9,7 @@ import dev._3000IQPlay.experium.features.setting.EnumConverter;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.Util;
 
+import java.awt.Color;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -46,6 +47,10 @@ public class ConfigManager
             }
             case "Bind": {
                 setting.setValue(new Bind.BindConverter().doBackward(element));
+                break;
+            }
+            case "Color": {
+                setting.setValue(new Color(element.getAsInt(), true));
                 break;
             }
             case "Enum": {
@@ -220,6 +225,10 @@ public class ConfigManager
         JsonObject object = new JsonObject();
         JsonParser jp = new JsonParser();
         for (Setting setting : feature.getSettings()) {
+			if (setting.getValue() instanceof Color) {
+                object.add(setting.getName(), jp.parse(String.valueOf(((Color) setting.getValue()).getRGB())));
+                continue;
+            }
             if (setting.isEnumSetting()) {
                 EnumConverter converter = new EnumConverter(((Enum) setting.getValue()).getClass());
                 object.add(setting.getName(), converter.doForward((Enum) setting.getValue()));
