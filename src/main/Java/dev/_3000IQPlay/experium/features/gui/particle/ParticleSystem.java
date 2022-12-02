@@ -55,7 +55,7 @@ public final class ParticleSystem {
                 float diff = diffPos.length();
                 int distance = ClickGui.getInstance().particleLength.getValue() / (this.scaledResolution.getScaleFactor() <= 1 ? 3 : this.scaledResolution.getScaleFactor());
                 if (!(diff < (float)distance) || (lineAlpha = (int)ParticleSystem.map(diff, distance, 0.0, 0.0, 127.0)) <= 8) continue;
-                RenderUtil.drawLine(particle.getPos().x + particle.getSize() / 2.0f, particle.getPos().y + particle.getSize() / 2.0f, otherParticle.getPos().x + otherParticle.getSize() / 2.0f, otherParticle.getPos().y + otherParticle.getSize() / 2.0f, 1.0f, Particle.changeAlpha(ColorUtil.toRGBA(ClickGui.getInstance().particlered.getValue(), ClickGui.getInstance().particlegreen.getValue(), ClickGui.getInstance().particleblue.getValue()), lineAlpha));
+                RenderUtil.drawLine(particle.getPos().x + particle.getSize() / 2.0f, particle.getPos().y + particle.getSize() / 2.0f, otherParticle.getPos().x + otherParticle.getSize() / 2.0f, otherParticle.getPos().y + otherParticle.getSize() / 2.0f, 1.0f, Particle.changeAlpha(ColorUtil.toRGBA(ClickGui.getInstance().particleC.getValue().getRed(), ClickGui.getInstance().particleC.getValue().getGreen(), ClickGui.getInstance().particleC.getValue().getBlue()), lineAlpha));
             }
             particle.render(mouseX, mouseY);
         }
