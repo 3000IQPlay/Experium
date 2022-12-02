@@ -85,7 +85,7 @@ public class ModuleButton
         super.drawScreen(mouseX, mouseY, partialTicks);
         if (!this.items.isEmpty()) {
             ClickGui gui = Experium.moduleManager.getModuleByClass(ClickGui.class);
-            Experium.textManager.drawStringWithShadow(gui.openCloseChange.getValue().booleanValue() ? (this.subOpen ? gui.close.getValue() : gui.open.getValue()) : gui.moduleButton.getValue(), this.x - 1.5f + (float)this.width - 7.4f, this.y - 2.0f - (float)ExperiumGui.getClickGui().getTextOffset(), ColorUtil.toRGBA(ClickGui.getInstance().ocsRed.getValue(), ClickGui.getInstance().ocsGreen.getValue(), ClickGui.getInstance().ocsBlue.getValue(), 255));
+            Experium.textManager.drawStringWithShadow(gui.openCloseChange.getValue().booleanValue() ? (this.subOpen ? gui.close.getValue() : gui.open.getValue()) : gui.moduleButton.getValue(), this.x - 1.5f + (float)this.width - 7.4f, this.y - 2.0f - (float)ExperiumGui.getClickGui().getTextOffset(), ColorUtil.toRGBA(ClickGui.getInstance().sideStringC.getValue().getRed(), ClickGui.getInstance().sideStringC.getValue().getGreen(), ClickGui.getInstance().sideStringC.getValue().getBlue(), ClickGui.getInstance().sideStringC.getValue().getAlpha()));
             if (subOpen) {
                 float height = 1.0f;
                 for (Item item : items) {

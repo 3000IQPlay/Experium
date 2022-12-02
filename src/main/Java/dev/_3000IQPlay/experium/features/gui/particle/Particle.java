@@ -65,7 +65,7 @@ public class Particle {
                 this.acceleration.setY(this.acceleration.getY() + deltaYToMouse * 0.0015f);
             }
         }
-        RenderUtil.drawRect(this.pos.x, this.pos.y, this.pos.x + this.size, this.pos.y + this.size, Particle.changeAlpha(ColorUtil.toRGBA(ClickGui.getInstance().particlered.getValue(), ClickGui.getInstance().particlegreen.getValue(), ClickGui.getInstance().particleblue.getValue()), this.alpha));
+        RenderUtil.drawRect(this.pos.x, this.pos.y, this.pos.x + this.size, this.pos.y + this.size, Particle.changeAlpha(ColorUtil.toRGBA(ClickGui.getInstance().particleC.getValue().getRed(), ClickGui.getInstance().particleC.getValue().getGreen(), ClickGui.getInstance().particleC.getValue().getBlue()), this.alpha));
     }
 
     public Vector2f getPos() {

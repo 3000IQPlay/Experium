@@ -63,10 +63,10 @@ public class Component
         if (this.open) {
             totalItemHeight = this.getTotalItemHeight() - 2.0f;
         }
-        RenderUtil.drawLine(this.x, (float)this.y - 1.5f, this.x, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().o_red.getValue(), ClickGui.getInstance().o_green.getValue(), ClickGui.getInstance().o_blue.getValue(), ClickGui.getInstance().o_alpha.getValue()));
-        RenderUtil.drawLine(this.x, (float)this.y - 1.5f, this.x + this.width, (float)this.y - 1.5f, thickness, ColorUtil.toRGBA(ClickGui.getInstance().o_red.getValue(), ClickGui.getInstance().o_green.getValue(), ClickGui.getInstance().o_blue.getValue(), ClickGui.getInstance().o_alpha.getValue()));
-        RenderUtil.drawLine(this.x + this.width, (float)this.y - 1.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().o_red.getValue(), ClickGui.getInstance().o_green.getValue(), ClickGui.getInstance().o_blue.getValue(), ClickGui.getInstance().o_alpha.getValue()));
-        RenderUtil.drawLine(this.x, (float)(this.y + this.height) + totalItemHeight, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().o_red.getValue(), ClickGui.getInstance().o_green.getValue(), ClickGui.getInstance().o_blue.getValue(), ClickGui.getInstance().o_alpha.getValue()));
+        RenderUtil.drawLine(this.x, (float)this.y - 1.5f, this.x, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().outlineC.getValue().getRed(), ClickGui.getInstance().outlineC.getValue().getGreen(), ClickGui.getInstance().outlineC.getValue().getBlue(), ClickGui.getInstance().outlineC.getValue().getAlpha()));
+        RenderUtil.drawLine(this.x, (float)this.y - 1.5f, this.x + this.width, (float)this.y - 1.5f, thickness, ColorUtil.toRGBA(ClickGui.getInstance().outlineC.getValue().getRed(), ClickGui.getInstance().outlineC.getValue().getGreen(), ClickGui.getInstance().outlineC.getValue().getBlue(), ClickGui.getInstance().outlineC.getValue().getAlpha()));
+        RenderUtil.drawLine(this.x + this.width, (float)this.y - 1.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().outlineC.getValue().getRed(), ClickGui.getInstance().outlineC.getValue().getGreen(), ClickGui.getInstance().outlineC.getValue().getBlue(), ClickGui.getInstance().outlineC.getValue().getAlpha()));
+        RenderUtil.drawLine(this.x, (float)(this.y + this.height) + totalItemHeight, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, thickness, ColorUtil.toRGBA(ClickGui.getInstance().outlineC.getValue().getRed(), ClickGui.getInstance().outlineC.getValue().getGreen(), ClickGui.getInstance().outlineC.getValue().getBlue(), ClickGui.getInstance().outlineC.getValue().getAlpha()));
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -80,7 +80,7 @@ public class Component
             }
         }
         if (ClickGui.getInstance().devSettings.getValue().booleanValue()) {
-            color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().topRed.getValue(), ClickGui.getInstance().topGreen.getValue(), ClickGui.getInstance().topBlue.getValue(), ClickGui.getInstance().topAlpha.getValue());
+            color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().topC.getValue().getRed(), ClickGui.getInstance().topC.getValue().getGreen(), ClickGui.getInstance().topC.getValue().getBlue(), ClickGui.getInstance().topC.getValue().getAlpha());
             int n = color;
         }
         if (ClickGui.getInstance().rainbowRolling.getValue().booleanValue() && ClickGui.getInstance().colorSync.getValue().booleanValue() && Colors.INSTANCE.rainbow.getValue().booleanValue()) {
@@ -89,11 +89,11 @@ public class Component
             RenderUtil.drawRect(this.x, (float)this.y - 1.5f, this.x + this.width, this.y + this.height - 6, color);
         }
         if (ClickGui.getInstance().frameSettings.getValue().booleanValue()) {
-            int n = color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().frameRed.getValue(), ClickGui.getInstance().frameGreen.getValue(), ClickGui.getInstance().frameBlue.getValue(), ClickGui.getInstance().frameAlpha.getValue());
-            RenderUtil.drawRect(this.x, (float)this.y + 11.0f, this.x + this.width, this.y + this.height - 6, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : ColorUtil.toARGB(ClickGui.getInstance().frameRed.getValue(), ClickGui.getInstance().frameGreen.getValue(), ClickGui.getInstance().frameBlue.getValue(), ClickGui.getInstance().frameAlpha.getValue()));
+            int n = color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().frameC.getValue().getRed(), ClickGui.getInstance().frameC.getValue().getGreen(), ClickGui.getInstance().frameC.getValue().getBlue(), ClickGui.getInstance().frameC.getValue().getAlpha());
+            RenderUtil.drawRect(this.x, (float)this.y + 11.0f, this.x + this.width, this.y + this.height - 6, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : ColorUtil.toARGB(ClickGui.getInstance().frameC.getValue().getRed(), ClickGui.getInstance().frameC.getValue().getGreen(), ClickGui.getInstance().frameC.getValue().getBlue(), ClickGui.getInstance().frameC.getValue().getAlpha()));
         }
         if (this.open) {
-            RenderUtil.drawRect(this.x, (float)this.y + 12.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, ColorUtil.toRGBA(ClickGui.getInstance().b_red.getValue(), ClickGui.getInstance().b_green.getValue(), ClickGui.getInstance().b_blue.getValue(), ClickGui.getInstance().b_alpha.getValue()));
+            RenderUtil.drawRect(this.x, (float)this.y + 12.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, ColorUtil.toRGBA(ClickGui.getInstance().moduleEnableC.getValue().getRed(), ClickGui.getInstance().moduleEnableC.getValue().getGreen(), ClickGui.getInstance().moduleEnableC.getValue().getBlue(), ClickGui.getInstance().moduleEnableC.getValue().getAlpha()));
         }
         if (this.open) {
             RenderUtil.drawRect(this.x, (float)this.y + 12.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, 0);
@@ -140,8 +140,8 @@ public class Component
                     GlStateManager.tryBlendFuncSeparate((GlStateManager.SourceFactor)GlStateManager.SourceFactor.SRC_ALPHA, (GlStateManager.DestFactor)GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, (GlStateManager.SourceFactor)GlStateManager.SourceFactor.ONE, (GlStateManager.DestFactor)GlStateManager.DestFactor.ZERO);
                     GlStateManager.shadeModel((int)7425);
                     GL11.glBegin((int)2);
-                    Color outlineColor = ClickGui.getInstance().colorSync.getValue() != false ? new Color(Colors.INSTANCE.getCurrentColorHex()) : new Color(Experium.colorManager.getColorAsIntFullAlpha());
-                    GL11.glColor4f((float)outlineColor.getRed(), (float)outlineColor.getGreen(), (float)outlineColor.getBlue(), (float)outlineColor.getAlpha());
+                    Color outlineC = ClickGui.getInstance().colorSync.getValue() != false ? new Color(Colors.INSTANCE.getCurrentColorHex()) : new Color(Experium.colorManager.getColorAsIntFullAlpha());
+                    GL11.glColor4f((float)outlineC.getRed(), (float)outlineC.getGreen(), (float)outlineC.getBlue(), (float)outlineC.getAlpha());
                     GL11.glVertex3f((float)this.x, (float)((float)this.y - 1.5f), (float)0.0f);
                     GL11.glVertex3f((float)(this.x + this.width), (float)((float)this.y - 1.5f), (float)0.0f);
                     GL11.glVertex3f((float)(this.x + this.width), (float)((float)(this.y + this.height) + totalItemHeight), (float)0.0f);
@@ -155,7 +155,7 @@ public class Component
             }
         }
 		if (ClickGui.getInstance().shader.getValue().booleanValue()) {
-            RenderUtil.drawColorShader(this.x, (int)((double)this.y - 1.5), this.x + this.width, this.y + this.height + (int)totalItemHeight, ColorUtil.toRGBA(new Color(ClickGui.getInstance().shaderRed.getValue(), ClickGui.getInstance().shaderGreen.getValue(), ClickGui.getInstance().shaderBlue.getValue(), ClickGui.getInstance().shaderAlpha.getValue())), ClickGui.getInstance().shaderRadius.getValue());
+            RenderUtil.drawColorShader(this.x, (int)((double)this.y - 1.5), this.x + this.width, this.y + this.height + (int)totalItemHeight, ColorUtil.toRGBA(new Color(ClickGui.getInstance().shaderC.getValue().getRed(), ClickGui.getInstance().shaderC.getValue().getGreen(), ClickGui.getInstance().shaderC.getValue().getBlue(), ClickGui.getInstance().shaderC.getValue().getAlpha())), ClickGui.getInstance().shaderRadius.getValue());
         }
 		if (ClickGui.getInstance().categoryTextCenter.getValue().booleanValue()) {
             Experium.textManager.drawStringWithShadow(this.getName(), (float)this.x + (float)(this.width / 2) - (float)(this.renderer.getStringWidth(this.getName()) / 2), (float)this.y - 4.0f - (float)ExperiumGui.getClickGui().getTextOffset(), -1);

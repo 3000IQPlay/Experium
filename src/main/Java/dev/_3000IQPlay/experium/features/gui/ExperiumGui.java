@@ -90,14 +90,14 @@ public class ExperiumGui
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         ClickGui clickGui = ClickGui.getInstance();
         if (ClickGui.getInstance().guiBackground.getValue().booleanValue()) {
-			RenderUtil.drawRect(0.0f, 0.0f, this.width, this.height, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : new Color(ClickGui.getInstance().gbRed.getValue(), ClickGui.getInstance().gbGreen.getValue(), ClickGui.getInstance().gbBlue.getValue(), ClickGui.getInstance().gbAlpha.getValue()).getRGB());
+			RenderUtil.drawRect(0.0f, 0.0f, this.width, this.height, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : new Color(ClickGui.getInstance().gbC.getValue().getRed(), ClickGui.getInstance().gbC.getValue().getGreen(), ClickGui.getInstance().gbC.getValue().getBlue(), ClickGui.getInstance().gbC.getValue().getAlpha()).getRGB());
         }
         descriptionDisplay.setDraw(false);
         this.checkMouseWheel();
         this.components.forEach(components -> components.drawScreen(mouseX, mouseY, partialTicks));
         ScaledResolution sr = new ScaledResolution(this.mc);
         if (ClickGui.getInstance().gradiant.getValue().booleanValue()) {
-            this.drawGradientRect(0, 0, sr.getScaledWidth(), sr.getScaledHeight(), 0, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : new Color(ClickGui.getInstance().gradiantRed.getValue(), ClickGui.getInstance().gradiantGreen.getValue(), ClickGui.getInstance().gradiantBlue.getValue(), ClickGui.getInstance().gradiantAlpha.getValue() / 2).getRGB());
+            this.drawGradientRect(0, 0, sr.getScaledWidth(), sr.getScaledHeight(), 0, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : new Color(ClickGui.getInstance().gradiantC.getValue().getRed(), ClickGui.getInstance().gradiantC.getValue().getGreen(), ClickGui.getInstance().gradiantC.getValue().getBlue(), ClickGui.getInstance().gradiantC.getValue().getAlpha() / 2).getRGB());
         }
         if (descriptionDisplay.shouldDraw() && clickGui.moduleDescription.getValue().booleanValue()) {
             descriptionDisplay.drawScreen(mouseX, mouseY, partialTicks);
