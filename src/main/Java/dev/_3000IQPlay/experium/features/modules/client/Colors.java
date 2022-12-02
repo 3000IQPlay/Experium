@@ -35,7 +35,7 @@ public class Colors
             tempHue += 0.0013071896f;
         }
         if (ClickGui.getInstance().colorSync.getValue().booleanValue()) {
-            Experium.colorManager.setColor(INSTANCE.getCurrentColor().getRed(), INSTANCE.getCurrentColor().getGreen(), INSTANCE.getCurrentColor().getBlue(), ClickGui.getInstance().hoverAlpha.getValue());
+            Experium.colorManager.setColor(INSTANCE.getCurrentColor().getRed(), INSTANCE.getCurrentColor().getGreen(), INSTANCE.getCurrentColor().getBlue(), ClickGui.getInstance().moduleMainC.getValue().getAlpha());
         }
     }
 
