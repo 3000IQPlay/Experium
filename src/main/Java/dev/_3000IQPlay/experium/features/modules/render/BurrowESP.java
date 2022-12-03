@@ -27,15 +27,9 @@ public class BurrowESP
     private Setting<Integer> boxAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(125), Integer.valueOf(0), Integer.valueOf(255), v -> this.box.getValue()));
     private Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f), v -> this.outline.getValue()));
     public Setting<Boolean> safeColor = this.register(new Setting<Boolean>("BedrockColor", false));
-    private Setting<Integer> safeRed = this.register(new Setting<Object>("BedrockRed", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.safeColor.getValue()));
-    private Setting<Integer> safeGreen = this.register(new Setting<Object>("BedrockGreen", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.safeColor.getValue()));
-    private Setting<Integer> safeBlue = this.register(new Setting<Object>("BedrockBlue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.safeColor.getValue()));
-    private Setting<Integer> safeAlpha = this.register(new Setting<Object>("BedrockAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.safeColor.getValue()));
+	private Setting<Color> bedrockC = this.register(new Setting<Color>("BedrockColor", new Color(40, 192, 255, 150), v -> this.safeColor.getValue()));
     public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
-    private Setting<Integer> safecRed = this.register(new Setting<Object>("OutlineSafeRed", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false && this.safeColor.getValue() != false));
-    private Setting<Integer> safecGreen = this.register(new Setting<Object>("OutlineSafeGreen", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false && this.safeColor.getValue() != false));
-    private Setting<Integer> safecBlue = this.register(new Setting<Object>("OutlineSafeBlue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false && this.safeColor.getValue() != false));
-    private Setting<Integer> safecAlpha = this.register(new Setting<Object>("OutlineSafeAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false && this.safeColor.getValue() != false));
+	private Setting<Color> outlineC = this.register(new Setting<Color>("OutlineColor", new Color(40, 192, 255, 150), v -> this.customOutline.getValue() != false && this.outline.getValue() != false && this.safeColor.getValue() != false));
 
     public BurrowESP() {
         super("BurrowESP", "Shows you 8yo kids", Module.Category.RENDER, false, false, false);
@@ -66,8 +60,7 @@ public class BurrowESP
                 pss = null;
                 return;
             }
-            RenderUtil.drawBoxESP(new BlockPos(pss.posX, pss.posY, pss.posZ), new Color(this.safeRed.getValue(), this.safeGreen.getValue(), this.safeBlue.getValue(), this.safeAlpha.getValue()), this.customOutline.getValue(), new Color(this.safecRed.getValue(), this.safecGreen.getValue(), this.safecBlue.getValue(), this.safecAlpha.getValue()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), true, this.height.getValue(), this.gradientBox.getValue(), this.gradientOutline.getValue(), this.invertGradientBox.getValue(), this.invertGradientOutline.getValue(), 0);
+            RenderUtil.drawBoxESP(new BlockPos(pss.posX, pss.posY, pss.posZ), new Color(this.bedrockC.getValue().getRed(), this.bedrockC.getValue().getGreen(), this.bedrockC.getValue().getBlue(), this.bedrockC.getValue().getAlpha()), this.customOutline.getValue(), new Color(this.outlineC.getValue().getRed(), this.outlineC.getValue().getGreen(), this.outlineC.getValue().getBlue(), this.outlineC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), true, this.height.getValue(), this.gradientBox.getValue(), this.gradientOutline.getValue(), this.invertGradientBox.getValue(), this.invertGradientOutline.getValue(), 0);
         }
     }
 }
-
