@@ -8,7 +8,7 @@ Add JumpCircle cuz its hot ong
 
 Add Particles/Snow to ChatModifier for BG
 
-Replace Color Sliders with Color Picker (ESP, Trajectories, EnchantColor, SkyColor, CrystalModify LEFT)
+Replace Color Sliders with Color Picker (ESP, Trajectories, EnchantColor, SkyColor LEFT)
 
 Add Better NameTags
 
