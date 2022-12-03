@@ -106,30 +106,13 @@ public class Shaders
     public Setting<Float> moreGradientOutline = this.register(new Setting<Object>("More Gradient", Float.valueOf(1.0f), Float.valueOf(0.0f), Float.valueOf(10.0f), object -> this.glowESP.getValue() == glowESPmode.Gradient));
     public Setting<Float> radOutline = this.register(new Setting<Object>("RAD Outline", Float.valueOf(0.75f), Float.valueOf(0.0f), Float.valueOf(5.0f), object -> this.glowESP.getValue() == glowESPmode.Circle));
     public Setting<Float> PIOutline = this.register(new Setting<Object>("PI Outline", Float.valueOf((float)Math.PI), Float.valueOf(0.0f), Float.valueOf(10.0f), object -> this.glowESP.getValue() == glowESPmode.Circle));
-    public Setting<Integer> colorImgOutlinered = this.register(new Setting<Integer>("colorImgOutline Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.RainbowCube || this.glowESP.getValue() == glowESPmode.RainbowCube));
-    public Setting<Integer> colorImgOutlinegreen = this.register(new Setting<Integer>("colorImgOutline Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.RainbowCube || this.glowESP.getValue() == glowESPmode.RainbowCube));
-    public Setting<Integer> colorImgOutlineblue = this.register(new Setting<Integer>("colorImgOutline Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.RainbowCube || this.glowESP.getValue() == glowESPmode.RainbowCube));
-    public Setting<Integer> colorImgOutlinealpha = this.register(new Setting<Integer>("colorImgOutline Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.RainbowCube || this.glowESP.getValue() == glowESPmode.RainbowCube));
-    public Setting<Integer> thirdColorImgOutlinered = this.register(new Setting<Integer>("thirdColorImgOutline Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgOutlinegreen = this.register(new Setting<Integer>("thirdColorImgOutline Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgOutlineblue = this.register(new Setting<Integer>("thirdColorImgOutline Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgOutlinealpha = this.register(new Setting<Integer>("thirdColorImgOutline Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> colorESPred = this.register(new Setting<Integer>("colorESP Red", 0, 0, 255));
-    public Setting<Integer> colorESPgreen = this.register(new Setting<Integer>("colorESP Green", 0, 0, 255));
-    public Setting<Integer> colorESPblue = this.register(new Setting<Integer>("colorESP Blue", 0, 0, 255));
-    public Setting<Integer> colorESPalpha = this.register(new Setting<Integer>("colorESP Alpha", 255, 0, 255));
-    public Setting<Integer> colorImgFillred = this.register(new Setting<Integer>("colorImgFill Red", 0, 0, 255));
-    public Setting<Integer> colorImgFillgreen = this.register(new Setting<Integer>("colorImgFill Green", 0, 0, 255));
-    public Setting<Integer> colorImgFillblue = this.register(new Setting<Integer>("colorImgFill Blue", 0, 0, 255));
-    public Setting<Integer> colorImgFillalpha = this.register(new Setting<Integer>("colorImgFill Alpha", 255, 0, 255));
-    public Setting<Integer> thirdColorImgFIllred = this.register(new Setting<Integer>("SmokeImgFill Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgFIllgreen = this.register(new Setting<Integer>("SmokeImgFill Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgFIllblue = this.register(new Setting<Integer>("SmokeFImgill Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> thirdColorImgFIllalpha = this.register(new Setting<Integer>("SmokeImgFill Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> secondColorImgFillred = this.register(new Setting<Integer>("SmokeFill Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> secondColorImgFillgreen = this.register(new Setting<Integer>("SmokeFill Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> secondColorImgFillblue = this.register(new Setting<Integer>("SmokeFill Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
-    public Setting<Integer> secondColorImgFillalpha = this.register(new Setting<Integer>("SmokeFill Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
+	
+	public Setting<Color> colorImgOutline = this.register(new Setting<Color>("ColorImgOutline", new Color(0, 0, 0, 255), n -> this.fillShader.getValue() == fillShadermode.RainbowCube || this.glowESP.getValue() == glowESPmode.RainbowCube));
+	public Setting<Color> thirdColorImgOutline = this.register(new Setting<Color>("ThirdColorImg", new Color(0, 0, 0, 255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
+	public Setting<Color> colorESP = this.register(new Setting<Color>("ColorESP", new Color(0, 0, 0, 255)));
+	public Setting<Color> colorImgFill = this.register(new Setting<Color>("ColorImgFill", new Color(0, 0, 0, 255)));
+	public Setting<Color> thirdColorImgFIll = this.register(new Setting<Color>("SmokeImgFill", new Color(0, 0, 0, 255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
+	public Setting<Color> secondColorImgFill = this.register(new Setting<Color>("SmokeFill", new Color(0, 0, 0, 255), n -> this.fillShader.getValue() == fillShadermode.Smoke || this.glowESP.getValue() == glowESPmode.Smoke));
     public boolean renderTags = true;
     public boolean renderCape = true;
 
@@ -142,12 +125,12 @@ public class Shaders
             GlStateManager.pushMatrix();
             this.renderTags = false;
             this.renderCape = false;
-            Color color = new Color(this.colorImgFillred.getValue(), this.colorImgFillgreen.getValue(), this.colorImgFillblue.getValue(), this.colorImgFillalpha.getValue());
-            Color color2 = new Color(this.colorESPred.getValue(), this.colorESPgreen.getValue(), this.colorESPblue.getValue(), this.colorESPalpha.getValue());
-            Color color3 = new Color(this.secondColorImgFillred.getValue(), this.secondColorImgFillgreen.getValue(), this.secondColorImgFillblue.getValue(), this.secondColorImgFillalpha.getValue());
-            Color color4 = new Color(this.thirdColorImgOutlinered.getValue(), this.thirdColorImgOutlinegreen.getValue(), this.thirdColorImgOutlineblue.getValue(), this.thirdColorImgOutlinealpha.getValue());
-            Color color5 = new Color(this.thirdColorImgFIllred.getValue(), this.thirdColorImgFIllgreen.getValue(), this.thirdColorImgFIllblue.getValue(), this.thirdColorImgFIllalpha.getValue());
-            Color color6 = new Color(this.colorImgOutlinered.getValue(), this.colorImgOutlinegreen.getValue(), this.colorImgOutlineblue.getValue(), this.colorImgOutlinealpha.getValue());
+            Color color = new Color(this.colorImgFill.getValue().getRed(), this.colorImgFill.getValue().getGreen(), this.colorImgFill.getValue().getBlue(), this.colorImgFill.getValue().getAlpha());
+            Color color2 = new Color(this.colorESP.getValue().getRed(), this.colorESP.getValue().getGreen(), this.colorESP.getValue().getBlue(), this.colorESP.getValue().getAlpha());
+            Color color3 = new Color(this.secondColorImgFill.getValue().getRed(), this.secondColorImgFill.getValue().getGreen(), this.secondColorImgFill.getValue().getBlue(), this.secondColorImgFill.getValue().getAlpha());
+            Color color4 = new Color(this.thirdColorImgOutline.getValue().getRed(), this.thirdColorImgOutline.getValue().getGreen(), this.thirdColorImgOutline.getValue().getBlue(), this.thirdColorImgOutline.getValue().getAlpha());
+            Color color5 = new Color(this.thirdColorImgFIll.getValue().getRed(), this.thirdColorImgFIll.getValue().getGreen(), this.thirdColorImgFIll.getValue().getBlue(), this.thirdColorImgFIll.getValue().getAlpha());
+            Color color6 = new Color(this.colorImgOutline.getValue().getRed(), this.colorImgOutline.getValue().getGreen(), this.colorImgOutline.getValue().getBlue(), this.colorImgOutline.getValue().getAlpha());
             if (this.glowESP.getValue() != glowESPmode.None && this.fillShader.getValue() != fillShadermode.None) {
                 Predicate<Boolean> predicate = this.getFill();
                 switch (this.fillShader.getValue()) {
@@ -507,12 +490,12 @@ public class Shaders
     }
 
     Predicate<Boolean> getFill() {
-        Color color = new Color(this.colorImgFillred.getValue(), this.colorImgFillgreen.getValue(), this.colorImgFillblue.getValue(), this.colorImgFillalpha.getValue());
-        Color color2 = new Color(this.colorESPred.getValue(), this.colorESPgreen.getValue(), this.colorESPblue.getValue(), this.colorESPalpha.getValue());
-        Color color3 = new Color(this.secondColorImgFillred.getValue(), this.secondColorImgFillgreen.getValue(), this.secondColorImgFillblue.getValue(), this.secondColorImgFillalpha.getValue());
-        Color color4 = new Color(this.thirdColorImgOutlinered.getValue(), this.thirdColorImgOutlinegreen.getValue(), this.thirdColorImgOutlineblue.getValue(), this.thirdColorImgOutlinealpha.getValue());
-        Color color5 = new Color(this.thirdColorImgFIllred.getValue(), this.thirdColorImgFIllgreen.getValue(), this.thirdColorImgFIllblue.getValue(), this.thirdColorImgFIllalpha.getValue());
-        Color color6 = new Color(this.colorImgOutlinered.getValue(), this.colorImgOutlinegreen.getValue(), this.colorImgOutlineblue.getValue(), this.colorImgOutlinealpha.getValue());
+        Color color = new Color(this.colorImgFill.getValue().getRed(), this.colorImgFill.getValue().getGreen(), this.colorImgFill.getValue().getBlue(), this.colorImgFill.getValue().getAlpha());
+        Color color2 = new Color(this.colorESP.getValue().getRed(), this.colorESP.getValue().getGreen(), this.colorESP.getValue().getBlue(), this.colorESP.getValue().getAlpha());
+        Color color3 = new Color(this.secondColorImgFill.getValue().getRed(), this.secondColorImgFill.getValue().getGreen(), this.secondColorImgFill.getValue().getBlue(), this.secondColorImgFill.getValue().getAlpha());
+        Color color4 = new Color(this.thirdColorImgOutline.getValue().getRed(), this.thirdColorImgOutline.getValue().getGreen(), this.thirdColorImgOutline.getValue().getBlue(), this.thirdColorImgOutline.getValue().getAlpha());
+        Color color5 = new Color(this.thirdColorImgFIll.getValue().getRed(), this.thirdColorImgFIll.getValue().getGreen(), this.thirdColorImgFIll.getValue().getBlue(), this.thirdColorImgFIll.getValue().getAlpha());
+        Color color6 = new Color(this.colorImgOutline.getValue().getRed(), this.colorImgOutline.getValue().getGreen(), this.colorImgOutline.getValue().getBlue(), this.colorImgOutline.getValue().getAlpha());
         Predicate<Boolean> predicate = bl -> true;
         switch (this.fillShader.getValue()) {
             case Astral: {
@@ -556,7 +539,7 @@ public class Shaders
                 break;
             }
             case Fill: {
-                Color color7 = new Color(this.colorImgFillred.getValue(), this.colorImgFillgreen.getValue(), this.colorImgFillblue.getValue(), this.colorImgFillalpha.getValue());
+                Color color7 = new Color(this.colorImgFill.getValue().getRed(), this.colorImgFill.getValue().getGreen(), this.colorImgFill.getValue().getBlue(), this.colorImgFill.getValue().getAlpha());
                 predicate = bl -> {
                     FillShader.INSTANCE.startShader((float)color7.getRed() / 255.0f, (float)color7.getGreen() / 255.0f, (float)color7.getBlue() / 255.0f, (float)color7.getAlpha() / 255.0f);
                     return false;
