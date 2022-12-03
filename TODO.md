@@ -10,4 +10,6 @@ Add Particles/Snow to ChatModifier for BG
 
 Replace Color Sliders with Color Picker (ESP, Trajectories, EnchantColor, SkyColor, CrystalModify LEFT)
 
+Add Better NameTags
+
 Try fixin Font Opacity/Alpha
