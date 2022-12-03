@@ -41,15 +41,9 @@ public class AutoBuilder
     private final Setting < Boolean > render = this.register ( new Setting <> ( "Render" , true , v -> this.settings.getValue ( ) == Settings.RENDER ) );
     private final Setting < Boolean > colorSync = this.register ( new Setting < > ( "CSync" , false , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
     private final Setting < Boolean > box = this.register ( new Setting <> ( "Box" , true , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
-    private final Setting < Integer > bRed = this.register ( new Setting <> ( "BoxRed" , 135 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.box.getValue ( ) ) );
-    private final Setting < Integer > bGreen = this.register ( new Setting <> ( "BoxGreen" , 0 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.box.getValue ( ) ) );
-    private final Setting < Integer > bBlue = this.register ( new Setting <> ( "BoxBlue" , 255 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.box.getValue ( ) ) );
-    private final Setting < Integer > bAlpha = this.register ( new Setting <> ( "BoxAlpha" , 40 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.box.getValue ( ) ) );
+	private final Setting<Color> bC = register(new Setting("BoxColor", new Color(40, 192, 255, 40)));
     private final Setting < Boolean > outline = this.register ( new Setting <> ( "Outline" , true , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
-    private final Setting < Integer > oRed = this.register ( new Setting <> ( "OutlineRed" , 135 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
-    private final Setting < Integer > oGreen = this.register ( new Setting <> ( "OutlineGreen" , 50 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
-    private final Setting < Integer > oBlue = this.register ( new Setting <> ( "OutlineBlue" , 255 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
-    private final Setting < Integer > oAlpha = this.register ( new Setting <> ( "OutlineAlpha" , 255 , 0 , 255 , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
+	private final Setting<Color> oC = register(new Setting("OutlineColor", new Color(40, 192, 255, 255)));
     private final Setting < Float > lineWidth = this.register ( new Setting <> ( "LineWidth" , 1.5f , 0.1f , 5.0f , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
     // MISC
     private final Setting < Boolean > keepPos = this.register ( new Setting <> ( "KeepOldPos" , false , v -> this.settings.getValue ( ) == Settings.MISC ) );
@@ -88,8 +82,8 @@ public class AutoBuilder
     @Override
     public void onRender3D ( Render3DEvent event ) {
         if ( this.placepositions == null  || ! this.render.getValue ( ) ) return;
-        Color outline = new Color ( this.oRed.getValue ( ) , this.oGreen.getValue ( ) , this.oBlue.getValue ( ) , this.oAlpha.getValue ( ) );
-        Color box = new Color ( this.bRed.getValue ( ) , this.bGreen.getValue ( ) , this.bBlue.getValue ( ) , this.bAlpha.getValue ( ) );
+        Color outline = new Color (this.oC.getValue().getRed(), this.oC.getValue().getGreen(), this.oC.getValue().getBlue(), this.oC.getValue().getAlpha());
+        Color box = new Color (this.bC.getValue().getRed(), this.bC.getValue().getGreen(), this.bC.getValue().getBlue(), this.bC.getValue().getAlpha());
         this.placepositions.forEach ( pos -> {
             RenderUtil.drawSexyBox (
                     new AxisAlignedBB ( pos ) ,
