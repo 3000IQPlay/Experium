@@ -41,10 +41,10 @@ public class AutoBuilder
     private final Setting < Boolean > render = this.register ( new Setting <> ( "Render" , true , v -> this.settings.getValue ( ) == Settings.RENDER ) );
     private final Setting < Boolean > colorSync = this.register ( new Setting < > ( "CSync" , false , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
     private final Setting < Boolean > box = this.register ( new Setting <> ( "Box" , true , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
-	private final Setting<Color> bC = register(new Setting("BoxColor", new Color(40, 192, 255, 40)));
+	private final Setting<Color> bC = register(new Setting("BoxColor", new Color(40, 192, 255, 40), v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue() && this.box.getValue()));
     private final Setting < Boolean > outline = this.register ( new Setting <> ( "Outline" , true , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) ) );
-	private final Setting<Color> oC = register(new Setting("OutlineColor", new Color(40, 192, 255, 255)));
-    private final Setting < Float > lineWidth = this.register ( new Setting <> ( "LineWidth" , 1.5f , 0.1f , 5.0f , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue ( ) && this.outline.getValue ( ) ) );
+	private final Setting<Color> oC = register(new Setting("OutlineColor", new Color(40, 192, 255, 255), v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue() && this.outline.getValue()));
+    private final Setting < Float > lineWidth = this.register ( new Setting <> ( "LineWidth" , 1.5f , 0.1f , 5.0f , v -> this.settings.getValue ( ) == Settings.RENDER && this.render.getValue() && this.outline.getValue()));
     // MISC
     private final Setting < Boolean > keepPos = this.register ( new Setting <> ( "KeepOldPos" , false , v -> this.settings.getValue ( ) == Settings.MISC ) );
     private final Setting < Updates > updates = this.register ( new Setting <> ( "Update" , Updates.TICK , v -> this.settings.getValue ( ) == Settings.MISC ) );
