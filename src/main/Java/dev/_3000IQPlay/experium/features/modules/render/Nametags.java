@@ -43,10 +43,7 @@ public class Nametags
     private final Setting<Boolean> rect = this.register(new Setting<>("Rectangle", true));
     private final Setting<Boolean> outline = this.register(new Setting<Object>("Outline", Boolean.FALSE, v -> this.rect.getValue()));
     private final Setting<Boolean> colorSync = this.register(new Setting<Object>("Sync", Boolean.FALSE, v -> this.outline.getValue()));
-    private final Setting<Integer> redSetting = this.register(new Setting<Object>("Red", 100, 0, 255, v -> this.outline.getValue()));
-    private final Setting<Integer> greenSetting = this.register(new Setting<Object>("Green", 0, 0, 255, v -> this.outline.getValue()));
-    private final Setting<Integer> blueSetting = this.register(new Setting<Object>("Blue", 240, 0, 255, v -> this.outline.getValue()));
-    private final Setting<Integer> alphaSetting = this.register(new Setting<Object>("Alpha", 255, 0, 255, v -> this.outline.getValue()));
+	private final Setting<Color> colorC = this.register(new Setting<Color>("Color", new Color(40, 192, 255, 255), v -> this.outline.getValue()));
     private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", 0.3f, 0.1f, 5.0f, v -> this.outline.getValue()));
     private final Setting<Boolean> sneak = this.register(new Setting<>("SneakColor", false));
     private final Setting<Boolean> heldStackName = this.register(new Setting<>("StackName", false));
@@ -118,7 +115,7 @@ public class Nametags
         if (this.rect.getValue()) {
             this.drawRect(-width - 2, -(Nametags.mc.fontRenderer.FONT_HEIGHT + 1), (float) width + 2.0f, 1.5f, 0x55000000);
             if (this.outline.getValue()) {
-                int color = this.colorSync.getValue() ? Colors.INSTANCE.getCurrentColorHex() : new Color(this.redSetting.getValue(), this.greenSetting.getValue(), this.blueSetting.getValue(), this.alphaSetting.getValue()).getRGB();
+                int color = this.colorSync.getValue() ? Colors.INSTANCE.getCurrentColorHex() : new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha()).getRGB();
                 this.drawOutlineRect(-width - 2, -(Nametags.mc.fontRenderer.FONT_HEIGHT + 1), (float) width + 2.0f, 1.5f, color);
             }
         }
