@@ -25,48 +25,17 @@ public class HoleESP
 	private final Setting<Integer> oBoxBottomAlpha = this.register(new Setting<Object>("ObsidianBoxBottomAlpha", Integer.valueOf(110), Integer.valueOf(0), Integer.valueOf(255), v -> this.renderObsidianHoles.getValue()));
 	public Setting<Double> bHeight = this.register(new Setting<Double>("BedrockHeight", 0.0, -2.0, 2.0, v -> this.renderBedrockHoles.getValue()));
 	public Setting<Double> oHeight = this.register(new Setting<Double>("ObsidianHeight", 0.0, -2.0, 2.0, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> bTopRed = this.register(new Setting<Integer>("BedrockTopRed", 135, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bTopGreen = this.register(new Setting<Integer>("BedrockTopGreen", 0, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bTopBlue = this.register(new Setting<Integer>("BedrockTopBlue", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bTopAlpha = this.register(new Setting<Integer>("BedrockTopAlpha", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
 	
-	private final Setting<Integer> boTopRed = this.register(new Setting<Integer>("BedrockTopOutlineRed", 135, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boTopGreen = this.register(new Setting<Integer>("BedrockTopOutlineGreen", 0, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boTopBlue = this.register(new Setting<Integer>("BedrockTopOutlineBlue", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boTopAlpha = this.register(new Setting<Integer>("BedrockTopOulineAlpha", 0, 0, 255, v -> this.renderBedrockHoles.getValue()));
+	private final Setting<Color> btfC = this.register(new Setting<Color>("BedrockTopFill", new Color(135, 0, 255, 255), v -> this.renderBedrockHoles.getValue()));
+	private final Setting<Color> btoC = this.register(new Setting<Color>("BedrockTopOutline", new Color(135, 0, 255, 0), v -> this.renderBedrockHoles.getValue()));
+	private final Setting<Color> bbfC = this.register(new Setting<Color>("BedrockBottomFill", new Color(0, 255, 255, 255), v -> this.renderBedrockHoles.getValue()));
+	private final Setting<Color> bboC = this.register(new Setting<Color>("BedrockBottomOutline", new Color(0, 255, 255, 255), v -> this.renderBedrockHoles.getValue()));
 	
 	
-	private final Setting<Integer> bBottomRed = this.register(new Setting<Integer>("BedrockBottomRed", 0, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bBottomGreen = this.register(new Setting<Integer>("BedrockBottomGreen", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bBottomBlue = this.register(new Setting<Integer>("BedrockBottomBlue", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> bBottomAlpha = this.register(new Setting<Integer>("BedrockBottomAlpha", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-	
-	private final Setting<Integer> boBottomRed = this.register(new Setting<Integer>("BedrockBottomOutlineRed", 0, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boBottomGreen = this.register(new Setting<Integer>("BedrockBottomOutlineGreen", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boBottomBlue = this.register(new Setting<Integer>("BedrockBottomOutlineBlue", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-    private final Setting<Integer> boBottomAlpha = this.register(new Setting<Integer>("BedrockBottomOulineAlpha", 255, 0, 255, v -> this.renderBedrockHoles.getValue()));
-	
-	
-	private final Setting<Integer> oTopRed = this.register(new Setting<Integer>("ObsidianTopRed", 135, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oTopGreen = this.register(new Setting<Integer>("ObsidianTopGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oTopBlue = this.register(new Setting<Integer>("ObsidianTopBlue", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oTopAlpha = this.register(new Setting<Integer>("ObsidianTopAlpha", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-	
-	private final Setting<Integer> ooTopRed = this.register(new Setting<Integer>("ObsidianTopOutlineRed", 135, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooTopGreen = this.register(new Setting<Integer>("ObsidianTopOutlineGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooTopBlue = this.register(new Setting<Integer>("ObsidianTopOutlineBlue", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooTopAlpha = this.register(new Setting<Integer>("ObsidianTopOulineAlpha", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-	
-	
-	private final Setting<Integer> oBottomRed = this.register(new Setting<Integer>("ObsidianBottomRed", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oBottomGreen = this.register(new Setting<Integer>("ObsidianBottomGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oBottomBlue = this.register(new Setting<Integer>("ObsidianBottomBlue", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> oBottomAlpha = this.register(new Setting<Integer>("ObsidianBottomAlpha", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-	
-	private final Setting<Integer> ooBottomRed = this.register(new Setting<Integer>("ObsidianBottomOutlineRed", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooBottomGreen = this.register(new Setting<Integer>("ObsidianBottomOutlineGreen", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooBottomBlue = this.register(new Setting<Integer>("ObsidianBottomOutlineBlue", 0, 0, 255, v -> this.renderObsidianHoles.getValue()));
-    private final Setting<Integer> ooBottomAlpha = this.register(new Setting<Integer>("ObsidianBottomOulineAlpha", 255, 0, 255, v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Color> otfC = this.register(new Setting<Color>("ObsidianTopFill", new Color(135, 0, 255, 255), v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Color> otoC = this.register(new Setting<Color>("OnsidianTopOutline", new Color(135, 0, 255, 0), v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Color> obfC = this.register(new Setting<Color>("OutlineBottomFill", new Color(255, 0, 0, 255), v -> this.renderObsidianHoles.getValue()));
+	private final Setting<Color> oboC = this.register(new Setting<Color>("OutlineBottomOutline", new Color(255, 0, 0, 255), v -> this.renderObsidianHoles.getValue()));
 	private int currentAlpha = 0;
 
     public HoleESP() {
@@ -96,11 +65,11 @@ public class HoleESP
 				continue;
 			}
 		    if (this.renderBedrockHoles.getValue() && Experium.holeManager.isSafe(pos)) {
-	            RenderUtil.drawBoxESP(pos, new Color(this.bTopRed.getValue(), this.bTopGreen.getValue(), this.bTopBlue.getValue(), this.bTopAlpha.getValue()), true, new Color(this.boTopRed.getValue(), this.boTopGreen.getValue(), this.boTopBlue.getValue(), this.boTopAlpha.getValue()), this.lineWidth.getValue().floatValue(), true, true, this.bBoxTopAlpha.getValue(), true, this.bHeight.getValue(), true, true, true, false, this.currentAlpha);
-				RenderUtil.drawBoxESP(pos, new Color(this.bBottomRed.getValue(), this.bBottomGreen.getValue(), this.bBottomBlue.getValue(), this.bBottomAlpha.getValue()), true, new Color(this.boBottomRed.getValue(), this.boBottomGreen.getValue(), this.boBottomBlue.getValue(), this.boBottomAlpha.getValue()), this.lineWidth.getValue().floatValue(), true, true, this.bBoxBottomAlpha.getValue(), true, this.bHeight.getValue(), true, true, false, true, this.currentAlpha);
+	            RenderUtil.drawBoxESP(pos, new Color(this.btfC.getValue().getRed(), this.btfC.getValue().getGreen(), this.btfC.getValue().getBlue(), this.btfC.getValue().getAlpha()), true, new Color(this.btoC.getValue().getRed(), this.btoC.getValue().getGreen(), this.btoC.getValue().getBlue(), this.btoC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.bBoxTopAlpha.getValue(), true, this.bHeight.getValue(), true, true, true, false, this.currentAlpha);
+				RenderUtil.drawBoxESP(pos, new Color(this.bbfC.getValue().getRed(), this.bbfC.getValue().getGreen(), this.bbfC.getValue().getBlue(), this.bbfC.getValue().getAlpha()), true, new Color(this.bboC.getValue().getRed(), this.bboC.getValue().getGreen(), this.bboC.getValue().getBlue(), this.bboC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.bBoxBottomAlpha.getValue(), true, this.bHeight.getValue(), true, true, false, true, this.currentAlpha);
 	        } else if (this.renderObsidianHoles.getValue()) {
-	    	    RenderUtil.drawBoxESP(pos, new Color(this.oTopRed.getValue(), this.oTopGreen.getValue(), this.oTopBlue.getValue(), this.oTopAlpha.getValue()), true, new Color(this.ooTopRed.getValue(), this.ooTopGreen.getValue(), this.ooTopBlue.getValue(), this.ooTopAlpha.getValue()), this.lineWidth.getValue().floatValue(), true, true, this.oBoxTopAlpha.getValue(), true, this.oHeight.getValue(), true, true, true, false, this.currentAlpha);
-			    RenderUtil.drawBoxESP(pos, new Color(this.oBottomRed.getValue(), this.oBottomGreen.getValue(), this.oBottomBlue.getValue(), this.oBottomAlpha.getValue()), true, new Color(this.ooBottomRed.getValue(), this.ooBottomGreen.getValue(), this.ooBottomBlue.getValue(), this.ooBottomAlpha.getValue()), this.lineWidth.getValue().floatValue(), true, true, this.oBoxBottomAlpha.getValue(), true, this.oHeight.getValue(), true, true, false, true, this.currentAlpha);
+	    	    RenderUtil.drawBoxESP(pos, new Color(this.otfC.getValue().getRed(), this.otfC.getValue().getGreen(), this.otfC.getValue().getBlue(), this.otfC.getValue().getAlpha()), true, new Color(this.otoC.getValue().getRed(), this.otoC.getValue().getGreen(), this.otoC.getValue().getBlue(), this.otoC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.oBoxTopAlpha.getValue(), true, this.oHeight.getValue(), true, true, true, false, this.currentAlpha);
+			    RenderUtil.drawBoxESP(pos, new Color(this.obfC.getValue().getRed(), this.obfC.getValue().getGreen(), this.obfC.getValue().getBlue(), this.obfC.getValue().getAlpha()), true, new Color(this.oboC.getValue().getRed(), this.oboC.getValue().getGreen(), this.oboC.getValue().getBlue(), this.oboC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.oBoxBottomAlpha.getValue(), true, this.oHeight.getValue(), true, true, false, true, this.currentAlpha);
 			}
 			++drawnHoles;
         }
