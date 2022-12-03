@@ -18,10 +18,7 @@ public class VoidESP
     private final Timer timer = new Timer();
     private final Setting<Integer> updates = this.register(new Setting<Integer>("Updates", 500, 0, 1000));
     private final Setting<Integer> voidCap = this.register(new Setting<Integer>("VoidCap", 500, 0, 1000));
-    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 135, 0, 255));
-    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
-    private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+	private final Setting<Color> colorC = this.register(new Setting<Color>("BoxColor", new Color(40, 192, 255, 40)));
     public Setting<Boolean> air = this.register(new Setting<Boolean>("OnlyAir", true));
     public Setting<Boolean> noEnd = this.register(new Setting<Boolean>("NoEnd", true));
     public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", true));
@@ -31,10 +28,7 @@ public class VoidESP
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
     public Setting<Double> height = this.register(new Setting<Double>("Height", 0.0, -2.0, 2.0));
     public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
-    private final Setting<Integer> cRed = this.register(new Setting<Object>("OL-Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cGreen = this.register(new Setting<Object>("OL-Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cBlue = this.register(new Setting<Object>("OL-Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cAlpha = this.register(new Setting<Object>("OL-Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
+	private final Setting<Color> lineC = this.register(new Setting<Color>("OutlineColor", new Color(40, 192, 255, 255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
     private List<BlockPos> voidHoles = new CopyOnWriteArrayList<BlockPos>();
 
     public VoidESP() {
@@ -70,7 +64,7 @@ public class VoidESP
         }
         for (BlockPos pos : this.voidHoles) {
             if (!RotationUtil.isInFov(pos)) continue;
-            RenderUtil.drawBoxESP(pos, new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), this.customOutline.getValue(), new Color(this.cRed.getValue(), this.cGreen.getValue(), this.cBlue.getValue(), this.cAlpha.getValue()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), true, this.height.getValue(), false, false, false, false, 0);
+            RenderUtil.drawBoxESP(pos, new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha()), this.customOutline.getValue(), new Color(this.lineC.getValue().getRed(), this.lineC.getValue().getGreen(), this.lineC.getValue().getBlue(), this.lineC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), true, this.height.getValue(), false, false, false, false, 0);
         }
     }
 
