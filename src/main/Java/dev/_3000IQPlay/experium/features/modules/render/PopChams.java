@@ -25,14 +25,8 @@ public class PopChams
         extends Module {
     public static Setting<Boolean> self;
     public static Setting<Boolean> elevator;
-    public static Setting<Integer> rL;
-    public static Setting<Integer> gL;
-    public static Setting<Integer> bL;
-    public static Setting<Integer> aL;
-    public static Setting<Integer> rF;
-    public static Setting<Integer> gF;
-    public static Setting<Integer> bF;
-    public static Setting<Integer> aF;
+    public static Setting<Color> fillC;
+	public static Setting<Color> lineC;
     public static Setting<Integer> fadestart;
     public static Setting<Float> fadetime;
     public static Setting<Boolean> onlyOneEsp;
@@ -47,15 +41,9 @@ public class PopChams
         super("PopChams", "Renders a Glowing fakeplayer in the exact location where your enemy popped", Module.Category.RENDER, true, false, false);
         self = this.register(new Setting<Boolean>("Render Own Pops", true));
         elevator = this.register(new Setting<Boolean>("Travel", true));
-        elevatorMode = this.register(new Setting<ElevatorMode>("Elevator", ElevatorMode.UP, v -> elevator.getValue()));
-        rL = this.register(new Setting<Integer>("Outline Red", 135, 0, 255));
-        bL = this.register(new Setting<Integer>("Outline Green", 0, 0, 255));
-        gL = this.register(new Setting<Integer>("Outline Blue", 255, 0, 255));
-        aL = this.register(new Setting<Integer>("Outline Alpha", 255, 0, 255));
-        rF = this.register(new Setting<Integer>("Fill Red", 135, 0, 255));
-        bF = this.register(new Setting<Integer>("Fill Green", 0, 0, 255));
-        gF = this.register(new Setting<Integer>("Fill Blue", 255, 0, 255));
-        aF = this.register(new Setting<Integer>("Fill Alpha", 140, 0, 255));
+        elevatorMode = this.register(new Setting<ElevatorMode>("Elevator", ElevatorMode.UP, v -> this.elevator.getValue()));
+		fillC = this.register(new Setting<Color>("FillColor", new Color(40, 192, 255, 140)));
+		lineC = this.register(new Setting<Color>("LineColor", new Color(40, 192, 255, 255)));
         fadestart = this.register(new Setting<Integer>("Fade Start", 0, 0, 255));
         fadetime = this.register(new Setting<Float>("Fade Time", Float.valueOf(0.5f), Float.valueOf(0.0f), Float.valueOf(2.0f)));
         onlyOneEsp = this.register(new Setting<Boolean>("Only Render One", true));
@@ -64,7 +52,7 @@ public class PopChams
     @SubscribeEvent
     public void onUpdate(PacketEvent.Receive event) {
         SPacketEntityStatus packet;
-        if (event.getPacket() instanceof SPacketEntityStatus && (packet = (SPacketEntityStatus)event.getPacket()).getOpCode() == 35 && packet.getEntity((World)PopChams.mc.world) != null && (self.getValue().booleanValue() || packet.getEntity((World)PopChams.mc.world).getEntityId() != PopChams.mc.player.getEntityId())) {
+        if (event.getPacket() instanceof SPacketEntityStatus && (packet = (SPacketEntityStatus)event.getPacket()).getOpCode() == 35 && packet.getEntity((World)PopChams.mc.world) != null && (this.self.getValue().booleanValue() || packet.getEntity((World)PopChams.mc.world).getEntityId() != PopChams.mc.player.getEntityId())) {
             GameProfile profile = new GameProfile(PopChams.mc.player.getUniqueID(), "");
             this.player = new EntityOtherPlayerMP((World)PopChams.mc.world, profile);
             this.player.copyLocationAndAnglesFrom(packet.getEntity((World)PopChams.mc.world));
@@ -76,8 +64,8 @@ public class PopChams
             this.playerModel.bipedLeftLegwear.showModel = false;
             this.playerModel.bipedRightArmwear.showModel = false;
             this.playerModel.bipedRightLegwear.showModel = false;
-            this.alphaFill = aF.getValue().intValue();
-            this.alphaLine = aL.getValue().intValue();
+            this.alphaFill = this.fillC.getValue().getAlpha();
+            this.alphaLine = this.lineC.getValue().getAlpha();
             if (!onlyOneEsp.getValue().booleanValue()) {
                 TotemPopChams totemPopChams = new TotemPopChams(this.player, this.playerModel, this.startTime, this.alphaFill, this.alphaLine);
             }
@@ -86,25 +74,25 @@ public class PopChams
 
     @SubscribeEvent
     public void onRenderWorld(RenderWorldLastEvent event) {
-        if (onlyOneEsp.getValue().booleanValue()) {
+        if (this.onlyOneEsp.getValue().booleanValue()) {
             if (this.player == null || PopChams.mc.world == null || PopChams.mc.player == null) {
                 return;
             }
-            if (elevator.getValue().booleanValue()) {
-                if (elevatorMode.getValue() == ElevatorMode.UP) {
+            if (this.elevator.getValue().booleanValue()) {
+                if (this.elevatorMode.getValue() == ElevatorMode.UP) {
                     this.player.posY += (double)(0.05f * event.getPartialTicks());
-                } else if (elevatorMode.getValue() == ElevatorMode.DOWN) {
+                } else if (this.elevatorMode.getValue() == ElevatorMode.DOWN) {
                     this.player.posY -= (double)(0.05f * event.getPartialTicks());
                 }
             }
             GL11.glLineWidth((float)1.0f);
-            Color lineColorS = new Color(rL.getValue(), bL.getValue(), gL.getValue(), aL.getValue());
-            Color fillColorS = new Color(rF.getValue(), bF.getValue(), gF.getValue(), aF.getValue());
+            Color lineColorS = new Color(this.lineC.getValue().getRed(), this.lineC.getValue().getGreen(), this.lineC.getValue().getBlue(), this.lineC.getValue().getAlpha());
+            Color fillColorS = new Color(this.fillC.getValue().getRed(), this.fillC.getValue().getGreen(), this.fillC.getValue().getBlue(), this.fillC.getValue().getAlpha());
             int lineA = lineColorS.getAlpha();
             int fillA = fillColorS.getAlpha();
-            long time = System.currentTimeMillis() - this.startTime - ((Number)fadestart.getValue()).longValue();
-            if (System.currentTimeMillis() - this.startTime > ((Number)fadestart.getValue()).longValue()) {
-                double normal = this.normalize(time, 0.0, ((Number)fadetime.getValue()).doubleValue());
+            long time = System.currentTimeMillis() - this.startTime - ((Number)this.fadestart.getValue()).longValue();
+            if (System.currentTimeMillis() - this.startTime > ((Number)this.fadestart.getValue()).longValue()) {
+                double normal = this.normalize(time, 0.0, ((Number)this.fadetime.getValue()).doubleValue());
                 normal = MathHelper.clamp((double)normal, (double)0.0, (double)1.0);
                 normal = -normal + 1.0;
                 lineA *= (int)normal;
@@ -118,11 +106,11 @@ public class PopChams
                 GL11.glEnable((int)2881);
                 GL11.glEnable((int)2848);
                 if (this.alphaFill > 1.0) {
-                    this.alphaFill -= (double)fadetime.getValue().floatValue();
+                    this.alphaFill -= (double)this.fadetime.getValue().floatValue();
                 }
                 Color fillFinal = new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), (int)this.alphaFill);
                 if (this.alphaLine > 1.0) {
-                    this.alphaLine -= (double)fadetime.getValue().floatValue();
+                    this.alphaLine -= (double)this.fadetime.getValue().floatValue();
                 }
                 Color outlineFinal = new Color(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue(), (int)this.alphaLine);
                 PopChams.glColor(fillFinal);
