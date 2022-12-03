@@ -55,7 +55,7 @@ public class ColorButton extends Button {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (ClickGui.getInstance().sideSettings.getValue().booleanValue()) {
-            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sliderC.getValue().getRed(), ClickGui.getInstance().sliderC.getValue().getGreen(), ClickGui.getInstance().sliderC.getValue().getBlue(), ClickGui.getInstance().sliderC.getValue().getAlpha());
+            int sideColor = ColorUtil.toRGBA(ClickGui.getInstance().sideLineC.getValue().getRed(), ClickGui.getInstance().sideLineC.getValue().getGreen(), ClickGui.getInstance().sideLineC.getValue().getBlue(), ClickGui.getInstance().sideLineC.getValue().getAlpha());
             RenderUtil.drawRect(this.x, this.y, this.x + 1.0f, this.y + (float) this.height + 1.0f, sideColor);
         }
         try {
