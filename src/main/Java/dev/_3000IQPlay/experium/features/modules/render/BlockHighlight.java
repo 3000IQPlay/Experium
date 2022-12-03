@@ -13,21 +13,15 @@ import java.awt.*;
 
 public class BlockHighlight
         extends Module {
-    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 100, 0, 255));
-    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 240, 0, 255));
-    private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+	private final Setting<Color> colorC = this.register(new Setting<Color>("BoxColor", new Color(40, 192, 255, 150)));
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
     public Setting<Boolean> rolling = this.register(new Setting<Object>("Rolling", Boolean.valueOf(false), v -> this.colorSync.getValue()));
     public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", false));
     private final Setting<Integer> boxAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(125), Integer.valueOf(0), Integer.valueOf(255), v -> this.box.getValue()));
     public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
     private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f), v -> this.outline.getValue()));
-    public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
-    private final Setting<Integer> cRed = this.register(new Setting<Object>("OL-Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cGreen = this.register(new Setting<Object>("OL-Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cBlue = this.register(new Setting<Object>("OL-Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
-    private final Setting<Integer> cAlpha = this.register(new Setting<Object>("OL-Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
+    public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(true), v -> this.outline.getValue()));
+	private final Setting<Color> outlineC = this.register(new Setting<Color>("OutlineColor", new Color(40, 192, 255, 255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
 
     public BlockHighlight() {
         super("BlockHighlight", "Highlights the block u look at.", Module.Category.RENDER, false, false, false);
@@ -41,9 +35,8 @@ public class BlockHighlight
             if (this.rolling.getValue().booleanValue()) {
                 RenderUtil.drawProperGradientBlockOutline(blockpos, new Color(HUD.getInstance().colorMap.get(0)), new Color(HUD.getInstance().colorMap.get(this.renderer.scaledHeight / 4)), new Color(HUD.getInstance().colorMap.get(this.renderer.scaledHeight / 2)), 1.0f);
             } else {
-                RenderUtil.drawBoxESP(blockpos, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), this.customOutline.getValue(), new Color(this.cRed.getValue(), this.cGreen.getValue(), this.cBlue.getValue(), this.cAlpha.getValue()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), false);
+                RenderUtil.drawBoxESP(blockpos, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha()), this.customOutline.getValue(), new Color(this.outlineC.getValue().getRed(), this.outlineC.getValue().getGreen(), this.outlineC.getValue().getBlue(), this.outlineC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), false);
             }
         }
     }
 }
-
