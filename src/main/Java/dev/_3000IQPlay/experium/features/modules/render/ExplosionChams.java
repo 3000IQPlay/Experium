@@ -18,10 +18,7 @@ import java.util.Map;
 
 public class ExplosionChams
         extends Module {
-    public final Setting<Integer> red = this.register(new Setting<Integer>("Red", 135, 0, 255));
-    public final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    public final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
-    public final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+	public final Setting<Color> colorC = this.register(new Setting<Color>("Color", new Color(40, 192, 255, 255)));
     public final Setting<Float> increase = this.register(new Setting<Float>("Increase Size", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(5.0f)));
     public final Setting<Integer> riseSpeed = this.register(new Setting<Integer>("Rise Time", 5, 1, 50));
     public final Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Sync", false));
@@ -74,13 +71,13 @@ public class ExplosionChams
     @SubscribeEvent
     public void onRender3D(Render3DEvent event) {
         if (!this.explodedCrystals.isEmpty()) {
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.7f, this.crystalPos.getZ(), 0.6f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 60));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.6f, this.crystalPos.getZ(), 0.5f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 50));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.5f, this.crystalPos.getZ(), 0.4f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 40));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.4f, this.crystalPos.getZ(), 0.3f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 30));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.3f, this.crystalPos.getZ(), 0.2f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 20));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.2f, this.crystalPos.getZ(), 0.1f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue() - 10));
-            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.1f, this.crystalPos.getZ(), 0.0f + this.increase.getValue().floatValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.7f, this.crystalPos.getZ(), 0.6f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 60));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.6f, this.crystalPos.getZ(), 0.5f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 50));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.5f, this.crystalPos.getZ(), 0.4f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 40));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.4f, this.crystalPos.getZ(), 0.3f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 30));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.3f, this.crystalPos.getZ(), 0.2f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 20));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.2f, this.crystalPos.getZ(), 0.1f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha() - 10));
+            RenderUtil.drawCircle(this.crystalPos.getX(), (float)this.crystalPos.getY() + (float)this.speed / 3.0f + 0.1f, this.crystalPos.getZ(), 0.0f + this.increase.getValue().floatValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha()));
         }
     }
 }
