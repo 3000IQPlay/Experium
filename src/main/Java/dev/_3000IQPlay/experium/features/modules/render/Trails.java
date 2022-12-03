@@ -1,11 +1,5 @@
 package dev._3000IQPlay.experium.features.modules.render;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
 import dev._3000IQPlay.experium.event.events.Render3DEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.setting.Setting;
@@ -17,6 +11,13 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
 public class Trails
         extends Module {
     private final Setting<Float> thick = this.register(new Setting<Float>("LineWidth", Float.valueOf(1.5f), Float.valueOf(0.1f), Float.valueOf(5.0f)));
@@ -27,10 +28,7 @@ public class Trails
     private final Setting<Boolean> render = this.register(new Setting<Boolean>("Render", true));
     private final Setting<Double> aliveTime = this.register(new Setting<Double>("Fade Time", 5.0, 0.0, 20.0));
     private final Setting<Integer> rDelay = this.register(new Setting<Integer>("Delay Before Render", 120, 0, 360));
-    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 135, 0, 255));
-    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
-    private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+	private final Setting<Color> colorC = this.register(new Setting<Color>("Color", new Color(40, 192, 255, 255)));
     private final HashMap<UUID, List<Vec3d>> poses = new HashMap();
     private final HashMap<UUID, Double> time = new HashMap();
 
@@ -99,7 +97,7 @@ public class Trails
             GL11.glBegin((int) 1);
             for (int i = 1; i < this.poses.get(uuid).size(); ++i) {
                 delay += this.rDelay.getValue().intValue();
-                GL11.glColor4d((double) ((float) this.red.getValue().intValue() / 255.0f), (double) ((float) this.green.getValue().intValue() / 255.0f), (double) ((float) this.blue.getValue().intValue() / 255.0f), (double) ((float) this.alpha.getValue().intValue() / 255.0f));
+                GL11.glColor4d((double) ((float) this.colorC.getValue().getRed() / 255.0f), (double) ((float) this.colorC.getValue().getGreen() / 255.0f), (double) ((float) this.colorC.getValue().getBlue() / 255.0f), (double) ((float) this.colorC.getValue().getAlpha() / 255.0f));
                 List<Vec3d> pos = this.poses.get(uuid);
                 GL11.glVertex3d((double) (pos.get((int) i).x - Trails.mc.getRenderManager().viewerPosX), (double) (pos.get((int) i).y - Trails.mc.getRenderManager().viewerPosY), (double) (pos.get((int) i).z - Trails.mc.getRenderManager().viewerPosZ));
                 GL11.glVertex3d((double) (pos.get((int) (i - 1)).x - Trails.mc.getRenderManager().viewerPosX), (double) (pos.get((int) (i - 1)).y - Trails.mc.getRenderManager().viewerPosY), (double) (pos.get((int) (i - 1)).z - Trails.mc.getRenderManager().viewerPosZ));
@@ -113,4 +111,3 @@ public class Trails
         GL11.glPopMatrix();
     }
 }
-
