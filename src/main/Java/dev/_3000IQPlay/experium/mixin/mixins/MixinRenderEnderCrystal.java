@@ -97,9 +97,9 @@ public abstract class MixinRenderEnderCrystal {
             GL11.glDisable((int) 2929);
             GL11.glDepthMask((boolean) false);
             GL11.glEnable((int) 10754);
-            Color visibleColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.red.getValue(), CrystalModify.INSTANCE.green.getValue(), CrystalModify.INSTANCE.blue.getValue());
-            Color hiddenColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.hiddenRed.getValue(), CrystalModify.INSTANCE.hiddenGreen.getValue(), CrystalModify.INSTANCE.hiddenBlue.getValue());
-            Color color = outlineColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.outlineRed.getValue(), CrystalModify.INSTANCE.outlineGreen.getValue(), CrystalModify.INSTANCE.outlineBlue.getValue());
+            Color visibleColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.colorC.getValue().getRed(), CrystalModify.INSTANCE.colorC.getValue().getGreen(), CrystalModify.INSTANCE.colorC.getValue().getBlue());
+            Color hiddenColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.hiddenC.getValue().getRed(), CrystalModify.INSTANCE.hiddenC.getValue().getGreen(), CrystalModify.INSTANCE.hiddenC.getValue().getBlue());
+            Color color = outlineColor = CrystalModify.INSTANCE.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(CrystalModify.INSTANCE.outlineC.getValue().getRed(), CrystalModify.INSTANCE.outlineC.getValue().getGreen(), CrystalModify.INSTANCE.outlineC.getValue().getBlue());
             if (CrystalModify.INSTANCE.hiddenSync.getValue().booleanValue()) {
                 GL11.glColor4f((float) ((float) visibleColor.getRed() / 255.0f), (float) ((float) visibleColor.getGreen() / 255.0f), (float) ((float) visibleColor.getBlue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.alpha.getValue().intValue() / 255.0f));
             } else {
@@ -123,7 +123,7 @@ public abstract class MixinRenderEnderCrystal {
                 GL11.glTexCoord3d((double) 1.0, (double) 1.0, (double) 1.0);
                 GL11.glEnable((int) 3553);
                 GL11.glBlendFunc((int) 768, (int) 771);
-                GL11.glColor4f((float) ((float) CrystalModify.INSTANCE.enchantRed.getValue().intValue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.enchantGreen.getValue().intValue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.enchantBlue.getValue().intValue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.enchantAlpha.getValue().intValue() / 255.0f));
+                GL11.glColor4f((float) ((float) CrystalModify.INSTANCE.glintC.getValue().getRed() / 255.0f), (float) ((float) CrystalModify.INSTANCE.glintC.getValue().getGreen() / 255.0f), (float) ((float) CrystalModify.INSTANCE.glintC.getValue().getBlue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.glintC.getValue().getAlpha() / 255.0f));
                 if (var1.shouldShowBottom()) {
                     this.modelEnderCrystal.render((Entity) var1, 0.0f, var14 * spinSpeed, var15 * bounceSpeed, 0.0f, 0.0f, 0.0625f);
                 } else {
@@ -158,7 +158,7 @@ public abstract class MixinRenderEnderCrystal {
                     GL11.glDisable((int) 2929);
                     GL11.glDepthMask((boolean) false);
                     GL11.glEnable((int) 10754);
-                    GL11.glColor4f((float) ((float) outlineColor.getRed() / 255.0f), (float) ((float) outlineColor.getGreen() / 255.0f), (float) ((float) outlineColor.getBlue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.outlineAlpha.getValue().intValue() / 255.0f));
+                    GL11.glColor4f((float) ((float) outlineColor.getRed() / 255.0f), (float) ((float) outlineColor.getGreen() / 255.0f), (float) ((float) outlineColor.getBlue() / 255.0f), (float) ((float) CrystalModify.INSTANCE.outlineC.getValue().getAlpha() / 255.0f));
                     if (var1.shouldShowBottom()) {
                         this.modelEnderCrystal.render((Entity) var1, 0.0f, var14 * spinSpeed, var15 * bounceSpeed, 0.0f, 0.0f, 0.0625f);
                     } else {
@@ -206,4 +206,3 @@ public abstract class MixinRenderEnderCrystal {
         }
     }
 }
-
