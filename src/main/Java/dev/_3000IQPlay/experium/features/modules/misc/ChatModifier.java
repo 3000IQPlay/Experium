@@ -17,6 +17,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,10 +25,9 @@ public class ChatModifier
         extends Module {
     private static ChatModifier INSTANCE = new ChatModifier();
     private final Timer timer = new Timer();
-	private Setting<Integer> chatBGred = this.register(new Setting<Integer>("ChatBGRed", 20, 0, 255));
-    private Setting<Integer> chatBGgreen = this.register(new Setting<Integer>("ChatBGGreen", 20, 0, 255));
-    private Setting<Integer> chatBGblue = this.register(new Setting<Integer>("ChatBGBlue", 20, 0, 255));
-    private Setting<Integer> chatBGalpha = this.register(new Setting<Integer>("ChatBGAlpha", 35, 0, 255));
+	public Setting<Color> cbgC = register(new Setting<Color>("ChatBGColor", new Color(20, 20, 20, 35)));
+	public Setting<Boolean> gradient = register(new Setting<Boolean>("GradientBG", true));
+	public Setting<Color> gC = register(new Setting<Color>("GradientBGColor", new Color(40, 192, 255, 90), v -> this.gradient.getValue()));
 	public Setting<Suffix> suffix = this.register(new Setting<Suffix>("Suffix", Suffix.NONE, "Your Suffix."));
 	public Setting<TextColor> textcolor = this.register(new Setting<TextColor>("TextColor", TextColor.NONE, "Your text color."));
 	public Setting<StiTextColor> stiTextColor = this.register(new Setting<StiTextColor>("StiTextColor", StiTextColor.NONE, "Your sti text color."));
@@ -58,7 +58,10 @@ public class ChatModifier
 	@Override
     public void onRender2D(Render2DEvent event) {
         if (ChatModifier.mc.currentScreen instanceof GuiChat) {
-            RenderUtil.drawRectangleCorrectly(0, 0, 1920, 1080, ColorUtil.toRGBA(this.chatBGred.getValue(), this.chatBGgreen.getValue(), this.chatBGblue.getValue(), this.chatBGalpha.getValue()));
+            RenderUtil.drawRectangleCorrectly(0, 0, 1920, 1080, ColorUtil.toRGBA(this.cbgC.getValue().getRed(), this.cbgC.getValue().getGreen(), this.cbgC.getValue().getBlue(), this.cbgC.getValue().getAlpha()));
+            if (this.gradient.getValue().booleanValue()) {
+                RenderUtil.drawGradientRect(0, 0, 1920, 1080, 0, new Color(this.gC.getValue().getRed(), this.gC.getValue().getGreen(), this.gC.getValue().getBlue(), this.gC.getValue().getAlpha() / 2).getRGB());
+            }
         }
     }
 
