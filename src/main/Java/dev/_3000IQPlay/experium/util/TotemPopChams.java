@@ -40,8 +40,8 @@ public class TotemPopChams {
             return;
         }
         GL11.glLineWidth((float)1.0f);
-        Color lineColorS = new Color(PopChams.rL.getValue(), PopChams.gL.getValue(), PopChams.bL.getValue(), PopChams.aL.getValue());
-        Color fillColorS = new Color(PopChams.rF.getValue(), PopChams.gF.getValue(), PopChams.bF.getValue(), PopChams.aF.getValue());
+        Color lineColorS = new Color(PopChams.lineC.getValue().getRed(), PopChams.lineC.getValue().getGreen(), PopChams.lineC.getValue().getBlue(), PopChams.lineC.getValue().getAlpha());
+        Color fillColorS = new Color(PopChams.fillC.getValue().getRed(), PopChams.fillC.getValue().getGreen(), PopChams.fillC.getValue().getBlue(), PopChams.fillC.getValue().getAlpha());
         int lineA = lineColorS.getAlpha();
         int fillA = fillColorS.getAlpha();
         long time = System.currentTimeMillis() - this.startTime - ((Number)PopChams.fadestart.getValue()).longValue();
