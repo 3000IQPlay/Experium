@@ -79,10 +79,8 @@ public class Component
                 this.drawOutline(ClickGui.getInstance().outlineThickness.getValue().floatValue(), color);
             }
         }
-        if (ClickGui.getInstance().devSettings.getValue().booleanValue()) {
-            color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().topC.getValue().getRed(), ClickGui.getInstance().topC.getValue().getGreen(), ClickGui.getInstance().topC.getValue().getBlue(), ClickGui.getInstance().topC.getValue().getAlpha());
-            int n = color;
-        }
+        color = ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColorHex() : ColorUtil.toARGB(ClickGui.getInstance().topC.getValue().getRed(), ClickGui.getInstance().topC.getValue().getGreen(), ClickGui.getInstance().topC.getValue().getBlue(), ClickGui.getInstance().topC.getValue().getAlpha());
+        int n = color;
         if (ClickGui.getInstance().rainbowRolling.getValue().booleanValue() && ClickGui.getInstance().colorSync.getValue().booleanValue() && Colors.INSTANCE.rainbow.getValue().booleanValue()) {
             RenderUtil.drawGradientRect((float)this.x, (float)this.y - 1.5f, (float)this.width, (float)(this.height - 4), (int)HUD.getInstance().colorMap.get(MathUtil.clamp(this.y, 0, this.renderer.scaledHeight)), (int)HUD.getInstance().colorMap.get(MathUtil.clamp(this.y + this.height - 4, 0, this.renderer.scaledHeight)));
         } else {
