@@ -10,6 +10,4 @@ Add Perticles/Snow to ChatModifier for BG
 
 Replace Color Sliders with Color Picker (Renders left)
 
-Add Christmas Hat Cosmetic (Phobos 1.9.0 has it)
-
-Add Christmas Hat in GUI's corner (maybe)
+Try fixin Font Opacity/Alpha
