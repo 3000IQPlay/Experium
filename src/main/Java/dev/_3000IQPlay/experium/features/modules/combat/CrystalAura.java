@@ -135,15 +135,9 @@ public class CrystalAura
     private final Setting<Float> accel = this.register(new Setting<Float>("Deceleration", Float.valueOf(0.8f), Float.valueOf(0.0f), Float.valueOf(1.0f), f -> this.renderMode.getValue() == RenderMode.GLIDE && this.setting.getValue() == Pages.Render));
     public Setting<Boolean> colorSync = this.register(new Setting<Object>("ColorSync", Boolean.valueOf(true), object -> this.setting.getValue() == Pages.Render));
     public Setting<Boolean> box = this.register(new Setting<Object>("Box", Boolean.valueOf(true), object -> this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> bRed = this.register(new Setting<Object>("BoxRed", Integer.valueOf(64), Integer.valueOf(0), Integer.valueOf(255), object -> this.box.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> bGreen = this.register(new Setting<Object>("BoxGreen", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), object -> this.box.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> bBlue = this.register(new Setting<Object>("BoxBlue", Integer.valueOf(145), Integer.valueOf(0), Integer.valueOf(255), object -> this.box.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> bAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(105), Integer.valueOf(0), Integer.valueOf(255), object -> this.box.getValue() != false && this.setting.getValue() == Pages.Render));
+	private final Setting<Color> bC = register(new Setting("BoxColor", new Color(40, 192, 255, 40), object -> this.box.getValue() != false && this.setting.getValue() == Pages.Render));
     public Setting<Boolean> outline = this.register(new Setting<Object>("Outline", Boolean.valueOf(true), object -> this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> oRed = this.register(new Setting<Object>("OutlineRed", Integer.valueOf(58), Integer.valueOf(0), Integer.valueOf(255), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> oGreen = this.register(new Setting<Object>("OutlineGreen", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> oBlue = this.register(new Setting<Object>("OutlineBlue", Integer.valueOf(145), Integer.valueOf(0), Integer.valueOf(255), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
-    private final Setting<Integer> oAlpha = this.register(new Setting<Object>("OutlineAlpha", Integer.valueOf(111), Integer.valueOf(0), Integer.valueOf(255), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
+	private final Setting<Color> oC = register(new Setting("OutlineColor", new Color(40, 192, 255, 255), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
     private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.8f), Float.valueOf(0.1f), Float.valueOf(5.0f), object -> this.outline.getValue() != false && this.setting.getValue() == Pages.Render));
     public Setting<Boolean> text = this.register(new Setting<Object>("RenderDmg", Boolean.valueOf(true), object -> this.setting.getValue() == Pages.Render));
     public Vec3d rotationVector = null;
@@ -758,8 +752,8 @@ public class CrystalAura
         if (CrystalAura.mc.world == null || CrystalAura.mc.player == null) {
             return;
         }
-        Color color = new Color(this.bRed.getValue(), this.bGreen.getValue(), this.bBlue.getValue(), this.bAlpha.getValue());
-        Color color2 = new Color(this.oRed.getValue(), this.oGreen.getValue(), this.oBlue.getValue(), this.oAlpha.getValue());
+        Color color = new Color(this.bC.getValue().getRed(), this.bC.getValue().getGreen(), this.bC.getValue().getBlue(), this.bC.getValue().getAlpha());
+        Color color2 = new Color(this.oC.getValue().getRed(), this.oC.getValue().getGreen(), this.bC.getValue().getBlue(), this.oC.getValue().getAlpha());
         if (this.renderBlock != null) {
             if (this.renderTimeoutTimer.passedMs(this.RTimerr.getValue().intValue())) {
                 return;
