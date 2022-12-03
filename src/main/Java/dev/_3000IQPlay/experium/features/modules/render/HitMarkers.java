@@ -15,10 +15,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public final class HitMarkers
         extends Module {
     public final ResourceLocation image;
-    public Setting<Integer> red = this.register(new Setting<Integer>("Red", 255, 0, 255));
-    public Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
-    public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
-    public Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+	public Setting<Color> colorC = this.register(new Setting<Color>("MarkerColor", new Color(255, 255, 255, 255)));
     public Setting<Integer> thickness = this.register(new Setting<Integer>("Thickness", 2, 1, 6));
     public Setting<Double> time = this.register(new Setting<Double>("Time", 20.0, 1.0, 50.0));
     private int renderTicks = 100;
@@ -61,9 +58,9 @@ public final class HitMarkers
 
     public void drawHitMarkers() {
         ScaledResolution resolution = new ScaledResolution(mc);
-        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f - 4.0f, (float)resolution.getScaledHeight() / 2.0f - 4.0f, (float)resolution.getScaledWidth() / 2.0f - 8.0f, (float)resolution.getScaledHeight() / 2.0f - 8.0f, this.thickness.getValue().intValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue()).getRGB());
-        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f + 4.0f, (float)resolution.getScaledHeight() / 2.0f - 4.0f, (float)resolution.getScaledWidth() / 2.0f + 8.0f, (float)resolution.getScaledHeight() / 2.0f - 8.0f, this.thickness.getValue().intValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue()).getRGB());
-        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f - 4.0f, (float)resolution.getScaledHeight() / 2.0f + 4.0f, (float)resolution.getScaledWidth() / 2.0f - 8.0f, (float)resolution.getScaledHeight() / 2.0f + 8.0f, this.thickness.getValue().intValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue()).getRGB());
-        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f + 4.0f, (float)resolution.getScaledHeight() / 2.0f + 4.0f, (float)resolution.getScaledWidth() / 2.0f + 8.0f, (float)resolution.getScaledHeight() / 2.0f + 8.0f, this.thickness.getValue().intValue(), new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue()).getRGB());
+        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f - 4.0f, (float)resolution.getScaledHeight() / 2.0f - 4.0f, (float)resolution.getScaledWidth() / 2.0f - 8.0f, (float)resolution.getScaledHeight() / 2.0f - 8.0f, this.thickness.getValue().intValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue()).getRGB());
+        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f + 4.0f, (float)resolution.getScaledHeight() / 2.0f - 4.0f, (float)resolution.getScaledWidth() / 2.0f + 8.0f, (float)resolution.getScaledHeight() / 2.0f - 8.0f, this.thickness.getValue().intValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue()).getRGB());
+        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f - 4.0f, (float)resolution.getScaledHeight() / 2.0f + 4.0f, (float)resolution.getScaledWidth() / 2.0f - 8.0f, (float)resolution.getScaledHeight() / 2.0f + 8.0f, this.thickness.getValue().intValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue()).getRGB());
+        RenderUtil.drawLine((float)resolution.getScaledWidth() / 2.0f + 4.0f, (float)resolution.getScaledHeight() / 2.0f + 4.0f, (float)resolution.getScaledWidth() / 2.0f + 8.0f, (float)resolution.getScaledHeight() / 2.0f + 8.0f, this.thickness.getValue().intValue(), new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue()).getRGB());
     }
 }
