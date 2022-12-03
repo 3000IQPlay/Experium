@@ -24,8 +24,6 @@ public class ClickGui
 	public Setting<SliderType> sliderType = this.register(new Setting<SliderType>("SliderType", SliderType.Line, v -> this.setting.getValue() == Settings.Sliders));
 	public Setting<Color> sliderC = register(new Setting<Color>("SliderColor", new Color(40, 192, 255, 255), v -> this.setting.getValue() == Settings.Sliders));
 
-
-
     public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", false, v -> this.setting.getValue() == Settings.Lines));
 	public Setting<Boolean> outlineNew = this.register(new Setting<Boolean>("OutlineNew", true, v -> this.setting.getValue() == Settings.Lines));
     public Setting<Float> outlineThickness = this.register(new Setting<Float>("LineThickness", Float.valueOf(2.0f), Float.valueOf(0.5f), Float.valueOf(5.0f), v -> this.setting.getValue() == Settings.Lines && this.outlineNew.getValue()));
@@ -69,8 +67,8 @@ public class ClickGui
 	public Setting<Color> moduleMainC = register(new Setting<Color>("ModuleEnableColor", new Color(40, 40, 40, 0), v -> this.setting.getValue() == Settings.Main));
 	public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main)); // I Switched those on accident so im lazy to switch them back lol
 	
-	public Setting<Color> textEnableC = register(new Setting<Color>("EnabledTextColor", new Color(40, 192, 255, 255), v -> this.setting.getValue() == Settings.FontC));
-	public Setting<Color> textDisabledC = register(new Setting<Color>("DisabledTextColor", new Color(255, 255, 255, 255), v -> this.setting.getValue() == Settings.FontC));
+	public Setting<Color> textEnableC = register(new Setting<Color>("EnabledTextColor", new Color(40, 192, 255), v -> this.setting.getValue() == Settings.FontC));
+	public Setting<Color> textDisabledC = register(new Setting<Color>("DisabledTextColor", new Color(255, 255, 255), v -> this.setting.getValue() == Settings.FontC));
 	
     public Setting<Boolean> customFov = this.register(new Setting<Boolean>("CustomFov", false, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Float> fov = this.register(new Setting<Object>("Fov", Float.valueOf(135.0f), Float.valueOf(-180.0f), Float.valueOf(180.0f), v -> this.setting.getValue() == Settings.Misc && this.customFov.getValue()));
@@ -81,8 +79,7 @@ public class ClickGui
     public Setting<String> moduleButton = this.register(new Setting<Object>("Buttons:", "", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() == false).setRenderName(true));
 	public Setting<Color> sideStringC = register(new Setting<Color>("SideStringColor", new Color(255, 255, 255, 255), v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() || this.gear.getValue()));
 	
-    public Setting<Boolean> devSettings = this.register(new Setting<Boolean>("TopColor", true, v -> this.setting.getValue() == Settings.Main));
-	public Setting<Color> topC = register(new Setting<Color>("TopColor", new Color(40, 192, 255, 90), v -> this.setting.getValue() == Settings.Main && this.devSettings.getValue()));
+	public Setting<Color> topC = register(new Setting<Color>("CategoryColor", new Color(40, 192, 255, 90), v -> this.setting.getValue() == Settings.Main));
 	
 	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true, v -> this.setting.getValue() == Settings.Lines));
 	public Setting<Color> frameC = register(new Setting<Color>("FrameColor", new Color(40, 192, 255, 200), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
