@@ -16,9 +16,7 @@ import java.util.List;
 
 public class BreadCrumbs
         extends Module {
-    private final Setting<Integer> colorRed = this.register(new Setting<Integer>("Red", 135, 0, 255));
-    private final Setting<Integer> colorGreen = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    private final Setting<Integer> colorBlue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
+	private final Setting<Color> bedrockC = this.register(new Setting<Color>("LineColor", new Color(40, 192, 255, 150)));
 	private final Setting<Float> width = this.register(new Setting<Float>("Width", Float.valueOf(Float.intBitsToFloat(Float.floatToIntBits(15.599429f) ^ 0x7EB99743)), Float.valueOf(Float.intBitsToFloat(Float.floatToIntBits(2.076195f) ^ 0x7F04E061)), Float.valueOf(Float.intBitsToFloat(Float.floatToIntBits(1.3190416f) ^ 0x7F08D65B))));
     private final Setting<Boolean> fade = this.register(new Setting<Boolean>("Fade", false));
     private final Setting<Integer> fadeTime = this.register(new Setting<Integer>("FadeTime", Integer.valueOf(5), Integer.valueOf(1), Integer.valueOf(100), _hidden -> this.fade.getValue()));
@@ -30,7 +28,7 @@ public class BreadCrumbs
     }
 
     private Color getColor() {
-        return new Color(this.colorRed.getValue(), this.colorGreen.getValue(), this.colorBlue.getValue());
+        return new Color(this.bedrockC.getValue().getRed(), this.bedrockC.getValue().getGreen(), this.bedrockC.getValue().getBlue());
     }
 	
     @Override
