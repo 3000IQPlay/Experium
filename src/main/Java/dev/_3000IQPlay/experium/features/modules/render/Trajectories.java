@@ -21,6 +21,7 @@ import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Cylinder;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +30,8 @@ public class Trajectories
     private final Setting<Float> size = this.register(new Setting<Float>("Size", Float.valueOf(0.5f), Float.valueOf(-5.0f), Float.valueOf(5.0f)));
     private final Setting<Float> innerSize = this.register(new Setting<Float>("Inner Size", Float.valueOf(0.15f), Float.valueOf(-5.0f), Float.valueOf(5.0f)));
     public Setting slices = this.register(new Setting<Integer>("Slices", 8, 2, 100));
-    public Setting red = this.register(new Setting<Integer>("Red", 0, 0, 255));
-    public Setting green = this.register(new Setting<Integer>("Green", 255, 0, 255));
-    public Setting blue = this.register(new Setting<Integer>("Blue", 0, 0, 255));
-    public Setting alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
-	public Setting eRed = this.register(new Setting<Integer>("EntityLandingRed", 255, 0, 255));
-    public Setting eGreen = this.register(new Setting<Integer>("EntityLandingGreen", 0, 0, 255));
-    public Setting eBlue = this.register(new Setting<Integer>("EntityLandingBlue", 0, 0, 255));
-    public Setting eAlpha = this.register(new Setting<Integer>("EntityLandingAlpha", 255, 0, 255));
+	public Setting<Color> lC = this.register(new Setting<Color>("LandingColor", new Color(40, 192, 255, 255)));
+	public Setting<Color> elC = this.register(new Setting<Color>("EntityLandingColor", new Color(255, 0, 0, 255)));
 
     public Trajectories() {
         super("Trajectories", "Draws trajectories.", Module.Category.RENDER, false, false, false);
@@ -75,7 +70,7 @@ public class Trajectories
                 motionY *= (double) (power * (item instanceof ItemFishingRod ? 0.75f : (Trajectories.mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.EXPERIENCE_BOTTLE ? 0.75f : 1.5f)));
                 motionZ *= (double) (power * (item instanceof ItemFishingRod ? 0.75f : (Trajectories.mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.EXPERIENCE_BOTTLE ? 0.75f : 1.5f)));
                 this.enableGL3D(2.0f);
-                GlStateManager.color((float) ((float) ((Integer) this.red.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.green.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.blue.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.alpha.getValue()).intValue() / 255.0f));
+                GlStateManager.color((float) ((float) ((Integer) this.lC.getValue().getRed()).intValue() / 255.0f), (float) ((float) ((Integer) this.lC.getValue().getGreen()).intValue() / 255.0f), (float) ((float) ((Integer) this.lC.getValue().getBlue()).intValue() / 255.0f), (float) ((float) ((Integer) this.lC.getValue().getAlpha()).intValue() / 255.0f));
                 GL11.glEnable((int) 2848);
                 float size = (float) (item instanceof ItemBow ? 0.3 : 0.25);
                 boolean hasLanded = false;
@@ -101,7 +96,7 @@ public class Trajectories
                         landingPosition = possibleEntityLanding;
                     }
                     if (landingOnEntity != null) {
-                        GlStateManager.color((float) ((float) ((Integer) this.eRed.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eGreen.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eBlue.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eAlpha.getValue()).intValue() / 255.0f));
+                        GlStateManager.color((float) ((float) ((Integer) this.elC.getValue().getRed()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getGreen()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getBlue()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getAlpha()).intValue() / 255.0f));
                     }
                     motionY *= (double) 0.99f;
                     this.drawLine3D((posX += (motionX *= (double) 0.99f)) - renderPosX, (posY += (motionY -= item instanceof ItemBow ? 0.05 : 0.03)) - renderPosY, (posZ += (motionZ *= (double) 0.99f)) - renderPosZ);
@@ -122,11 +117,11 @@ public class Trajectories
                     GlStateManager.rotate((float) -90.0f, (float) 1.0f, (float) 0.0f, (float) 0.0f);
                     c.setDrawStyle(100011);
                     if (landingOnEntity != null) {
-                        GlStateManager.color((float) ((float) ((Integer) this.eRed.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eGreen.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eBlue.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eAlpha.getValue()).intValue() / 255.0f));
+                        GlStateManager.color((float) ((float) ((Integer) this.elC.getValue().getRed()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getGreen()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getBlue()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getAlpha()).intValue() / 255.0f));
                         GL11.glLineWidth((float) 2.5f);
                         c.draw(0.5f, 0.5f, 0.0f, ((Integer) this.slices.getValue()).intValue(), 1);
                         GL11.glLineWidth((float) 0.1f);
-                        GlStateManager.color((float) ((float) ((Integer) this.eRed.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eGreen.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eBlue.getValue()).intValue() / 255.0f), (float) ((float) ((Integer) this.eAlpha.getValue()).intValue() / 255.0f));
+                        GlStateManager.color((float) ((float) ((Integer) this.elC.getValue().getRed()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getGreen()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getBlue()).intValue() / 255.0f), (float) ((float) ((Integer) this.elC.getValue().getAlpha()).intValue() / 255.0f));
                     }
                     c.draw(this.size.getValue().floatValue(), this.innerSize.getValue().floatValue(), 0.0f, ((Integer) this.slices.getValue()).intValue(), 1);
                 }
