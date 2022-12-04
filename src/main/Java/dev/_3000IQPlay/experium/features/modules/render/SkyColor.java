@@ -11,19 +11,20 @@ import java.awt.*;
 public class SkyColor
         extends Module {
     private static SkyColor INSTANCE = new SkyColor();
-    private Setting<Integer> red = register(new Setting("Red", 135, 0, 255));
-    private Setting<Integer> green = register(new Setting("Green", 0, 0, 255));
-    private Setting<Integer> blue = register(new Setting("Blue", 255, 0, 255));
-    private Setting<Boolean> rainbow = register(new Setting("Rainbow", false));
-    private Setting<Boolean> fog = register(new Setting("Fog", true));
+    private Setting<Integer> red = this.register(new Setting<Integer>("Red", 135, 0, 255));
+    private Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
+    private Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
+    private Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Rainbow", false));
+    private Setting<Boolean> fog = this.register(new Setting<Boolean>("Fog", true));
 
     public SkyColor() {
         super("SkyColor", "Changes the color of the sky", Module.Category.RENDER, false, false, false);
     }
 
     public static SkyColor getInstance() {
-        if (INSTANCE == null)
+        if (INSTANCE == null) {
             INSTANCE = new SkyColor();
+		}
         return INSTANCE;
     }
 
@@ -33,15 +34,14 @@ public class SkyColor
 
     @SubscribeEvent
     public void fogColors(final EntityViewRenderEvent.FogColors event) {
-        event.setRed(red.getValue() / 255f);
-        event.setGreen(green.getValue() / 255f);
-        event.setBlue(blue.getValue() / 255f);
+        event.setRed(this.red.getValue() / 255f);
+        event.setGreen(this.green.getValue() / 255f);
+        event.setBlue(this.blue.getValue() / 255f);
     }
 
     @SubscribeEvent
     public void fog_density(final EntityViewRenderEvent.FogDensity event) {
-
-        if (fog.getValue().booleanValue()) {
+        if (this.fog.getValue().booleanValue()) {
             event.setDensity(0.0f);
             event.setCanceled(true);
         }
@@ -59,23 +59,18 @@ public class SkyColor
 
     @Override
     public void onUpdate() {
-        if (rainbow.getValue()) {
+        if (this.rainbow.getValue().booleanValue()) {
             doRainbow();
         }
     }
 
     public void doRainbow() {
-
         float[] tick_color = {
                 (System.currentTimeMillis() % (360 * 32)) / (360f * 32)
         };
-
         int color_rgb_o = Color.HSBtoRGB(tick_color[0], 0.8f, 0.8f);
-
         red.setValue((color_rgb_o >> 16) & 0xFF);
         green.setValue((color_rgb_o >> 8) & 0xFF);
         blue.setValue(color_rgb_o & 0xFF);
     }
-
-
 }
