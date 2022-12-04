@@ -8,9 +8,7 @@ Try adding CC PFly bypass (For flying)
 
 Add JumpCircle cuz its hot ong
 
-Add Particles/Snow to ChatModifier for BG
-
-Replace Color Sliders with Color Picker (ESP, Trajectories, EnchantColor, SkyColor LEFT)
+Replace Color Sliders with Color Picker (EnchantColor, SkyColor LEFT)
 
 Add Better NameTags
 
