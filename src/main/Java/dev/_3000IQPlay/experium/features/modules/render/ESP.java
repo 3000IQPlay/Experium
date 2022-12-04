@@ -1,7 +1,5 @@
 package dev._3000IQPlay.experium.features.modules.render;
 
-import java.awt.Color;
-
 import dev._3000IQPlay.experium.event.events.Render3DEvent;
 import dev._3000IQPlay.experium.features.modules.Module;
 import dev._3000IQPlay.experium.features.modules.client.Colors;
@@ -19,6 +17,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.Color;
+
 public class ESP
         extends Module {
     private static ESP INSTANCE = new ESP();
@@ -27,11 +27,8 @@ public class ESP
     public final Setting<Boolean> xporbs = this.register(new Setting<Boolean>("XpOrbs", false));
     public final Setting<Boolean> xpbottles = this.register(new Setting<Boolean>("XpBottles", false));
     public final Setting<Boolean> pearl = this.register(new Setting<Boolean>("Pearls", false));
-    public final Setting<Integer> red = this.register(new Setting<Integer>("Red", 135, 0, 255));
-    public final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
-    public final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
+	public final Setting<Color> espC = this.register(new Setting<Color>("ESPColor", new Color(40, 192, 255, 255)));
     public final Setting<Integer> boxAlpha = this.register(new Setting<Integer>("BoxAlpha", 120, 0, 255));
-    public final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
     public final Setting<Float> lineWidth = this.register(new Setting<Float>("LineWidth", Float.valueOf(2.0f), Float.valueOf(0.1f), Float.valueOf(5.0f)));
 
     public ESP() {
@@ -70,14 +67,14 @@ public class ESP
                 GL11.glEnable((int) 2848);
                 GL11.glHint((int) 3154, (int) 4354);
                 GL11.glLineWidth((float) 1.0f);
-                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.red.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.green.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.blue.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() : (float) this.boxAlpha.getValue().intValue() / 255.0f));
+                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.espC.getValue().getRed() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.espC.getValue().getGreen() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.espC.getValue().getBlue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() : (float) this.boxAlpha.getValue().intValue() / 255.0f));
                 GL11.glDisable((int) 2848);
                 GlStateManager.depthMask((boolean) true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
+                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.espC.getValue().getRed(), this.espC.getValue().getGreen(), this.espC.getValue().getBlue(), this.espC.getValue().getAlpha()), 1.0f);
                 if (++i < 50) continue;
             }
         }
@@ -96,14 +93,14 @@ public class ESP
                 GL11.glEnable((int) 2848);
                 GL11.glHint((int) 3154, (int) 4354);
                 GL11.glLineWidth((float) 1.0f);
-                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.red.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.green.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.blue.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
+                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.espC.getValue().getRed() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.espC.getValue().getGreen() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.espC.getValue().getBlue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
                 GL11.glDisable((int) 2848);
                 GlStateManager.depthMask((boolean) true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
+                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.espC.getValue().getRed(), this.espC.getValue().getGreen(), this.espC.getValue().getBlue(), this.espC.getValue().getAlpha()), 1.0f);
                 if (++i < 50) continue;
             }
         }
@@ -122,14 +119,14 @@ public class ESP
                 GL11.glEnable((int) 2848);
                 GL11.glHint((int) 3154, (int) 4354);
                 GL11.glLineWidth((float) 1.0f);
-                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.red.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.green.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.blue.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
+                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.espC.getValue().getRed() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.espC.getValue().getGreen() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.espC.getValue().getBlue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
                 GL11.glDisable((int) 2848);
                 GlStateManager.depthMask((boolean) true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
+                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.espC.getValue().getRed(), this.espC.getValue().getGreen(), this.espC.getValue().getBlue(), this.espC.getValue().getAlpha()), 1.0f);
                 if (++i < 50) continue;
             }
         }
@@ -148,14 +145,14 @@ public class ESP
                 GL11.glEnable((int) 2848);
                 GL11.glHint((int) 3154, (int) 4354);
                 GL11.glLineWidth((float) 1.0f);
-                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.red.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.green.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.blue.getValue().intValue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
+                RenderGlobal.renderFilledBox((AxisAlignedBB) bb, (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getRed() / 255.0f : (float) this.espC.getValue().getRed() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getGreen() / 255.0f : (float) this.espC.getValue().getGreen() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getBlue() / 255.0f : (float) this.espC.getValue().getBlue() / 255.0f), (float) (this.colorSync.getValue() != false ? (float) Colors.INSTANCE.getCurrentColor().getAlpha() / 255.0f : (float) this.boxAlpha.getValue().intValue() / 255.0f));
                 GL11.glDisable((int) 2848);
                 GlStateManager.depthMask((boolean) true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
+                RenderUtil.drawBlockOutline(bb, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.espC.getValue().getRed(), this.espC.getValue().getGreen(), this.espC.getValue().getBlue(), this.espC.getValue().getAlpha()), 1.0f);
                 if (++i < 50) continue;
             }
         }
