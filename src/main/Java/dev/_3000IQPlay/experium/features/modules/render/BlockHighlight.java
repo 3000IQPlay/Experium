@@ -13,15 +13,16 @@ import java.awt.*;
 
 public class BlockHighlight
         extends Module {
-	private final Setting<Color> colorC = this.register(new Setting<Color>("BoxColor", new Color(40, 192, 255, 150)));
+	private final Setting<Integer> boxTopAlpha = this.register(new Setting<Object>("BoxTopAlpha", Integer.valueOf(110), Integer.valueOf(0), Integer.valueOf(255)));
+	private final Setting<Integer> boxBottomAlpha = this.register(new Setting<Object>("BoxBottomAlpha", Integer.valueOf(110), Integer.valueOf(0), Integer.valueOf(255)));
+	private final Setting<Color> tfC = this.register(new Setting<Color>("TopFill", new Color(135, 0, 255, 255)));
+	private final Setting<Color> toC = this.register(new Setting<Color>("TopOutline", new Color(135, 0, 255, 255)));
+	private final Setting<Color> bfC = this.register(new Setting<Color>("BottomFill", new Color(0, 255, 255, 255)));
+	private final Setting<Color> boC = this.register(new Setting<Color>("BottomOutline", new Color(0, 255, 255, 255)));
+	private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.5f), Float.valueOf(0.1f), Float.valueOf(5.0f)));
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
     public Setting<Boolean> rolling = this.register(new Setting<Object>("Rolling", Boolean.valueOf(false), v -> this.colorSync.getValue()));
-    public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", false));
-    private final Setting<Integer> boxAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(125), Integer.valueOf(0), Integer.valueOf(255), v -> this.box.getValue()));
-    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
-    private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f), v -> this.outline.getValue()));
-    public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(true), v -> this.outline.getValue()));
-	private final Setting<Color> outlineC = this.register(new Setting<Color>("OutlineColor", new Color(40, 192, 255, 255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
+	private int currentAlpha = 0;
 
     public BlockHighlight() {
         super("BlockHighlight", "Highlights the block u look at.", Module.Category.RENDER, false, false, false);
@@ -35,7 +36,8 @@ public class BlockHighlight
             if (this.rolling.getValue().booleanValue()) {
                 RenderUtil.drawProperGradientBlockOutline(blockpos, new Color(HUD.getInstance().colorMap.get(0)), new Color(HUD.getInstance().colorMap.get(this.renderer.scaledHeight / 4)), new Color(HUD.getInstance().colorMap.get(this.renderer.scaledHeight / 2)), 1.0f);
             } else {
-                RenderUtil.drawBoxESP(blockpos, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.colorC.getValue().getRed(), this.colorC.getValue().getGreen(), this.colorC.getValue().getBlue(), this.colorC.getValue().getAlpha()), this.customOutline.getValue(), new Color(this.outlineC.getValue().getRed(), this.outlineC.getValue().getGreen(), this.outlineC.getValue().getBlue(), this.outlineC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue(), false);
+                RenderUtil.drawBoxESP(blockpos, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.tfC.getValue().getRed(), this.tfC.getValue().getGreen(), this.tfC.getValue().getBlue(), this.tfC.getValue().getAlpha()), true, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.toC.getValue().getRed(), this.toC.getValue().getGreen(), this.toC.getValue().getBlue(), this.toC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.boxTopAlpha.getValue(), true, 0.0, true, true, true, false, this.currentAlpha);
+			    RenderUtil.drawBoxESP(blockpos, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.bfC.getValue().getRed(), this.bfC.getValue().getGreen(), this.bfC.getValue().getBlue(), this.bfC.getValue().getAlpha()), true, this.colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor() : new Color(this.boC.getValue().getRed(), this.boC.getValue().getGreen(), this.boC.getValue().getBlue(), this.boC.getValue().getAlpha()), this.lineWidth.getValue().floatValue(), true, true, this.boxBottomAlpha.getValue(), true, 0.0, true, true, false, true, this.currentAlpha);
             }
         }
     }
