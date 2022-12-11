@@ -159,13 +159,13 @@ public class ModuleManager
         this.modules.add(new CornerClip());
 		this.modules.add(new FastSwim());
 		this.modules.add(new HighJump());
-		this.modules.add(new CrystalAura());
+		//this.modules.add(new CrystalAura());
 		this.modules.add(new FarThrow());
 		//this.modules.add(new Module123());
 
         //this.moduleColorMap.put(this.getModuleByClass(Module123.class), new Color(101, 65, 8));
         this.moduleColorMap.put(this.getModuleByClass(FarThrow.class), new Color(11, 0, 199));
-        this.moduleColorMap.put(this.getModuleByClass(CrystalAura.class), new Color(0, 255, 255));
+        //this.moduleColorMap.put(this.getModuleByClass(CrystalAura.class), new Color(0, 255, 255));
         this.moduleColorMap.put(this.getModuleByClass(HighJump.class), new Color(82, 5, 51));
         this.moduleColorMap.put(this.getModuleByClass(FastSwim.class), new Color(0, 144, 121));
         this.moduleColorMap.put(this.getModuleByClass(CornerClip.class), new Color(134, 0, 55));
