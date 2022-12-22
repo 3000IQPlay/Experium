@@ -9,6 +9,7 @@ import dev._3000IQPlay.experium.features.modules.client.ClickGui;
 import dev._3000IQPlay.experium.features.setting.Bind;
 import dev._3000IQPlay.experium.features.setting.Setting;
 import dev._3000IQPlay.experium.util.ColorUtil;
+import dev._3000IQPlay.experium.util.RenderUtil;
 import dev._3000IQPlay.experium.util.Util;
 
 import java.awt.*;

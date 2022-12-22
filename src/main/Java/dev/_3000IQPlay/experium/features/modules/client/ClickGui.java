@@ -60,16 +60,16 @@ public class ClickGui
 	public Setting<Boolean> moduleOutline = this.register(new Setting<Boolean>("ModuleOutline", true, v -> this.setting.getValue() == Settings.Lines));
 	public Setting<Color> moduleOutlineC = register(new Setting<Color>("ModuleOutlineColor", new Color(0, 0, 0, 255), v -> this.setting.getValue() == Settings.Lines && this.moduleOutline.getValue()));
 	
-    public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true, v -> this.setting.getValue() == Settings.Misc));
-    public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.setting.getValue() == Settings.Misc && this.scroll.getValue()));
-	
+	public Setting<Color> topC = register(new Setting<Color>("CategoryColor", new Color(40, 192, 255, 90), v -> this.setting.getValue() == Settings.Main));
 	public Setting<Color> moduleEnableC = register(new Setting<Color>("ModuleMainColor", new Color(40, 40, 40, 255), v -> this.setting.getValue() == Settings.Main));
 	public Setting<Color> moduleMainC = register(new Setting<Color>("ModuleEnableColor", new Color(40, 40, 40, 0), v -> this.setting.getValue() == Settings.Main));
-	public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main)); // I Switched those on accident so im lazy to switch them back lol
+	public Setting<Integer> hoverAlpha = register(new Setting<Integer>("HoverAlpha", 170, 0, 255, v -> this.setting.getValue() == Settings.Main));
 	
 	public Setting<Color> textEnableC = register(new Setting<Color>("EnabledTextColor", new Color(40, 192, 255), v -> this.setting.getValue() == Settings.FontC));
 	public Setting<Color> textDisabledC = register(new Setting<Color>("DisabledTextColor", new Color(255, 255, 255), v -> this.setting.getValue() == Settings.FontC));
 	
+	public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true, v -> this.setting.getValue() == Settings.Misc));
+    public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.setting.getValue() == Settings.Misc && this.scroll.getValue()));
     public Setting<Boolean> customFov = this.register(new Setting<Boolean>("CustomFov", false, v -> this.setting.getValue() == Settings.Misc));
     public Setting<Float> fov = this.register(new Setting<Object>("Fov", Float.valueOf(135.0f), Float.valueOf(-180.0f), Float.valueOf(180.0f), v -> this.setting.getValue() == Settings.Misc && this.customFov.getValue()));
 	public Setting<Boolean> gear = this.register(new Setting<Boolean>("Gears", false, v -> this.setting.getValue() == Settings.Misc));
@@ -78,8 +78,6 @@ public class ClickGui
     public Setting<String> close = this.register(new Setting<Object>("Close:", "-", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue()).setRenderName(true));
     public Setting<String> moduleButton = this.register(new Setting<Object>("Buttons:", "", v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() == false).setRenderName(true));
 	public Setting<Color> sideStringC = register(new Setting<Color>("SideStringColor", new Color(255, 255, 255, 255), v -> this.setting.getValue() == Settings.Misc && this.openCloseChange.getValue() || this.gear.getValue()));
-	
-	public Setting<Color> topC = register(new Setting<Color>("CategoryColor", new Color(40, 192, 255, 90), v -> this.setting.getValue() == Settings.Main));
 	
 	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true, v -> this.setting.getValue() == Settings.Lines));
 	public Setting<Color> frameC = register(new Setting<Color>("FrameColor", new Color(40, 192, 255, 200), v -> this.setting.getValue() == Settings.Lines && this.frameSettings.getValue()));
